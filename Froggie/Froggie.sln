@@ -26,6 +26,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Froggie.Data.Test", "Test\Froggie.Data.Test\Froggie.Data.Test.csproj", "{873C4B3D-C41F-45C2-A125-0BB6F92F2DFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{D765EF67-E79B-4E4B-9C39-E142AC57203C}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

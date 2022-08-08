@@ -1,5 +1,3 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -7,10 +5,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Froggie.Api/Froggie.Api.csproj", "Froggie.Api/"]
-RUN dotnet restore "Froggie.Api/Froggie.Api.csproj"
 COPY . .
-WORKDIR "/src/Froggie.Api"
+RUN dotnet restore "Source/Froggie.Api/Froggie.Api.csproj"
+WORKDIR "/src/Source/Froggie.Api"
 RUN dotnet build "Froggie.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

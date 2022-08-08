@@ -1,0 +1,16 @@
+name: froggie-core-ci
+
+on:
+  push:
+    branches: [ "init" ]
+  pull_request:
+    branches: [ "init" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile --tag froggie-core:$(date +%s)
+

@@ -16,7 +16,7 @@ jobs:
       run: echo "PACKAGE_NAME=steveyeager.jfrog.io/froggie:ci-$VERSION" >> $GITHUB_ENV
     - uses: actions/checkout@v3
     - name: build
-      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile --tag froggie-core:$(date +%s)
+      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t $PACKAGE_NAME
     - name: docker-login
       run: docker login -u froggie-github steveyeager.jfrog.io -p ${{secrets.ARTIFACTORY_TOKEN}}
     - name: docker-push

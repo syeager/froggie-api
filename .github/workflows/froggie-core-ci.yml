@@ -10,14 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ARTIACTORY: ${{secrets.ARTIFACTORY}}
+      ARTIFACTORY: ${{secrets.ARTIFACTORY}}
       ARTIFACTORY_TOKEN: ${{secrets.ARTIFACTORY_TOKEN}}
       
     steps:
     - name: env-version
       run: echo "VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
     - name: env-package_name
-      run: echo "PACKAGE_NAME=$ARTIACTORY/froggie/froggie:ci-$VERSION" >> $GITHUB_ENV
+      run: echo "PACKAGE_NAME=$ARTIFACTORY/froggie/froggie:ci-$VERSION" >> $GITHUB_ENV
       
     - uses: actions/checkout@v3
     - name: build

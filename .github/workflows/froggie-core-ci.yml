@@ -13,15 +13,16 @@ jobs:
       FROGGIE_ARTIFACTORY: ${{secrets.ARTIFACTORY}}
       FROGGIE_ARTIFACTORY_TOKEN: ${{secrets.ARTIFACTORY_TOKEN}}
       FROGGIE_VERSION: 1.0.0-$GITHUB_RUN_NUMBER
-      FROGGIE_PACKAGE_NAME: ${{env.FROGGIE_ARTIFACTORY}}/froggie/froggie:ci-${{env.FROGGIE_VERSION}}
       
     steps:
+    - name: define_env_vars
+      run: echo "FROGGIE_PACKAGE_NAME={$FROGGIE_ARTIFACTORY/froggie/froggie:ci-$FROGGIE_VERSION}" >> $GITHUB_ENV
     - name: print_env
       run: env | grep FROGGIE_ | sort
     - uses: actions/checkout@v3
     - name: build
-      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t ${{env.FROGGIE_PACKAGE_NAME}}
+      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t $FROGGIE_PACKAGE_NAME
     - name: docker-login
-      run: docker login ${{env.FROGGIE_ARTIFACTORY}} -u froggie-github -p ${{env.FROGGIE_ARTIFACTORY_TOKEN}}
+      run: docker login $FROGGIE_ARTIFACTORY -u froggie-github -p $FROGGIE_ARTIFACTORY_TOKEN
     - name: docker-push
-      run: docker push ${{env.FROGGIE_PACKAGE_NAME}}
+      run: docker push $FROGGIE_PACKAGE_NAME

@@ -16,6 +16,8 @@ jobs:
       VERSION: 1.0.0-$GITHUB_RUN_NUMBER
       
     steps:
+    - name: print_env
+      run: env
     - uses: actions/checkout@v3
     - name: build
       run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t $PACKAGE_NAME

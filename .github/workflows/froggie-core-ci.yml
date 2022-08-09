@@ -12,13 +12,10 @@ jobs:
     env:
       ARTIFACTORY: ${{secrets.ARTIFACTORY}}
       ARTIFACTORY_TOKEN: ${{secrets.ARTIFACTORY_TOKEN}}
+      PACKAGE_NAME: $ARTIFACTORY/froggie/froggie:ci-$VERSION
+      VERSION: 1.0.0-$GITHUB_RUN_NUMBER
       
     steps:
-    - name: env-version
-      run: echo "VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-    - name: env-package_name
-      run: echo "PACKAGE_NAME=$ARTIFACTORY/froggie/froggie:ci-$VERSION" >> $GITHUB_ENV
-      
     - uses: actions/checkout@v3
     - name: build
       run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t $PACKAGE_NAME

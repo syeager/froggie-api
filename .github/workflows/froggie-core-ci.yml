@@ -9,13 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FROGGIE_ARTIFACTORY: steveyeager.jfrog.io
-      FROGGIE_ARTIFACTORY_TOKEN: ${{secrets.ARTIFACTORY_TOKEN}}
-      FROGGIE_VERSION: 1.0.0-$GITHUB_RUN_NUMBER
-      
     steps:
-    - name: define_env_vars
+    - name: env-FROGGIE_ARTIFACTORY
+      run: echo "FROGGIE_ARTIFACTORY=steveyeager.jfrog.io" >> $GITHUB_ENV
+    - name: env-FROGGIE_ARTIFACTORY_TOKEN
+      run: echo "FROGGIE_ARTIFACTORY_TOKEN=${{secrets.ARTIFACTORY_TOKEN}}" >> $GITHUB_ENV
+    - name: env-FROGGIE_VERSION
+      run: echo "FROGGIE_VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+    - name: env-FROGGIE_ARTIFACTORY
       run: echo "FROGGIE_PACKAGE_NAME=$FROGGIE_ARTIFACTORY/froggie/froggie:ci-$FROGGIE_VERSION" >> $GITHUB_ENV
     - name: print_env
       run: env | grep FROGGIE_ | sort

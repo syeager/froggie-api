@@ -1,0 +1,29 @@
+name: froggie-core-ci
+
+on:
+  push:
+    branches: [ "init" ]
+  pull_request:
+    branches: [ "init" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: env-FROGGIE_ARTIFACTORY
+      run: echo "FROGGIE_ARTIFACTORY=steveyeager.jfrog.io" >> $GITHUB_ENV
+    - name: env-FROGGIE_ARTIFACTORY_TOKEN
+      run: echo "FROGGIE_ARTIFACTORY_TOKEN=${{secrets.ARTIFACTORY_TOKEN}}" >> $GITHUB_ENV
+    - name: env-FROGGIE_VERSION
+      run: echo "FROGGIE_VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+    - name: env-FROGGIE_ARTIFACTORY
+      run: echo "FROGGIE_PACKAGE_NAME=$FROGGIE_ARTIFACTORY/froggie/froggie:ci-$FROGGIE_VERSION" >> $GITHUB_ENV
+    - name: print_env
+      run: env | grep FROGGIE_ | sort
+    - uses: actions/checkout@v3
+    - name: build
+      run: docker build ./Froggie --file ./Froggie/Source/Froggie.Api/Dockerfile -t $FROGGIE_PACKAGE_NAME
+    - name: docker-login
+      run: docker login $FROGGIE_ARTIFACTORY -u froggie-github -p $FROGGIE_ARTIFACTORY_TOKEN
+    - name: docker-push
+      run: docker push $FROGGIE_PACKAGE_NAME

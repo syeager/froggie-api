@@ -1,4 +1,4 @@
-name: froggie-main-ci
+name: froggie-_-pr
 
 on:
   pull_request:

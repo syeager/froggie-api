@@ -1,0 +1,30 @@
+name: froggie-_-pr
+
+on:
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: env-FROGGIE_ARTIFACT_REPO
+      run: echo "FROGGIE_ARTIFACT_REPO=froggie.azurecr.io" >> $GITHUB_ENV
+    - name: env-FROGGIE_ARTIFACT_REPO_PASSWORD
+      run: echo "FROGGIE_ARTIFACT_REPO_PASSWORD=${{secrets.AZURE_CONTAINER_REPO_PASSWORD}}" >> $GITHUB_ENV
+    - name: env-FROGGIE_VERSION
+      run: echo "FROGGIE_VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+    - name: env-FROGGIE_PACKAGE_NAME
+      run: echo "FROGGIE_PACKAGE_NAME=$FROGGIE_ARTIFACT_REPO/froggie/froggie:pr" >> $GITHUB_ENV
+    - name: print_env
+      run: env | grep FROGGIE_ | sort
+    - uses: actions/checkout@v3
+    - name: build
+      run: >
+        docker build ./Froggie
+        -f ./Froggie/Source/Froggie.Api/Dockerfile
+        -t $FROGGIE_PACKAGE_NAME
+        --label froggie.branch=$GITHUB_REF_NAME
+        --label froggie.commit=$GITHUB_SHA
+        --label froggie.version=$FROGGIE_VERSION
+        --label froggie.workflow=$GITHUB_WORKFLOW

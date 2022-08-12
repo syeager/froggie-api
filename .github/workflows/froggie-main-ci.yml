@@ -1,10 +1,8 @@
-name: froggie-core-ci
+name: froggie-main-ci
 
 on:
   push:
-    branches: [ "init" ]
-  pull_request:
-    branches: [ "init" ]
+    branches: [ "main" ]
 
 jobs:
   build:

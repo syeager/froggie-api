@@ -1,0 +1,3 @@
+[submodule "Froggie/Common-DotNet"]
+	path = Froggie/Common-DotNet
+	url = https://github.com/syeager/Common-DotNet.git

@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Folder Include="Tasks\Validators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\LittleByte.Domain\LittleByte.Domain.csproj" />
+  </ItemGroup>
+</Project>

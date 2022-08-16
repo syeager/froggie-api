@@ -1,5 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Froggie.Domain.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\..\Common\LittleByte.Domain\LittleByte.Domain.csproj" />
   </ItemGroup>
 </Project>

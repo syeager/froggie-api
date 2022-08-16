@@ -19,6 +19,8 @@ jobs:
     - name: print_env
       run: env | grep FROGGIE_ | sort
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
     - name: build
       run: >
         docker build ./Froggie

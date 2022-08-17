@@ -18,7 +18,7 @@ internal class TitleValidator<T> : PropertyValidator<T, Title>
     public override bool IsValid(ValidationContext<T> context, Title value) => value.Value.Length is >= TitleRules.LengthMin and <= TitleRules.LengthMax;
 }
 
-internal static class TitleRules
+public static class TitleRules
 {
     public const int LengthMin = 1;
     public const int LengthMax = 100;

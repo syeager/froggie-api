@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Common\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj" />
+		<ProjectReference Include="..\..\Common\LittleByte.Infra\LittleByte.Infra.csproj" />
+	</ItemGroup>
 </Project>

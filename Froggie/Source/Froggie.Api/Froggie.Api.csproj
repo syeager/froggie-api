@@ -11,6 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\LittleByte.Extensions.AspNet\LittleByte.Extensions.AspNet.csproj" />
+    <ProjectReference Include="..\..\Common\LittleByte.Identity\LittleByte.Identity.csproj" />
+    <ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
     <ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tasks\Requests\" />
   </ItemGroup>
 </Project>

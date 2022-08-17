@@ -50,7 +50,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Identity", "Comm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Infra", "Common\LittleByte.Infra\LittleByte.Infra.csproj", "{DE53D130-D963-4134-8A30-B9ED3323C31D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleByte.Test", "Common\LittleByte.Test\LittleByte.Test.csproj", "{B309C7E2-3629-49E3-81A2-F33EAD2F6268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Test", "Common\LittleByte.Test\LittleByte.Test.csproj", "{B309C7E2-3629-49E3-81A2-F33EAD2F6268}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Extensions.AutoMapper", "Common\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj", "{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,12 @@ Global
 		{B309C7E2-3629-49E3-81A2-F33EAD2F6268}.Local|Any CPU.Build.0 = Local|Any CPU
 		{B309C7E2-3629-49E3-81A2-F33EAD2F6268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B309C7E2-3629-49E3-81A2-F33EAD2F6268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Local|Any CPU.ActiveCfg = Local|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Local|Any CPU.Build.0 = Local|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +184,7 @@ Global
 		{535F043A-A574-43DD-A9C8-755C68403A14} = {32D2BC20-A206-4576-B8E5-35A28FBACE25}
 		{DE53D130-D963-4134-8A30-B9ED3323C31D} = {32D2BC20-A206-4576-B8E5-35A28FBACE25}
 		{B309C7E2-3629-49E3-81A2-F33EAD2F6268} = {32D2BC20-A206-4576-B8E5-35A28FBACE25}
+		{ADBB629A-B5E1-4B0E-8D62-84A3ED358101} = {32D2BC20-A206-4576-B8E5-35A28FBACE25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B63E0B92-308E-443F-851C-9D06C966EF95}

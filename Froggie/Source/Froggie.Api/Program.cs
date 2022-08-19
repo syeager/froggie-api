@@ -1,3 +1,4 @@
+using Froggie.Data;
 using LittleByte.Core.Dates;
 using LittleByte.Extensions.AspNet.Configuration;
 using LittleByte.Extensions.AspNet.Middleware;
@@ -16,7 +17,8 @@ builder.Services
     .AddSingleton<IDateService, DateService>()
     .AddJwtAuthentication(builder.Configuration)
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen();
+    .AddSwaggerGen()
+    .AddPersistence();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();

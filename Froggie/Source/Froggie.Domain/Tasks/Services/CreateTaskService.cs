@@ -1,6 +1,6 @@
 ﻿using LittleByte.Validation;
 
-namespace Froggie.Domain.Tasks;
+namespace Froggie.Domain.Tasks.Services;
 
 public interface ICreateTaskService
 {

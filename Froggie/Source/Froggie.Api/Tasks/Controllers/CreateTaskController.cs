@@ -2,7 +2,7 @@
 using AutoMapper;
 using Froggie.Api.Tasks.Models;
 using Froggie.Api.Tasks.Requests;
-using Froggie.Domain.Tasks;
+using Froggie.Domain.Tasks.Services;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Commands;
 using Microsoft.AspNetCore.Authorization;

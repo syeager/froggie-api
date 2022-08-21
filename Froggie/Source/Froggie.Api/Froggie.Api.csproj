@@ -1,23 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <UserSecretsId>a667cda1-3938-4b88-840d-57932ea7b535</UserSecretsId>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\LittleByte.Extensions.AspNet\LittleByte.Extensions.AspNet.csproj" />
-    <ProjectReference Include="..\..\Common\LittleByte.Identity\LittleByte.Identity.csproj" />
-    <ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
-    <ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tasks\Requests\" />
-  </ItemGroup>
+	<PropertyGroup>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<UserSecretsId>a667cda1-3938-4b88-840d-57932ea7b535</UserSecretsId>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
+		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Common\LittleByte.Extensions.AspNet\LittleByte.Extensions.AspNet.csproj" />
+		<ProjectReference Include="..\..\Common\LittleByte.Identity\LittleByte.Identity.csproj" />
+	</ItemGroup>
 </Project>

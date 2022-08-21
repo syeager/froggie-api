@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks.Controllers;
 
-[Authorize]
+[AllowAnonymous]
 public sealed class CreateTaskController : TaskController
 {
     private readonly ICreateTaskService createTask;
@@ -26,7 +26,7 @@ public sealed class CreateTaskController : TaskController
 
     [HttpPost("create")]
     [ResponseType(HttpStatusCode.Created, typeof(TaskDto))]
-    public async Task<ApiResponse<TaskDto>> Create(CreateTaskRequest request)
+    public async ValueTask<ApiResponse<TaskDto>> Create(CreateTaskRequest request)
     {
         var validTask = await createTask.CreateAsync(request.Title);
         var task = validTask.GetModelOrThrow();

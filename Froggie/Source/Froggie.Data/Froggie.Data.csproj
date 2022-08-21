@@ -6,4 +6,7 @@
 		<ProjectReference Include="..\..\Common\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj" />
 		<ProjectReference Include="..\..\Common\LittleByte.Infra\LittleByte.Infra.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.8" />
+	</ItemGroup>
 </Project>

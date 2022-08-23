@@ -1,22 +1,48 @@
-var builder = WebApplication.CreateBuilder(args);
+using Froggie.Api.Tasks;
+using Froggie.Data;
+using LittleByte.Core.Dates;
+using LittleByte.Extensions.AspNet.Configuration;
+using LittleByte.Extensions.AspNet.Middleware;
+using LittleByte.Logging.Configuration;
+using Serilog;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+builder.UseSerilog();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services
+    .AddLogs()
+    .AddOpenApi("Froggie")
+    .AddSingleton<IDateService, DateService>()
+    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen()
+    .AddTasks()
+    .AddPersistence();
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if(app.Environment.IsDevelopment())
+{
+    app
+        .UseDeveloperExceptionPage()
+        .UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+}
 
-app.UseHsts();
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app
+    .UseHttpsRedirection()
+    .UseHsts()
+    .UseRouting()
+    .UseAuthorization()
+    .UseHttpExceptions()
+    .UseModelValidationExceptions()
+    .UseEndpoints(endpoints => endpoints.MapControllers())
+    .UseOpenApi();
 
 app.Run();

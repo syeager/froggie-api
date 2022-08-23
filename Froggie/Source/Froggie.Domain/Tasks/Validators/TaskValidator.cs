@@ -2,10 +2,10 @@
 
 namespace Froggie.Domain.Tasks.Validators;
 
-public class TaskValidator : ModelValidator<Task>
+internal class TaskValidator : ModelValidator<Task>
 {
     public TaskValidator()
     {
-
+        RuleFor(t => t.Title).IsTitle();
     }
 }

@@ -1,14 +1,12 @@
-﻿using System.Net;
+using System.Net;
 using AutoMapper;
 using Froggie.Api.Tasks.Models;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Queries;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks.Controllers;
 
-[AllowAnonymous]
 public sealed class GetTaskController : TaskController
 {
     private readonly IFindByIdQuery<Task> getTask;

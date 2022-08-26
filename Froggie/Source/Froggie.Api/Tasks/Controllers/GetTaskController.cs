@@ -1,6 +1,7 @@
-using System.Net;
+﻿using System.Net;
 using AutoMapper;
 using Froggie.Api.Tasks.Models;
+using LittleByte.Extensions.AspNet.Core;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ public sealed class GetTaskController : TaskController
         this.mapper = mapper;
     }
 
-    [HttpGet]
+    [HttpGet(Routes.GetById)]
     [ResponseType(HttpStatusCode.OK, typeof(TaskDto))]
     public async ValueTask<ApiResponse<TaskDto>> GetTask(Guid id)
     {

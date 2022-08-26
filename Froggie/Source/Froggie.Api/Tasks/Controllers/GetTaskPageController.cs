@@ -1,5 +1,6 @@
-using System.Net;
+﻿using System.Net;
 using Froggie.Data.Tasks.Queries;
+using LittleByte.Extensions.AspNet.Core;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ public sealed class GetTaskPageController : TaskController
         this.taskPageQuery = taskPageQuery;
     }
 
-    [HttpGet("get-page")]
+    [HttpGet(Routes.GetByPage)]
     [ResponseType(HttpStatusCode.OK, typeof(PageResponse<Task>))]
     public async Task<ApiResponse<PageResponse<Task>>> GetPage([FromQuery]PageRequest? request)
     {

@@ -3,17 +3,21 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS source
 WORKDIR /src
 COPY . .
-RUN dotnet restore "Source/Froggie.Api/Froggie.Api.csproj"
-WORKDIR "/src/Source/Froggie.Api"
-RUN dotnet build "Froggie.Api.csproj" -c Release -o /app/build
+WORKDIR /src/Source/Froggie.Api
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish "Froggie.Api.csproj" -c Release -o /app/publish
+FROM source as test
+WORKDIR /src
+RUN dotnet test -c Debug -o /app/test
 
-FROM base AS final
+FROM source AS publish
+WORKDIR /src/Source/Froggie.Api
+RUN dotnet publish -c Release -o /app/publish
+
+FROM source AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Froggie.Api.dll"]

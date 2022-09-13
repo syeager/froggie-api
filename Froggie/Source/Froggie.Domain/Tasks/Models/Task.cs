@@ -21,4 +21,10 @@ public sealed class Task : DomainModel<Task>
 
         return task;
     }
+
+    public static bool Delete(Id<Task> id)
+    {
+        // TODO
+        return false;
+    }
 }

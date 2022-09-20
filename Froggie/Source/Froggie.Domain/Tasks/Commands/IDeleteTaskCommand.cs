@@ -1,6 +1,6 @@
-﻿namespace Froggie.Domain.Tasks.Commands;
+﻿namespace Froggie.Domain.Tasks;
 
 public interface IDeleteTaskCommand
 {
-    void Delete(Id<Task> id);
+    ValueTask DeleteAsync(Id<Task> id);
 }

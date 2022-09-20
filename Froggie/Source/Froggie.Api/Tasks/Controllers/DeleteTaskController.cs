@@ -1,9 +1,9 @@
 ﻿using Froggie.Api.Tasks.Requests;
-using Froggie.Domain.Tasks.Services;
-using LittleByte.Extensions.AspNet.Responses;
-using LittleByte.Infra.Commands;
+using LittleByte.Common.AspNet.Responses;
+using LittleByte.Common.Infra.Commands;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Froggie.Domain.Tasks;
 
 namespace Froggie.Api.Tasks.Controllers;
 
@@ -19,14 +19,13 @@ public sealed class DeleteTaskController : TaskController
     }
 
     [HttpDelete("delete")]
-    [ResponseType(HttpStatusCode.OK, typeof(bool))]
-    public async ValueTask<bool> Delete (DeleteTaskRequest request)
+    [ResponseType(HttpStatusCode.OK)]
+    public async ValueTask<ApiResponse> Delete (DeleteTaskRequest request)
     {
-        var result = await deleteTask.DeleteAsync(request.Id);
+        deleteTask.DeleteAsync(request.Id);
 
         await saveContext.CommitChangesAsync();
 
-        // TODO
-        return result;
+        return new OkResponse();
     }
 }

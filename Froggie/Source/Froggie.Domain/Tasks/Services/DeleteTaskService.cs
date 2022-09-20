@@ -1,10 +1,8 @@
-﻿using Froggie.Domain.Tasks.Commands;
-
-namespace Froggie.Domain.Tasks.Services;
+﻿namespace Froggie.Domain.Tasks;
 
 public interface IDeleteTaskService
 {
-    ValueTask<bool> DeleteAsync(Id<Task> id);
+    void DeleteAsync(Id<Task> id);
 }
 
 public sealed class DeleteTaskService : IDeleteTaskService
@@ -16,10 +14,10 @@ public sealed class DeleteTaskService : IDeleteTaskService
         this.deleteTask = deleteTask;
     }
 
-    public ValueTask<bool> DeleteAsync(Id<Task> id)
+    public async void DeleteAsync(Id<Task> id)
     {
-        var result = Task.Delete(id);
-        deleteTask.Delete(id);
-        return ValueTask.FromResult(result);
+        
+        deleteTask.DeleteAsync(id);
+        await ValueTask.CompletedTask;
     }
 }

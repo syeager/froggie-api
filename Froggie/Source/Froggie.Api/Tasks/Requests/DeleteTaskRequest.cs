@@ -1,5 +1,4 @@
-﻿using Froggie.Domain.Tasks.Models;
-using LittleByte.Domain;
+﻿using LittleByte.Common.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace Froggie.Api.Tasks.Requests;

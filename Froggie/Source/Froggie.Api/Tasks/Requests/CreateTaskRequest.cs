@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using Froggie.Domain.Tasks.Validators;
-using LittleByte.Extensions.AspNet.Attributes;
+using LittleByte.Common.AspNet.Attributes;
 
 namespace Froggie.Api.Tasks.Requests;
 

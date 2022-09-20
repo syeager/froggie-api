@@ -1,6 +1,6 @@
 ﻿using Froggie.Data.Tasks.Models;
 using Froggie.Domain.Tasks.Commands;
-using LittleByte.Validation;
+using LittleByte.Common.Validation;
 
 namespace Froggie.Data.Tasks.Commands;
 

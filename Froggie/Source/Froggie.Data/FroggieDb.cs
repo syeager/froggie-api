@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Froggie.Data.Tasks.Models;
-using LittleByte.Infra.Contexts;
+using LittleByte.Common.Infra.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

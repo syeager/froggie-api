@@ -1,5 +1,5 @@
 ﻿using Froggie.Data.Tasks;
-using LittleByte.Infra.Commands;
+using LittleByte.Common.Infra.Commands;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

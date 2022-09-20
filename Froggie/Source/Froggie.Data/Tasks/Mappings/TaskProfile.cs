@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Froggie.Data.Tasks.Models;
-using LittleByte.Extensions.AutoMapper;
+using LittleByte.Common.AspNet.AutoMapper;
 
 namespace Froggie.Data.Tasks.Mappings;
 

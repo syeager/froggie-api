@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using Froggie.Data.Tasks.Queries;
-using LittleByte.Extensions.AspNet.Core;
-using LittleByte.Extensions.AspNet.Responses;
-using LittleByte.Infra.Models;
+using LittleByte.Common.AspNet.Core;
+using LittleByte.Common.AspNet.Responses;
+using LittleByte.Common.Infra.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks.Controllers;

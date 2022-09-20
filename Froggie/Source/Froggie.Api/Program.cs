@@ -1,9 +1,10 @@
 using Froggie.Api.Tasks;
 using Froggie.Data;
-using LittleByte.Core.Dates;
-using LittleByte.Extensions.AspNet.Configuration;
-using LittleByte.Extensions.AspNet.Middleware;
-using LittleByte.Logging.Configuration;
+using LittleByte.Common;
+using LittleByte.Common.AspNet.Configuration;
+using LittleByte.Common.AspNet.Middleware;
+using LittleByte.Common.Dates;
+using LittleByte.Common.Logging.Configuration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

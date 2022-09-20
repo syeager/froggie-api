@@ -1,6 +1,4 @@
-﻿using LittleByte.Validation;
-
-namespace Froggie.Domain.Tasks.Validators;
+﻿namespace Froggie.Domain.Tasks.Validators;
 
 internal class TaskValidator : ModelValidator<Task>
 {

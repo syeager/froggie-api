@@ -6,6 +6,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\..\Common\LittleByte.Domain\LittleByte.Domain.csproj" />
-  </ItemGroup>
+	  <Folder Include="Users\Models\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Common\LittleByte.Common\LittleByte.Common.csproj" />
+	</ItemGroup>
 </Project>

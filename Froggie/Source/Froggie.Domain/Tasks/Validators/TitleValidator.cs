@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using Froggie.Domain.Tasks.Models;
-using LittleByte.Core.Common;
+using LittleByte.Common;
 
 namespace Froggie.Domain.Tasks.Validators;
 

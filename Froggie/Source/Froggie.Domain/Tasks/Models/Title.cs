@@ -2,5 +2,8 @@
 
 public sealed record Title(string Value)
 {
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 }

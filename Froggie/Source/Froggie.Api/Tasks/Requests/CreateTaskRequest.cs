@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using Froggie.Domain.Tasks.Validators;
 using LittleByte.Common.AspNet.Attributes;
 

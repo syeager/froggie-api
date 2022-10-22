@@ -1,3 +1,6 @@
-[submodule "Froggie/Common"]
+[submodule "editor_config"]
+	path = Froggie
+	url = https://github.com/syeager/settings-editor_config.git
+[submodule "common"]
 	path = Froggie/Common
 	url = https://github.com/syeager/Common-DotNet.git

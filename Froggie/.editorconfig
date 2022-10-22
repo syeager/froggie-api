@@ -1,0 +1,22 @@
+
+[*]
+
+# Microsoft .NET properties
+csharp_prefer_braces = true:none
+csharp_space_after_keywords_in_control_flow_statements = false
+csharp_style_var_elsewhere = true:suggestion
+csharp_style_var_for_built_in_types = true:error
+csharp_style_var_when_type_is_apparent = true:suggestion
+
+# ReSharper properties
+resharper_align_linq_query = true
+resharper_align_multiline_extends_list = true
+resharper_align_multiline_parameter = true
+resharper_csharp_empty_block_style = together_same_line
+resharper_method_or_operator_body = block_body
+resharper_place_accessorholder_attribute_on_same_line = false
+resharper_place_field_attribute_on_same_line = false
+resharper_space_between_keyword_and_expression = false
+
+# ReSharper inspection severities
+resharper_suggest_var_or_type_simple_types_highlighting = error

@@ -5,7 +5,7 @@ namespace Froggie.Data.Tasks.Queries;
 
 public interface ITaskPageQuery
 {
-    Task<PageResponse<Task>> RunQuery(PageRequest request);
+    Task<PageResponse<Task>> RunAsync(PageRequest request);
 }
 
 internal sealed class TaskPageQuery : ITaskPageQuery
@@ -19,7 +19,7 @@ internal sealed class TaskPageQuery : ITaskPageQuery
         this.mapper = mapper;
     }
 
-    public async Task<PageResponse<Task>> RunQuery(PageRequest request)
+    public async Task<PageResponse<Task>> RunAsync(PageRequest request)
     {
         var taskDaos = await froggieDb.Tasks
             .Skip(request.Page * request.PageSize)

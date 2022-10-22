@@ -1,0 +1,41 @@
+﻿using AutoMapper;
+using Froggie.Data.Users.Models;
+using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users.Queries;
+using LittleByte.Common.Validation;
+using Microsoft.AspNetCore.Identity;
+using Serilog;
+
+namespace Froggie.Data.Users.Queries;
+
+internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPasswordQuery
+{
+    private readonly IMapper mapper;
+    private readonly UserManager<UserDao> userManager;
+
+    public FindUserByEmailAndPasswordQuery(UserManager<UserDao> userManager, IMapper mapper)
+    {
+        this.userManager = userManager;
+        this.mapper = mapper;
+    }
+
+    public async ValueTask<Valid<User>?> TryFindAsync(Email email, Password password)
+    {
+        var userEntity = await userManager.FindByEmailAsync(email.Value);
+        if(userEntity is null)
+        {
+            return null;
+        }
+
+        Log.Information("Found user by email {Email} with Id {Id}", email.Value, userEntity.Id);
+        var correctPassword = await userManager.CheckPasswordAsync(userEntity, password.Value);
+
+        if(!correctPassword)
+        {
+            return null;
+        }
+
+        var user = mapper.Map<Valid<User>>(userEntity);
+        return user;
+    }
+}

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using Froggie.Data.Tasks.Models;
+using Froggie.Data.Users.Models;
 using LittleByte.Common.Infra.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Froggie.Data;
 
-internal sealed class FroggieDb : DomainContext<FroggieDb, IdentityUser<Guid>, IdentityRole<Guid>>
+[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
+internal sealed class FroggieDb : DomainContext<FroggieDb, UserDao, IdentityRole<Guid>>
 {
-    public DbSet<TaskDao> Tasks { get; set; } = null!;
+    public DbSet<TaskDao> Tasks { get; init; } = null!;
 
     public FroggieDb(IMapper mapper, DbContextOptions<FroggieDb> options)
-        : base(mapper, options)
-    {
-    }
+        : base(mapper, options) { }
 }

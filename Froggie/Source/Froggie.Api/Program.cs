@@ -1,9 +1,10 @@
 using Froggie.Api.Tasks;
+using Froggie.Api.Users;
 using Froggie.Data;
 using LittleByte.Common;
 using LittleByte.Common.AspNet.Configuration;
 using LittleByte.Common.AspNet.Middleware;
-using LittleByte.Common.Dates;
+using LittleByte.Common.Identity.Configuration;
 using LittleByte.Common.Logging.Configuration;
 using Serilog;
 
@@ -14,12 +15,14 @@ builder.Services.AddControllers();
 
 builder.Services
     .AddLogs()
+    .AddJwtAuthentication(builder.Configuration)
     .AddOpenApi("Froggie")
     .AddSingleton<IDateService, DateService>()
     .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddTasks()
+    .AddUsers()
     .AddPersistence();
 
 var app = builder.Build();

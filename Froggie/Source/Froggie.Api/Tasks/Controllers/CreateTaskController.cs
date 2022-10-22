@@ -14,8 +14,8 @@ namespace Froggie.Api.Tasks.Controllers;
 public sealed class CreateTaskController : TaskController
 {
     private readonly ICreateTaskService createTask;
-    private readonly ISaveContextCommand saveContext;
     private readonly IMapper mapper;
+    private readonly ISaveContextCommand saveContext;
 
     public CreateTaskController(ICreateTaskService createTask, ISaveContextCommand saveContext, IMapper mapper)
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Users.Models;
 using Froggie.Api.Users.Requests;
+using Froggie.Api.Users.Responses;
 using Froggie.Domain.Users.Models;
 using Froggie.Domain.Users.Services;
 using LittleByte.Common.AspNet.Responses;
@@ -17,7 +17,10 @@ public sealed class CreateUserController : UserController
     private readonly IUserRegisterService registerService;
     private readonly ISaveContextCommand saveCommand;
 
-    public CreateUserController(ILogInService logInService, IUserRegisterService registerService, IMapper mapper, ISaveContextCommand saveCommand)
+    public CreateUserController(ILogInService logInService,
+                                IUserRegisterService registerService,
+                                IMapper mapper,
+                                ISaveContextCommand saveCommand)
     {
         this.logInService = logInService;
         this.registerService = registerService;
@@ -25,19 +28,22 @@ public sealed class CreateUserController : UserController
         this.saveCommand = saveCommand;
     }
 
+    // TODO: Should have RegisterResponse.
     [HttpPost(Routes.Create)]
-    [ResponseType(HttpStatusCode.Created, typeof(UserDto))]
-    public async ValueTask<ApiResponse<UserDto>> Create(CreateUserRequest request)
+    [ResponseType(HttpStatusCode.OK, typeof(LogInResponse))]
+    public async ValueTask<ApiResponse<LogInResponse>> Create(CreateUserRequest request)
     {
         var email = new Email(request.Email);
         var name = new Name(request.Name);
         var password = new Password(request.Password);
 
-        var user = await registerService.RegisterAsync(email, name, password);
-        var userDto = mapper.Map<UserDto>(user);
+        await registerService.RegisterAsync(email, name, password);
+
+        var logInResult = await logInService.LogInAsync(email, password);
+        var response = mapper.Map<LogInResponse>(logInResult);
 
         await saveCommand.CommitChangesAsync();
 
-        return new CreatedResponse<UserDto>(userDto);
+        return new OkResponse<LogInResponse>(response);
     }
 }

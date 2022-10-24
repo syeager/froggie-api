@@ -2,6 +2,7 @@
 using Froggie.Data.Users.Models;
 using Froggie.Domain.Users.Models;
 using JetBrains.Annotations;
+using LittleByte.Common.AspNet.AutoMapper;
 
 namespace Froggie.Data.Users.Mappings;
 
@@ -10,7 +11,6 @@ internal sealed class UserProfile : Profile
 {
     public UserProfile()
     {
-        CreateMap<User, UserDao>().ForMember(dao => dao.UserName, config => config.MapFrom(domain => domain.Name.Value));
-        CreateMap<UserDao, User>().ConstructUsing(dao => dao.ToUser());
+        this.MapBoth<User, UserDao, UserMap>();
     }
 }

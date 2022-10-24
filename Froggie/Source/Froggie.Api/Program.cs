@@ -23,7 +23,8 @@ builder.Services
     .AddSwaggerGen()
     .AddTasks()
     .AddUsers()
-    .AddPersistence();
+    .AddPersistence()
+    .AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
@@ -43,6 +44,7 @@ app
     .UseHttpsRedirection()
     .UseHsts()
     .UseRouting()
+    .UseAuthentication()
     .UseAuthorization()
     .UseHttpExceptions()
     .UseModelValidationExceptions()

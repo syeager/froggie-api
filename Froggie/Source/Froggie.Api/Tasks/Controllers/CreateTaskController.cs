@@ -5,12 +5,10 @@ using Froggie.Api.Tasks.Requests;
 using Froggie.Domain.Tasks.Services;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks.Controllers;
 
-[AllowAnonymous]
 public sealed class CreateTaskController : TaskController
 {
     private readonly ICreateTaskService createTask;

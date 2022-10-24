@@ -1,4 +1,5 @@
 ﻿using Froggie.Data.Users.Commands;
+using Froggie.Data.Users.Mappings;
 using Froggie.Data.Users.Models;
 using Froggie.Data.Users.Queries;
 using Froggie.Domain.Users.Commands;
@@ -25,6 +26,7 @@ public static class UserConfiguration
             .AddEntityFrameworkStores<FroggieDb>();
 
         return @this
+            .AddTransient<UserMap>()
             .AddTransient<IUserPageQuery, UserPageQuery>()
             .AddTransient<IAddUserCommand, AddUserCommand>()
             .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>();

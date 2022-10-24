@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using Controller = LittleByte.Common.AspNet.Core.Controller;
 
 namespace Froggie.Api.Tasks.Controllers;
 
-[AllowAnonymous]
-[Route("tasks", Name = "Tasks")]
 [OpenApiTag("Tasks")]
-[ApiController]
+[Route("tasks", Name = "Tasks")]
 public abstract class TaskController : Controller { }

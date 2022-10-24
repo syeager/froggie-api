@@ -4,7 +4,6 @@ using Froggie.Domain.Users.Commands;
 using Froggie.Domain.Users.Models;
 using LittleByte.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
-using User = Froggie.Domain.Users.Models.User;
 
 namespace Froggie.Data.Users.Commands;
 

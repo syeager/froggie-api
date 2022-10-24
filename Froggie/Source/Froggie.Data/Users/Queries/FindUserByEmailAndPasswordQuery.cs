@@ -2,7 +2,6 @@
 using Froggie.Data.Users.Models;
 using Froggie.Domain.Users.Models;
 using Froggie.Domain.Users.Queries;
-using LittleByte.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 
@@ -19,7 +18,7 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
         this.mapper = mapper;
     }
 
-    public async ValueTask<Valid<User>?> TryFindAsync(Email email, Password password)
+    public async ValueTask<User?> TryFindAsync(Email email, Password password)
     {
         var userEntity = await userManager.FindByEmailAsync(email.Value);
         if(userEntity is null)
@@ -35,7 +34,7 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
             return null;
         }
 
-        var user = mapper.Map<Valid<User>>(userEntity);
+        var user = mapper.Map<User>(userEntity);
         return user;
     }
 }

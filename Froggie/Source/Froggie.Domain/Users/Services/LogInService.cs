@@ -29,10 +29,9 @@ public sealed class LogInService : ILogInService
     {
         LogInResult result;
 
-        var validUser = await findUserByEmailAndPasswordQuery.TryFindAsync(email, password);
-        if(validUser is not null)
+        var user = await findUserByEmailAndPasswordQuery.TryFindAsync(email, password);
+        if(user is not null)
         {
-            var user = validUser.Value.GetModelOrThrow();
             var claims = GetUserClaims(user);
             var token = tokenGenerator.GenerateJwt(claims);
             result = LogInResult.Success(token, user);

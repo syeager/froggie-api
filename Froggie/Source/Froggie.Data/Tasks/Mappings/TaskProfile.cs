@@ -10,6 +10,6 @@ internal sealed class TaskProfile : Profile
 {
     public TaskProfile()
     {
-        this.CreateBiDirectionMap<TaskDao, Task>();
+        this.MapBoth<TaskDao, Task>();
     }
 }

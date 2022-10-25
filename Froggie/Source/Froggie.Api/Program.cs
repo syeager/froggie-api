@@ -15,7 +15,6 @@ builder.Services.AddControllers();
 
 builder.Services
     .AddLogs()
-    .AddJwtAuthentication(builder.Configuration)
     .AddOpenApi("Froggie")
     .AddSingleton<IDateService, DateService>()
     .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())

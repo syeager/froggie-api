@@ -40,8 +40,8 @@ else
 }
 
 app
-    .UseHttpsRedirection()
-    .UseHsts()
+    //.UseHttpsRedirection()
+    //.UseHsts()
     .UseRouting()
     .UseAuthentication()
     .UseAuthorization()

@@ -38,7 +38,7 @@ public sealed class LogInService : ILogInService
         }
         else
         {
-            result = LogInResult.Fail(new[] {"todo"}); // TODO
+            result = LogInResult.Fail(new[] {"Incorrect email or password."});
         }
 
         return result;

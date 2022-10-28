@@ -4,6 +4,10 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<NoWarn>NUnit2006</NoWarn>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\LittleByte.Test\LittleByte.Test.csproj" />
 	</ItemGroup>

@@ -4,7 +4,7 @@ namespace Froggie.Domain.Tasks.Services;
 
 public interface ICreateTaskService
 {
-    ValueTask<Valid<Task>> CreateAsync(string title);
+    ValueTask<Task> CreateAsync(string title);
 }
 
 public sealed class CreateTaskService : ICreateTaskService
@@ -16,7 +16,7 @@ public sealed class CreateTaskService : ICreateTaskService
         this.addTask = addTask;
     }
 
-    public ValueTask<Valid<Task>> CreateAsync(string title)
+    public ValueTask<Task> CreateAsync(string title)
     {
         var id = new Id<Task>();
         var task = Task.Create(id, title);

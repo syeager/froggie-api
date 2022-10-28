@@ -26,8 +26,7 @@ public sealed class CreateTaskController : TaskController
     [ResponseType(HttpStatusCode.Created, typeof(TaskDto))]
     public async ValueTask<ApiResponse<TaskDto>> Create(CreateTaskRequest request)
     {
-        var validTask = await createTask.CreateAsync(request.Title);
-        var task = validTask.GetModelOrThrow();
+        var task = await createTask.CreateAsync(request.Title);
 
         await saveContext.CommitChangesAsync();
 

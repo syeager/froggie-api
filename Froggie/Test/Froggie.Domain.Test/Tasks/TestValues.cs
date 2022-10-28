@@ -1,9 +1,11 @@
-﻿using Froggie.Domain.Tasks.Models;
-using Froggie.Domain.Tasks.Validators;
+﻿using Froggie.Domain.Tasks.Validators;
 
 namespace Froggie.Domain.Test.Tasks;
 
-public static class TV
+public static class Valid
 {
-    public static readonly Title Title = new(new string('a', TitleRules.LengthMin));
+    public static class Task
+    {
+        public static readonly string Title = new('a', TitleRules.LengthMin);
+    }
 }

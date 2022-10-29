@@ -29,7 +29,7 @@ internal sealed class UserRegisterService : IUserRegisterService
             .Push<Email>(emailValue)
             .Push<Name>(nameValue)
             .Info("Register user");
-        
+
         var nameIsTaken = await doesUserWithNameExistQuery.SearchAsync(nameValue);
         if(nameIsTaken)
         {

@@ -1,5 +1,4 @@
-﻿using Froggie.Domain.Tasks.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Domain.Tasks;
 

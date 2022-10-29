@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-using Froggie.Domain.Tasks.Commands;
-using Froggie.Domain.Tasks.Services;
+using Froggie.Domain.Tasks;
 
 namespace Froggie.Domain.Test.Tasks.Services;
 

@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Tasks.Commands;
-
-namespace Froggie.Domain.Tasks.Services;
+﻿namespace Froggie.Domain.Tasks;
 
 public interface ICreateTaskService
 {

@@ -1,5 +1,4 @@
-﻿using Froggie.Domain.Tasks.Models;
-using Froggie.Domain.Tasks.Validators;
+﻿using Froggie.Domain.Tasks;
 using LittleByte.Common;
 using LittleByte.Test.Validation;
 

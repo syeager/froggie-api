@@ -1,4 +1,4 @@
-﻿namespace Froggie.Domain.Tasks.Commands;
+﻿namespace Froggie.Domain.Tasks;
 
 public interface IAddTaskCommand
 {

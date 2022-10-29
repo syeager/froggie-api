@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using Froggie.Domain.Tasks.Models;
 using LittleByte.Common;
 
-namespace Froggie.Domain.Tasks.Validators;
+namespace Froggie.Domain.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
 [ExcludeFromCodeCoverage]

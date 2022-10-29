@@ -1,4 +1,4 @@
-﻿using Froggie.Domain.Tasks.Validators;
+﻿using Froggie.Domain.Tasks;
 
 // ReSharper disable once CheckNamespace
 namespace Froggie.Domain.Test;

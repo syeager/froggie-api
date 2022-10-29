@@ -1,5 +1,5 @@
 ﻿using Froggie.Data.Tasks.Models;
-using Froggie.Domain.Tasks.Commands;
+using Froggie.Domain.Tasks;
 
 namespace Froggie.Data.Tasks.Commands;
 

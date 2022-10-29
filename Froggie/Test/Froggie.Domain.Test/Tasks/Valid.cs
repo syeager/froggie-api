@@ -1,8 +1,9 @@
 ﻿using Froggie.Domain.Tasks.Validators;
 
-namespace Froggie.Domain.Test.Tasks;
+// ReSharper disable once CheckNamespace
+namespace Froggie.Domain.Test;
 
-public static class Valid
+public static partial class Valid
 {
     public static class Task
     {

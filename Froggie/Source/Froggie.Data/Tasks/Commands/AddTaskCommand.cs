@@ -1,7 +1,6 @@
-﻿using Froggie.Data.Tasks.Models;
-using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Tasks;
 
-namespace Froggie.Data.Tasks.Commands;
+namespace Froggie.Data.Tasks;
 
 internal sealed class AddTaskCommand : IAddTaskCommand
 {

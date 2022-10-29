@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Froggie.Data.Tasks.Models;
+using Froggie.Data.Tasks;
 using Froggie.Data.Users.Models;
 using LittleByte.Common.Infra.Contexts;
 using Microsoft.AspNetCore.Identity;

@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Froggie.Data.Tasks.Models;
 using LittleByte.Common.AspNet.AutoMapper;
 
-namespace Froggie.Data.Tasks.Mappings;
+namespace Froggie.Data.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "UnusedType.Global")]

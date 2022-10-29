@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Froggie.Data.Tasks.Queries;
+namespace Froggie.Data.Tasks;
 
 public interface ITaskPageQuery
 {

@@ -14,7 +14,7 @@ internal sealed class UserRegisterService : IUserRegisterService
     private readonly IAddUserCommand addUserCommand;
     private readonly IUserFactory userFactory;
 
-    internal UserRegisterService(IAddUserCommand addUserCommand, IUserFactory userFactory)
+    public UserRegisterService(IAddUserCommand addUserCommand, IUserFactory userFactory)
     {
         this.addUserCommand = addUserCommand;
         this.userFactory = userFactory;

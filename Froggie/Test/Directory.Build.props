@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<NoWarn>NUnit2006,NUnit2015</NoWarn>
+		<NoWarn>NUnit2005,NUnit2006,NUnit2015</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

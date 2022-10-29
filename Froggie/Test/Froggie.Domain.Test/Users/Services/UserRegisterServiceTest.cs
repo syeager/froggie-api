@@ -54,9 +54,11 @@ public sealed class UserRegisterServiceTest : UnitTest
         var existingUser = Valid.Users.New();
         doesUserWithNameExistQuery.SearchAsync(existingUser.Name.Value).Returns(true);
 
-        Assert.ThrowsAsync<Exception>(() => testObj.RegisterAsync(
+        var exception = Assert.ThrowsAsync<NameIsTakenException>(() => testObj.RegisterAsync(
             Valid.Users.Email2.Value,
             existingUser.Name.Value,
             Valid.Users.Password.Value).AsTask());
+
+        Assert.AreEqual(existingUser.Name.Value, exception!.NameValue);
     }
 }

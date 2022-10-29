@@ -25,7 +25,7 @@ internal sealed class UserRegisterService : IUserRegisterService
         var nameIsTaken = await doesUserWithNameExistQuery.SearchAsync(nameValue);
         if(nameIsTaken)
         {
-            throw new Exception();
+            throw new NameIsTakenException(nameValue);
         }
         
         var user = await findUserByEmailQuery.FindAsync(emailValue);

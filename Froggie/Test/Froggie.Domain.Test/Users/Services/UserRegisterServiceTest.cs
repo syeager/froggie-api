@@ -2,13 +2,11 @@
 
 namespace Froggie.Domain.Test.Users.Services;
 
-/*
- * email exists
- * username exists
- */
 public sealed class UserRegisterServiceTest : UnitTest
 {
     private IAddUserCommand addUserCommand = null!;
+    private IDoesUserWithNameExistQuery doesUserWithNameExistQuery = null!;
+    private IFindUserByEmailQuery findUserByEmailQuery = null!;
     private UserRegisterService testObj = null!;
     private IUserFactory userFactory = null!;
 
@@ -16,8 +14,10 @@ public sealed class UserRegisterServiceTest : UnitTest
     public void SetUp()
     {
         addUserCommand = Substitute.For<IAddUserCommand>();
+        doesUserWithNameExistQuery = Substitute.For<IDoesUserWithNameExistQuery>();
+        findUserByEmailQuery = Substitute.For<IFindUserByEmailQuery>();
         userFactory = Substitute.For<IUserFactory>();
-        testObj = new UserRegisterService(addUserCommand, userFactory);
+        testObj = new UserRegisterService(addUserCommand, userFactory, findUserByEmailQuery, doesUserWithNameExistQuery);
     }
 
     [Test]
@@ -34,5 +34,29 @@ public sealed class UserRegisterServiceTest : UnitTest
             Valid.Users.Password.Value);
 
         Assert.AreNotEqual(Guid.Empty, user.Id.Value);
+    }
+
+    [Test]
+    public void When_EmailTaken_Then_Throw()
+    {
+        var existingUser = Valid.Users.New();
+        findUserByEmailQuery.FindAsync(Valid.Users.Email.Value).Returns(existingUser);
+
+        Assert.ThrowsAsync<Exception>(() => testObj.RegisterAsync(
+            existingUser.Email.Value,
+            Valid.Users.Name2.Value,
+            Valid.Users.Password.Value).AsTask());
+    }
+
+    [Test]
+    public void When_NameTaken_Then_Throw()
+    {
+        var existingUser = Valid.Users.New();
+        doesUserWithNameExistQuery.SearchAsync(existingUser.Name.Value).Returns(true);
+
+        Assert.ThrowsAsync<Exception>(() => testObj.RegisterAsync(
+            Valid.Users.Email2.Value,
+            existingUser.Name.Value,
+            Valid.Users.Password.Value).AsTask());
     }
 }

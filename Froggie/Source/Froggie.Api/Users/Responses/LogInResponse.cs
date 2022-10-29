@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Froggie.Api.Users.Models;
 
-namespace Froggie.Api.Users.Responses;
+namespace Froggie.Api.Users;
 
 public sealed class LogInResponse
 {

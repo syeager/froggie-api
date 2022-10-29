@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using Froggie.Api.Users.Models;
-using Froggie.Api.Users.Responses;
 using Froggie.Domain.Users;
 using JetBrains.Annotations;
 
-namespace Froggie.Api.Users.Mappings;
+namespace Froggie.Api.Users;
 
 [UsedImplicitly]
 internal sealed class UserProfile : Profile

@@ -1,13 +1,11 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Users.Requests;
-using Froggie.Api.Users.Responses;
 using Froggie.Domain.Users;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Froggie.Api.Users.Controllers;
+namespace Froggie.Api.Users;
 
 public sealed class LogInUserController : UserController
 {

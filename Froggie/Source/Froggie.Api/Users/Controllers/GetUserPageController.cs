@@ -1,12 +1,11 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Users.Models;
 using Froggie.Data.Users.Queries;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Froggie.Api.Users.Controllers;
+namespace Froggie.Api.Users;
 
 public sealed class GetUserPageController : UserController
 {

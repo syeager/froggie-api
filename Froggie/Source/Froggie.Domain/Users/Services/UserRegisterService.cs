@@ -25,6 +25,11 @@ internal sealed class UserRegisterService : IUserRegisterService
 
     public async ValueTask<User> RegisterAsync(string emailValue, string nameValue, string passwordValue)
     {
+        using var logger = this.NewLogger()
+            .Push<Email>(emailValue)
+            .Push<Name>(nameValue)
+            .Info("Register user");
+        
         var nameIsTaken = await doesUserWithNameExistQuery.SearchAsync(nameValue);
         if(nameIsTaken)
         {

@@ -1,12 +1,11 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Tasks.Models;
 using Froggie.Data.Tasks.Queries;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Froggie.Api.Tasks.Controllers;
+namespace Froggie.Api.Tasks;
 
 public sealed class GetTaskPageController : TaskController
 {

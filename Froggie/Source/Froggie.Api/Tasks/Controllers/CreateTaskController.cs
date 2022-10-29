@@ -1,13 +1,11 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Tasks.Models;
-using Froggie.Api.Tasks.Requests;
 using Froggie.Domain.Tasks;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Froggie.Api.Tasks.Controllers;
+namespace Froggie.Api.Tasks;
 
 public sealed class CreateTaskController : TaskController
 {

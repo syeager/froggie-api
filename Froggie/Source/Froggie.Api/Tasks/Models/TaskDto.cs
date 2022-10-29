@@ -2,7 +2,7 @@
 using Froggie.Domain.Tasks;
 using LittleByte.Common.AspNet.Attributes;
 
-namespace Froggie.Api.Tasks.Models;
+namespace Froggie.Api.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class TaskDto : Dto

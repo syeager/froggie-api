@@ -2,7 +2,7 @@
 using NSwag.Annotations;
 using Controller = LittleByte.Common.AspNet.Core.Controller;
 
-namespace Froggie.Api.Tasks.Controllers;
+namespace Froggie.Api.Tasks;
 
 [OpenApiTag("Tasks")]
 [Route("tasks", Name = "Tasks")]

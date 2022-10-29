@@ -2,7 +2,7 @@
 using Froggie.Domain.Tasks;
 using LittleByte.Common.AspNet.Attributes;
 
-namespace Froggie.Api.Tasks.Requests;
+namespace Froggie.Api.Tasks;
 
 [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
 public sealed class CreateTaskRequest

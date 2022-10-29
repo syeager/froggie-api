@@ -2,6 +2,7 @@
 
 namespace Froggie.Domain.Users;
 
+[ExcludeFromCodeCoverage]
 public sealed class NameIsTakenException : Exception
 {
     public string NameValue { get; }

@@ -33,7 +33,7 @@ public sealed class LogInServiceTest : UnitTest
     {
         var user = AddUser();
 
-        var result = await testObj.LogInAsync(Valid.User.Email, Valid.User.Password);
+        var result = await testObj.LogInAsync(Valid.Users.Email, Valid.Users.Password);
 
         AssertSuccess(result, user);
     }
@@ -41,7 +41,7 @@ public sealed class LogInServiceTest : UnitTest
     [Test]
     public async ValueTask When_NoUserWithEmail_Then_Fail()
     {
-        var result = await testObj.LogInAsync(Valid.User.Email, Valid.User.Password);
+        var result = await testObj.LogInAsync(Valid.Users.Email, Valid.Users.Password);
 
         AssertFailure(result);
     }
@@ -52,7 +52,7 @@ public sealed class LogInServiceTest : UnitTest
         AddUser();
         var wrongPassword = new Password("abd124");
 
-        var result = await testObj.LogInAsync(Valid.User.Email, wrongPassword);
+        var result = await testObj.LogInAsync(Valid.Users.Email, wrongPassword);
 
         AssertFailure(result);
     }
@@ -61,9 +61,9 @@ public sealed class LogInServiceTest : UnitTest
 
     private User AddUser()
     {
-        var user = User.Create(new Id<User>(), Valid.User.Email, Valid.User.Name);
+        var user = User.Create(new Id<User>(), Valid.Users.Email, Valid.Users.Name);
         findUserQuery
-            .TryFindAsync(Valid.User.Email, Valid.User.Password)
+            .TryFindAsync(Valid.Users.Email, Valid.Users.Password)
             .Returns(user);
         tokenGenerator.GenerateJwt(default!).ReturnsForAnyArgs(new JwtSecurityToken());
         return user;

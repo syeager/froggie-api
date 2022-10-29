@@ -1,30 +1,31 @@
 ﻿using Froggie.Domain.Users.Commands;
+using Froggie.Domain.Users.Factories;
 using Froggie.Domain.Users.Models;
 
 namespace Froggie.Domain.Users.Services;
 
 public interface IUserRegisterService
 {
-    Task<User> RegisterAsync(Email email, Name name, Password password);
+    ValueTask<User> RegisterAsync(string emailValue, string nameValue, string passwordValue);
 }
 
 public sealed class UserRegisterService : IUserRegisterService
 {
     private readonly IAddUserCommand addUserCommand;
+    private readonly IUserFactory userFactory;
 
-    public UserRegisterService(IAddUserCommand addUserCommand)
+    internal UserRegisterService(IAddUserCommand addUserCommand, IUserFactory userFactory)
     {
         this.addUserCommand = addUserCommand;
+        this.userFactory = userFactory;
     }
 
-    // TODO: Confirm password.
-    // TODO: Use password.
-    // TODO: Check for existing user with email or name.
-    public async Task<User> RegisterAsync(Email email, Name name, Password password)
+    public async ValueTask<User> RegisterAsync(string emailValue, string nameValue, string passwordValue)
     {
         var id = Guid.NewGuid();
-        var user = User.Create(id, email, name);
+        var user = userFactory.Create(id, emailValue, nameValue);
 
+        var password = new Password(passwordValue);
         await addUserCommand.AddAsync(user, password);
 
         return user;

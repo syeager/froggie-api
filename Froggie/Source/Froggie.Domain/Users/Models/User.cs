@@ -14,7 +14,7 @@ public sealed class User : DomainModel<User>
         Name = name;
     }
 
-    public static User Create(Id<User> id, Email email, Name name)
+    internal static User Create(Id<User> id, Email email, Name name)
     {
         var user = new User(id, email, name);
         var validator = new UserValidator();

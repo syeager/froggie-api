@@ -17,7 +17,7 @@ internal sealed class TitleValidatorTest : UnitTest
     [Test]
     public void When_Valid_Then_Pass()
     {
-        var title = new Title(Valid.Task.Title);
+        var title = new Title(Valid.Tasks.Title);
 
         var result = testObj.IsValid(ValidationContextUtility.Empty(), title);
 

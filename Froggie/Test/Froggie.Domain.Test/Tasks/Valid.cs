@@ -5,7 +5,7 @@ namespace Froggie.Domain.Test;
 
 public static partial class Valid
 {
-    public static class Task
+    public static class Tasks
     {
         public static readonly string Title = new('a', TitleRules.LengthMin);
     }

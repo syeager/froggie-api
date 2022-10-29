@@ -18,7 +18,7 @@ public sealed class CreateTaskServiceTest : UnitTest
     [Test]
     public async ValueTask With_ValidData_Then_CreateNewTask()
     {
-        var task = await testObj.CreateAsync(Valid.Task.Title);
+        var task = await testObj.CreateAsync(Valid.Tasks.Title);
 
         Assert.AreNotEqual(Guid.Empty, task.Id.Value);
         addTaskCommand.Received(1).Add(task);

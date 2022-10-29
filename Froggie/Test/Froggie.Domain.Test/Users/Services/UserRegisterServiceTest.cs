@@ -42,10 +42,12 @@ public sealed class UserRegisterServiceTest : UnitTest
         var existingUser = Valid.Users.New();
         findUserByEmailQuery.FindAsync(Valid.Users.Email.Value).Returns(existingUser);
 
-        Assert.ThrowsAsync<Exception>(() => testObj.RegisterAsync(
+        var exception = Assert.ThrowsAsync<EmailIsTakenException>(() => testObj.RegisterAsync(
             existingUser.Email.Value,
             Valid.Users.Name2.Value,
             Valid.Users.Password.Value).AsTask());
+
+        Assert.AreEqual(existingUser.Email.Value, exception!.EmailValue);
     }
 
     [Test]

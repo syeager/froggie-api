@@ -12,7 +12,10 @@ internal sealed class UserRegisterService : IUserRegisterService
     private readonly IFindUserByEmailQuery findUserByEmailQuery;
     private readonly IUserFactory userFactory;
 
-    public UserRegisterService(IAddUserCommand addUserCommand, IUserFactory userFactory, IFindUserByEmailQuery findUserByEmailQuery, IDoesUserWithNameExistQuery doesUserWithNameExistQuery)
+    public UserRegisterService(IAddUserCommand addUserCommand,
+                               IUserFactory userFactory,
+                               IFindUserByEmailQuery findUserByEmailQuery,
+                               IDoesUserWithNameExistQuery doesUserWithNameExistQuery)
     {
         this.addUserCommand = addUserCommand;
         this.userFactory = userFactory;
@@ -27,11 +30,11 @@ internal sealed class UserRegisterService : IUserRegisterService
         {
             throw new NameIsTakenException(nameValue);
         }
-        
+
         var user = await findUserByEmailQuery.FindAsync(emailValue);
         if(user is not null)
         {
-            throw new Exception();
+            throw new EmailIsTakenException(emailValue);
         }
 
         var id = Guid.NewGuid();

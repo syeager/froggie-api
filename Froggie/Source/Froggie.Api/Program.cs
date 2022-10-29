@@ -1,4 +1,3 @@
-using Froggie.Api.Tasks;
 using Froggie.Data;
 using Froggie.Domain;
 using LittleByte.Common;
@@ -21,7 +20,6 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddDomain()
-    .AddTasks()
     .AddPersistence()
     .AddJwtAuthentication(builder.Configuration);
 

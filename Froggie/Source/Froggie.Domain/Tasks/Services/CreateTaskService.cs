@@ -7,7 +7,7 @@ public interface ICreateTaskService
     ValueTask<Task> CreateAsync(string title);
 }
 
-public sealed class CreateTaskService : ICreateTaskService
+internal sealed class CreateTaskService : ICreateTaskService
 {
     private readonly IAddTaskCommand addTask;
 

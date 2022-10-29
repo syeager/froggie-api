@@ -1,8 +1,4 @@
-﻿using Froggie.Domain.Users.Commands;
-using Froggie.Domain.Users.Factories;
-using Froggie.Domain.Users.Models;
-
-namespace Froggie.Domain.Users.Services;
+﻿namespace Froggie.Domain.Users;
 
 public interface IUserRegisterService
 {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Froggie.Data.Users.Models;
-using Froggie.Domain.Users.Models;
-using Froggie.Domain.Users.Queries;
+using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 

@@ -1,3 +1,3 @@
-﻿namespace Froggie.Domain.Users.Models;
+﻿namespace Froggie.Domain.Users;
 
 public record Password(string Value);

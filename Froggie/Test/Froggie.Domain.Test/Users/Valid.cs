@@ -1,4 +1,4 @@
-﻿using Froggie.Domain.Users.Models;
+﻿using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 
 // ReSharper disable once CheckNamespace

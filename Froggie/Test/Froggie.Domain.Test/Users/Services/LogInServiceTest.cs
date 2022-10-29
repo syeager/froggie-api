@@ -1,8 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using Froggie.Domain.Users.Models;
-using Froggie.Domain.Users.Queries;
-using Froggie.Domain.Users.Results;
-using Froggie.Domain.Users.Services;
+using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 using LittleByte.Common.Identity.Services;
 

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Froggie.Data.Users.Models;
-using Froggie.Domain.Users.Commands;
-using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users;
 using LittleByte.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
 

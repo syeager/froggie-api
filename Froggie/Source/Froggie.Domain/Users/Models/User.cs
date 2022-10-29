@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Users.Validators;
-
-namespace Froggie.Domain.Users.Models;
+﻿namespace Froggie.Domain.Users;
 
 public sealed class User : DomainModel<User>
 {

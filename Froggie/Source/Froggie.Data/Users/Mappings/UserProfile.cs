@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Froggie.Data.Users.Models;
-using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users;
 using JetBrains.Annotations;
 using LittleByte.Common.AspNet.AutoMapper;
 

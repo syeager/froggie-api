@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Users.Models;
-
-namespace Froggie.Domain.Users.Factories;
+﻿namespace Froggie.Domain.Users;
 
 public interface IUserFactory
 {

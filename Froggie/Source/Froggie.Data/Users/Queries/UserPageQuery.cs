@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Froggie.Data.Users.Queries;

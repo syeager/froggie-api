@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Users.Factories;
-using Froggie.Domain.Users.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Domain.Users;
 

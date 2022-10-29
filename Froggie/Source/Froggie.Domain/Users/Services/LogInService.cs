@@ -1,11 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Froggie.Domain.Users.Models;
-using Froggie.Domain.Users.Queries;
-using Froggie.Domain.Users.Results;
 using LittleByte.Common.Identity.Services;
 
-namespace Froggie.Domain.Users.Services;
+namespace Froggie.Domain.Users;
 
 public interface ILogInService
 {

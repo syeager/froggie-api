@@ -9,7 +9,7 @@ public interface IUserRegisterService
     ValueTask<User> RegisterAsync(string emailValue, string nameValue, string passwordValue);
 }
 
-public sealed class UserRegisterService : IUserRegisterService
+internal sealed class UserRegisterService : IUserRegisterService
 {
     private readonly IAddUserCommand addUserCommand;
     private readonly IUserFactory userFactory;

@@ -12,7 +12,7 @@ public interface ILogInService
     public Task<LogInResult> LogInAsync(Email email, Password password);
 }
 
-public sealed class LogInService : ILogInService
+internal sealed class LogInService : ILogInService
 {
     private readonly IFindUserByEmailAndPasswordQuery findUserByEmailAndPasswordQuery;
     private readonly ITokenGenerator tokenGenerator;

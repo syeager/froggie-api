@@ -1,8 +1,4 @@
-﻿using Froggie.Data.Users.Commands;
-using Froggie.Data.Users.Mappings;
-using Froggie.Data.Users.Models;
-using Froggie.Data.Users.Queries;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

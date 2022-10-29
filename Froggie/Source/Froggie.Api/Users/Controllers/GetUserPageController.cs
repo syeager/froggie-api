@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Data.Users.Queries;
+using Froggie.Data.Users;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Models;
 using Microsoft.AspNetCore.Mvc;

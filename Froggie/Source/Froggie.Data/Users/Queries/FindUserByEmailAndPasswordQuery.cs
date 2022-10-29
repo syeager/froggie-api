@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Froggie.Data.Users.Models;
 using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 
-namespace Froggie.Data.Users.Queries;
+namespace Froggie.Data.Users;
 
 internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPasswordQuery
 {

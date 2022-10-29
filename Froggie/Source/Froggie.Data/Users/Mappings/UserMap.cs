@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Froggie.Data.Users.Models;
 using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 
-namespace Froggie.Data.Users.Mappings;
+namespace Froggie.Data.Users;
 
 internal sealed class UserMap : ITypeConverter<User, UserDao>, ITypeConverter<UserDao, User>
 {

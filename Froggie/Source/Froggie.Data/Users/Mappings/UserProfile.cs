@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Froggie.Data.Users.Models;
 using Froggie.Domain.Users;
 using JetBrains.Annotations;
 using LittleByte.Common.AspNet.AutoMapper;
 
-namespace Froggie.Data.Users.Mappings;
+namespace Froggie.Data.Users;
 
 [UsedImplicitly]
 internal sealed class UserProfile : Profile

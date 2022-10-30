@@ -2,6 +2,7 @@
 using Froggie.Api.Users;
 using Froggie.Data;
 using Froggie.Domain;
+using Froggie.Domain.Test;
 using LittleByte.Test.Categories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,12 +23,11 @@ public sealed class RegisterUserTest : IntegrationTest
     public async ValueTask RegisterNewUser()
     {
         var controller = services.GetRequiredService<CreateUserController>();
-        // TODO: Use Valid?
         var request = new CreateUserRequest
         {
-            Email = "user@example.com",
-            Name = "user",
-            Password = "abc123"
+            Email = Valid.Users.Email.Value,
+            Name = Valid.Users.Name.Value,
+            Password = Valid.Users.Password.Value
         };
 
         var response = await controller.Create(request);

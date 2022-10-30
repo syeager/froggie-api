@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Froggie.Api\Froggie.Api.csproj" />
+    <ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />
   </ItemGroup>
 </Project>

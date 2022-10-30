@@ -20,7 +20,10 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
     {
         using var logger = this.NewLogger().Push<Email>(email.Value);
 
-        var userEntity = await userManager.FindByEmailAsync(email.Value);
+        var userEntity = await userManager
+            .FindByEmailAsync(email.Value)
+            .ConfigureAwait(false);
+
         if(userEntity is null)
         {
             logger.Info("No user with email found");
@@ -29,7 +32,9 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
 
         logger.Info("Found user with email");
 
-        var correctPassword = await userManager.CheckPasswordAsync(userEntity, password.Value);
+        var correctPassword = await userManager
+            .CheckPasswordAsync(userEntity, password.Value)
+            .ConfigureAwait(false);
 
         if(!correctPassword)
         {

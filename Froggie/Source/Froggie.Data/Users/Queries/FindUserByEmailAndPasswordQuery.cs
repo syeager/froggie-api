@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Froggie.Domain.Users;
+using LittleByte.Common.Logging;
 using Microsoft.AspNetCore.Identity;
-using Serilog;
 
 namespace Froggie.Data.Users;
 
@@ -18,17 +18,22 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
 
     public async ValueTask<User?> TryFindAsync(Email email, Password password)
     {
+        using var logger = this.NewLogger().Push<Email>(email.Value);
+
         var userEntity = await userManager.FindByEmailAsync(email.Value);
         if(userEntity is null)
         {
+            logger.Info("No user with email found");
             return null;
         }
 
-        Log.Information("Found user by email {Email} with Id {Id}", email.Value, userEntity.Id);
+        logger.Info("Found user with email");
+
         var correctPassword = await userManager.CheckPasswordAsync(userEntity, password.Value);
 
         if(!correctPassword)
         {
+            logger.Info("Password check failed");
             return null;
         }
 

@@ -22,6 +22,8 @@ public static class UserConfiguration
 
         return @this
             .AddTransient<UserMap>()
+            .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
+            .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
             .AddTransient<IUserPageQuery, UserPageQuery>()
             .AddTransient<IAddUserCommand, AddUserCommand>()
             .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>();

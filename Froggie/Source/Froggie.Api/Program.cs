@@ -1,6 +1,5 @@
-using Froggie.Api.Tasks;
-using Froggie.Api.Users;
 using Froggie.Data;
+using Froggie.Domain;
 using LittleByte.Common;
 using LittleByte.Common.AspNet.Configuration;
 using LittleByte.Common.AspNet.Middleware;
@@ -20,8 +19,7 @@ builder.Services
     .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
-    .AddTasks()
-    .AddUsers()
+    .AddDomain()
     .AddPersistence()
     .AddJwtAuthentication(builder.Configuration);
 

@@ -1,6 +1,6 @@
-﻿namespace Froggie.Domain.Tasks.Commands;
+﻿namespace Froggie.Domain.Tasks;
 
 public interface IAddTaskCommand
 {
-    void Add(Valid<Task> validTask);
+    void Add(Task validTask);
 }

@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using Froggie.Data.Users.Models;
-using Froggie.Domain.Users.Commands;
-using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users;
 using LittleByte.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
-namespace Froggie.Data.Users.Commands;
+namespace Froggie.Data.Users;
 
 internal sealed class AddUserCommand : IAddUserCommand
 {

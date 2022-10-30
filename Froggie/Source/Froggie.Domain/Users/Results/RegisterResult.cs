@@ -1,6 +1,4 @@
-using Froggie.Domain.Users.Models;
-
-namespace Froggie.Domain.Users.Results;
+namespace Froggie.Domain.Users;
 
 public class RegisterResult
 {

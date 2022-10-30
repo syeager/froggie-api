@@ -1,9 +1,4 @@
-﻿using Froggie.Data.Users.Commands;
-using Froggie.Data.Users.Mappings;
-using Froggie.Data.Users.Models;
-using Froggie.Data.Users.Queries;
-using Froggie.Domain.Users.Commands;
-using Froggie.Domain.Users.Queries;
+﻿using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +22,8 @@ public static class UserConfiguration
 
         return @this
             .AddTransient<UserMap>()
+            .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
+            .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
             .AddTransient<IUserPageQuery, UserPageQuery>()
             .AddTransient<IAddUserCommand, AddUserCommand>()
             .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>();

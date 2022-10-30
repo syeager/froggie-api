@@ -1,4 +1,4 @@
-﻿namespace Froggie.Domain.Tasks.Validators;
+﻿namespace Froggie.Domain.Tasks;
 
 internal class TaskValidator : ModelValidator<Task>
 {

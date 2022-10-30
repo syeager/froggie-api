@@ -1,8 +1,6 @@
-﻿using Froggie.Data.Tasks.Models;
-using Froggie.Domain.Tasks.Commands;
-using LittleByte.Common.Validation;
+﻿using Froggie.Domain.Tasks;
 
-namespace Froggie.Data.Tasks.Commands;
+namespace Froggie.Data.Tasks;
 
 internal sealed class AddTaskCommand : IAddTaskCommand
 {
@@ -13,9 +11,8 @@ internal sealed class AddTaskCommand : IAddTaskCommand
         this.froggieDb = froggieDb;
     }
 
-    public void Add(Valid<Task> validTask)
+    public void Add(Task task)
     {
-        var task = validTask.GetModelOrThrow();
         froggieDb.Add<Task, TaskDao>(task);
     }
 }

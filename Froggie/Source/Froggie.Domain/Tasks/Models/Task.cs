@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Tasks.Validators;
-
-namespace Froggie.Domain.Tasks.Models;
+﻿namespace Froggie.Domain.Tasks;
 
 public sealed class Task : DomainModel<Task>
 {
@@ -12,14 +10,15 @@ public sealed class Task : DomainModel<Task>
         Title = title;
     }
 
-    public static Valid<Task> Create(Id<Task> id, string titleValue)
+    public static Task Create(Id<Task> id, string titleValue)
     {
         var title = new Title(titleValue);
         var task = new Task(id, title);
 
         var validator = new TaskValidator();
         var validTask = validator.Sign(task);
+        validTask.ThrowIfInvalid();
 
-        return validTask;
+        return task;
     }
 }

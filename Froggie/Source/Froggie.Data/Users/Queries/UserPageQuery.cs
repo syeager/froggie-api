@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Froggie.Domain.Users.Models;
+using Froggie.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace Froggie.Data.Users.Queries;
+namespace Froggie.Data.Users;
 
 public interface IUserPageQuery
 {

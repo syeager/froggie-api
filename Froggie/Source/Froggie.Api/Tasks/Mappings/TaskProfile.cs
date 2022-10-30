@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Froggie.Api.Tasks.Models;
 using JetBrains.Annotations;
 
-namespace Froggie.Api.Tasks.Mappings;
+namespace Froggie.Api.Tasks;
 
 [UsedImplicitly]
 internal sealed class TaskProfile : Profile

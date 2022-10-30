@@ -1,4 +1,4 @@
-﻿namespace Froggie.Data.Tasks.Models;
+﻿namespace Froggie.Data.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]

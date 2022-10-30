@@ -1,6 +1,4 @@
-using Froggie.Domain.Users.Models;
-
-namespace Froggie.Domain.Users.Queries;
+namespace Froggie.Domain.Users;
 
 public interface IFindUserByEmailAndPasswordQuery
 {

@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Users.Validators;
-
-namespace Froggie.Domain.Users.Models;
+﻿namespace Froggie.Domain.Users;
 
 public sealed class User : DomainModel<User>
 {
@@ -14,7 +12,7 @@ public sealed class User : DomainModel<User>
         Name = name;
     }
 
-    public static User Create(Id<User> id, Email email, Name name)
+    internal static User Create(Id<User> id, Email email, Name name)
     {
         var user = new User(id, email, name);
         var validator = new UserValidator();

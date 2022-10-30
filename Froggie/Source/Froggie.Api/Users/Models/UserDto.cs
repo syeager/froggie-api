@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Froggie.Api.Users.Models;
+namespace Froggie.Api.Users;
 
 public class UserDto : Dto
 {

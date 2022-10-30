@@ -1,7 +1,4 @@
-﻿using Froggie.Data.Tasks.Commands;
-using Froggie.Data.Tasks.Models;
-using Froggie.Data.Tasks.Queries;
-using Froggie.Domain.Tasks.Commands;
+﻿using Froggie.Domain.Tasks;
 using LittleByte.Common.Infra.Queries;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,14 +1,11 @@
 ﻿using System.Net;
 using AutoMapper;
-using Froggie.Api.Users.Requests;
-using Froggie.Api.Users.Responses;
-using Froggie.Domain.Users.Models;
-using Froggie.Domain.Users.Services;
+using Froggie.Domain.Users;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Froggie.Api.Users.Controllers;
+namespace Froggie.Api.Users;
 
 public sealed class CreateUserController : UserController
 {
@@ -33,13 +30,12 @@ public sealed class CreateUserController : UserController
     [ResponseType(HttpStatusCode.OK, typeof(LogInResponse))]
     public async ValueTask<ApiResponse<LogInResponse>> Create(CreateUserRequest request)
     {
-        var email = new Email(request.Email);
-        var name = new Name(request.Name);
+        var user = await registerService.RegisterAsync(request.Email, request.Name, request.Password);
+
+        // TODO: There has to be a better way to get the password. Maybe RegisterAsync should return a RegisterResult?
         var password = new Password(request.Password);
-
-        await registerService.RegisterAsync(email, name, password);
-
-        var logInResult = await logInService.LogInAsync(email, password);
+        
+        var logInResult = await logInService.LogInAsync(user.Email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
 
         await saveCommand.CommitChangesAsync();

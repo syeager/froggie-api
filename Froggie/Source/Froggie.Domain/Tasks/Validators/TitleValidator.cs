@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using Froggie.Domain.Tasks.Models;
 using LittleByte.Common;
 
-namespace Froggie.Domain.Tasks.Validators;
+namespace Froggie.Domain.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
+[ExcludeFromCodeCoverage]
 internal static class TitleValidatorExtension
 {
     public static IRuleBuilderOptions<T, Title> IsTitle<T>(this IRuleBuilder<T, Title> @this)

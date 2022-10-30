@@ -2,6 +2,7 @@
 using Froggie.Data.Tasks.Models;
 using Froggie.Domain.Tasks;
 using LittleByte.Common.Domain;
+using LittleByte.Common.Exceptions;
 
 namespace Froggie.Data.Tasks.Commands;
 
@@ -18,8 +19,13 @@ internal sealed class DeleteTaskCommand : IDeleteTaskCommand
 
     public async ValueTask DeleteAsync(Id<Task> id)
     {
-        var task = await froggieDb.FindRequiredAsync<Task, TaskDao>(id);
-        var taskDao = mapper.Map<TaskDao>(task);
-        froggieDb.Remove(taskDao);
+        var task = await froggieDb.Tasks.FindAsync(id.Value);
+       
+        if (task is null)
+        {
+            throw new NotFoundException(typeof(Task), id);
+        }
+
+        froggieDb.Remove(task);
     }
 }

@@ -16,8 +16,6 @@ public sealed class DeleteTaskService : IDeleteTaskService
 
     public async void DeleteAsync(Id<Task> id)
     {
-        
-        deleteTask.DeleteAsync(id);
-        await ValueTask.CompletedTask;
+        await deleteTask.DeleteAsync(id);
     }
 }

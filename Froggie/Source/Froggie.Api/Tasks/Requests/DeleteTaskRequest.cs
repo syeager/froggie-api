@@ -1,7 +1,6 @@
-﻿using LittleByte.Common.Domain;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Froggie.Api.Tasks.Requests;
+namespace Froggie.Api.Tasks;
 
 public sealed class DeleteTaskRequest
 {

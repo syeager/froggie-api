@@ -1,11 +1,10 @@
-﻿using Froggie.Api.Tasks.Requests;
+﻿using System.Net;
+using Froggie.Domain.Tasks;
 using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using Froggie.Domain.Tasks;
 
-namespace Froggie.Api.Tasks.Controllers;
+namespace Froggie.Api.Tasks;
 
 public sealed class DeleteTaskController : TaskController
 {

@@ -1,26 +1,20 @@
-﻿using System.Net;
-using Froggie.Api.Users;
-using Froggie.Data;
-using Froggie.Domain;
+﻿using Froggie.Api.Users;
 using Froggie.Domain.Test;
-using LittleByte.Test.Categories;
+using LittleByte.Common.Exceptions;
+using LittleByte.Test.AspNet;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Users;
 
-public sealed class RegisterUserTest : IntegrationTest
+public sealed class RegisterUserTest : ApiIntegrationTest
 {
     protected override void AddServices(IServiceCollection serviceCollection)
     {
-        serviceCollection
-            .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-            .AddDomain()
-            .AddPersistence()
-            .AddTransient<CreateUserController>();
+        serviceCollection.AddTransient<CreateUserController>();
     }
 
     [Test]
-    public async ValueTask RegisterNewUser()
+    public async ValueTask RegisterNewUser_Success()
     {
         var controller = services.GetRequiredService<CreateUserController>();
         var request = new CreateUserRequest
@@ -32,8 +26,20 @@ public sealed class RegisterUserTest : IntegrationTest
 
         var response = await controller.Create(request);
 
-        Assert.AreEqual((int)HttpStatusCode.OK, response.StatusCode);
-        Assert.NotNull(response.Obj);
-        Assert.IsFalse(response.IsError);
+        ApiAssert.IsSuccess(response);
+    }
+
+    [Test]
+    public void RegisterNewUser_Failure()
+    {
+        var controller = services.GetRequiredService<CreateUserController>();
+        var request = new CreateUserRequest
+        {
+            Email = Valid.Users.Email.Value,
+            Name = Valid.Users.Name.Value,
+            Password = ""
+        };
+
+        Assert.ThrowsAsync<BadRequestException>(() => controller.Create(request).AsTask());
     }
 }

@@ -11,6 +11,7 @@ internal static class TaskConfiguration
         return @this
             .AddScoped<ITaskPageQuery, TaskPageQuery>()
             .AddScoped<IFindByIdQuery<Task>, FindByIdQuery<Task, TaskDao, FroggieDb>>()
-            .AddScoped<IAddTaskCommand, AddTaskCommand>();
+            .AddScoped<IAddTaskCommand, AddTaskCommand>()
+            .AddScoped<IDeleteTaskCommand, DeleteTaskCommand>();
     }
 }

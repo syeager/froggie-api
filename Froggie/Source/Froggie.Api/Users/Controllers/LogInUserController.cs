@@ -24,7 +24,8 @@ public sealed class LogInUserController : UserController
 
     [HttpPost(Routes.LogIn)]
     [ResponseType(HttpStatusCode.OK, typeof(LogInResponse))]
-    public async ValueTask<ApiResponse<LogInResponse>> Create(LogInUserRequest request)
+    [ResponseType(HttpStatusCode.BadRequest)]
+    public async ValueTask<ApiResponse<LogInResponse>> LogIn(LogInUserRequest request)
     {
         var email = new Email(request.Email);
         var password = new Password(request.Password);
@@ -34,6 +35,8 @@ public sealed class LogInUserController : UserController
 
         await saveCommand.CommitChangesAsync();
 
-        return new OkResponse<LogInResponse>(response);
+        return response.Succeeded
+            ? new OkResponse<LogInResponse>(response)
+            : new BadRequestResponse<LogInResponse>(response);
     }
 }

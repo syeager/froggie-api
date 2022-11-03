@@ -6,8 +6,8 @@ namespace Froggie.Data.Users;
 
 internal sealed class FindUserByEmailQuery : IFindUserByEmailQuery
 {
-    private readonly UserManager<UserDao> userManager;
     private readonly IMapper mapper;
+    private readonly UserManager<UserDao> userManager;
 
     public FindUserByEmailQuery(UserManager<UserDao> userManager, IMapper mapper)
     {

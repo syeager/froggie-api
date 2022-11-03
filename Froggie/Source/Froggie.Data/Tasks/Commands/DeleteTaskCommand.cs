@@ -16,8 +16,8 @@ internal sealed class DeleteTaskCommand : IDeleteTaskCommand
     public async ValueTask DeleteAsync(Id<Task> id)
     {
         var task = await froggieDb.Tasks.FindAsync(id.Value);
-       
-        if (task is null)
+
+        if(task is null)
         {
             throw new NotFoundException(typeof(Task), id);
         }

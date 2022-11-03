@@ -17,6 +17,7 @@ public sealed class User : DomainModel<User>
         var user = new User(id, email, name);
         var validator = new UserValidator();
         validator.SignOrThrow(user);
+
         return user;
     }
 }

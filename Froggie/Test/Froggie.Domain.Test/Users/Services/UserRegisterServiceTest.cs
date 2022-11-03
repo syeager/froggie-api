@@ -21,7 +21,7 @@ public sealed class UserRegisterServiceTest : UnitTest
     }
 
     [Test]
-    public async ValueTask When_ValidData_Then_CreateUser()
+    public async ValueTask With_ValidData_Then_CreateUser()
     {
         var expectedUser = Valid.Users.New();
         userFactory
@@ -34,6 +34,8 @@ public sealed class UserRegisterServiceTest : UnitTest
             Valid.Users.Password.Value);
 
         Assert.AreNotEqual(Guid.Empty, user.Id.Value);
+        Assert.AreSame(expectedUser, user);
+        await addUserCommand.Received(1).AddAsync(expectedUser, Valid.Users.Password);
     }
 
     [Test]

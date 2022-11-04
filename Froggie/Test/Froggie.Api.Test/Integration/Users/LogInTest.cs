@@ -6,20 +6,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Users;
 
-public sealed class LogInTest : ApiIntegrationTest
+public sealed class LogInTest : ApiIntegrationTest<LogInUserController>
 {
-    protected override void AddServices(IServiceCollection serviceCollection)
-    {
-        serviceCollection.AddTransient<LogInUserController>();
-    }
-
     [Test]
     public async ValueTask LogInUser_Success()
     {
         var registerService = services.GetRequiredService<IUserRegisterService>();
-        await registerService.RegisterAsync(Valid.Users.Email.Value, Valid.Users.Name.Value, Valid.Users.Password.Value);
+        await registerService.RegisterAsync(
+            Valid.Users.Email.Value,
+            Valid.Users.Name.Value,
+            Valid.Users.Password.Value);
 
-        var controller = services.GetRequiredService<LogInUserController>();
         var request = new LogInUserRequest
         {
             Email = Valid.Users.Email.Value,
@@ -34,7 +31,6 @@ public sealed class LogInTest : ApiIntegrationTest
     [Test]
     public async ValueTask LogInUser_Failure()
     {
-        var controller = services.GetRequiredService<LogInUserController>();
         var request = new LogInUserRequest
         {
             Email = Valid.Users.Email.Value,

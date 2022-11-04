@@ -2,21 +2,14 @@
 using Froggie.Domain.Test;
 using LittleByte.Common.Exceptions;
 using LittleByte.Test.AspNet;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Users;
 
-public sealed class RegisterUserTest : ApiIntegrationTest
+public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
 {
-    protected override void AddServices(IServiceCollection serviceCollection)
-    {
-        serviceCollection.AddTransient<CreateUserController>();
-    }
-
     [Test]
     public async ValueTask RegisterNewUser_Success()
     {
-        var controller = services.GetRequiredService<CreateUserController>();
         var request = new CreateUserRequest
         {
             Email = Valid.Users.Email.Value,
@@ -32,7 +25,6 @@ public sealed class RegisterUserTest : ApiIntegrationTest
     [Test]
     public void RegisterNewUser_Failure()
     {
-        var controller = services.GetRequiredService<CreateUserController>();
         var request = new CreateUserRequest
         {
             Email = Valid.Users.Email.Value,

@@ -18,10 +18,10 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
 
     public async ValueTask<User?> TryFindAsync(Email email, Password password)
     {
-        using var logger = this.NewLogger().Push<Email>(email.Value);
+        using var logger = this.NewLogger().Push(email);
 
         var userEntity = await userManager
-            .FindByEmailAsync(email.Value)
+            .FindByEmailAsync(email)
             .ConfigureAwait(false);
 
         if(userEntity is null)
@@ -33,7 +33,7 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
         logger.Info("Found user with email");
 
         var correctPassword = await userManager
-            .CheckPasswordAsync(userEntity, password.Value)
+            .CheckPasswordAsync(userEntity, password)
             .ConfigureAwait(false);
 
         if(!correctPassword)

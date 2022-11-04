@@ -2,7 +2,7 @@
 
 public interface IDeleteTaskService
 {
-    void DeleteAsync(Id<Task> id);
+    ValueTask DeleteAsync(Id<Task> id);
 }
 
 public sealed class DeleteTaskService : IDeleteTaskService
@@ -14,7 +14,7 @@ public sealed class DeleteTaskService : IDeleteTaskService
         this.deleteTask = deleteTask;
     }
 
-    public async void DeleteAsync(Id<Task> id)
+    public async ValueTask DeleteAsync(Id<Task> id)
     {
         await deleteTask.DeleteAsync(id);
     }

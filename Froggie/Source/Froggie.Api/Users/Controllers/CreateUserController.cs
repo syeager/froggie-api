@@ -34,7 +34,7 @@ public sealed class CreateUserController : UserController
 
         // TODO: There has to be a better way to get the password. Maybe RegisterAsync should return a RegisterResult?
         var password = new Password(request.Password);
-        
+
         var logInResult = await logInService.LogInAsync(user.Email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
 

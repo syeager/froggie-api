@@ -19,7 +19,7 @@ internal sealed class AddUserCommand : IAddUserCommand
     public async ValueTask AddAsync(User user, Password password)
     {
         var userDao = mapper.Map<UserDao>(user);
-        var result = await userManager.CreateAsync(userDao, password.Value);
+        var result = await userManager.CreateAsync(userDao, password);
 
         if(!result.Succeeded)
         {

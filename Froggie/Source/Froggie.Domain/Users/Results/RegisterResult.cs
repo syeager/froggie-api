@@ -2,13 +2,13 @@ namespace Froggie.Domain.Users;
 
 public class RegisterResult
 {
+    [MemberNotNullWhen(false, nameof(Succeeded))]
+    public IReadOnlyList<string>? Errors { get; }
+
     public bool Succeeded { get; }
 
     [MemberNotNullWhen(true, nameof(Succeeded))]
     public Valid<User>? User { get; }
-
-    [MemberNotNullWhen(false, nameof(Succeeded))]
-    public IReadOnlyList<string>? Errors { get; }
 
     private RegisterResult(bool succeeded, Valid<User>? user, IEnumerable<string>? errors)
     {

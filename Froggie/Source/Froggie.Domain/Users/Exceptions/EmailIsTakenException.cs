@@ -11,15 +11,21 @@ public sealed class EmailIsTakenException : Exception
     {
         EmailValue = emailValue;
     }
-    public EmailIsTakenException(SerializationInfo info, StreamingContext context, string emailValue) : base(info, context)
+
+    public EmailIsTakenException(SerializationInfo info, StreamingContext context, string emailValue)
+        : base(info, context)
     {
         EmailValue = emailValue;
     }
-    public EmailIsTakenException(string? message, string emailValue) : base(message)
+
+    public EmailIsTakenException(string? message, string emailValue)
+        : base(message)
     {
         EmailValue = emailValue;
     }
-    public EmailIsTakenException(string? message, Exception? innerException, string emailValue) : base(message, innerException)
+
+    public EmailIsTakenException(string? message, Exception? innerException, string emailValue)
+        : base(message, innerException)
     {
         EmailValue = emailValue;
     }

@@ -1,22 +1,31 @@
 ﻿using Froggie.Data;
 using Froggie.Domain;
+using LittleByte.Common.AspNet.Core;
 using LittleByte.Test.Categories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration;
 
-public abstract class ApiIntegrationTest : IntegrationTest
+public abstract class ApiIntegrationTest<T> : IntegrationTest
+    where T : Controller
 {
-    protected abstract void AddServices(IServiceCollection serviceCollection);
+    protected T controller = null!;
 
     protected sealed override void SetupInternal(IServiceCollection serviceCollection)
     {
         serviceCollection
             .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
             .AddDomain()
-            .AddPersistence();
+            .AddPersistence()
+            .AddTransient<T>();
+    }
 
-        AddServices(serviceCollection);
+    [SetUp]
+    public override void SetUp()
+    {
+        base.SetUp();
+
+        controller = services.GetRequiredService<T>();
     }
 
     [TearDown]

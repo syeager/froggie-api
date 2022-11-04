@@ -6,10 +6,7 @@ namespace Froggie.Domain;
 
 public static class DomainConfiguration
 {
-    public static IServiceCollection AddDomain(this IServiceCollection @this)
-    {
-        return @this
-            .AddTasks()
-            .AddUsers();
-    }
+    public static IServiceCollection AddDomain(this IServiceCollection @this) => @this
+        .AddTasks()
+        .AddUsers();
 }

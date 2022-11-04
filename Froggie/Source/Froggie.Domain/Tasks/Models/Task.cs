@@ -10,14 +10,11 @@ public sealed class Task : DomainModel<Task>
         Title = title;
     }
 
-    public static Task Create(Id<Task> id, string titleValue)
+    internal static Task Create(Id<Task> id, Title title)
     {
-        var title = new Title(titleValue);
         var task = new Task(id, title);
-
         var validator = new TaskValidator();
-        var validTask = validator.Sign(task);
-        validTask.ThrowIfInvalid();
+        validator.SignOrThrow(task);
 
         return task;
     }

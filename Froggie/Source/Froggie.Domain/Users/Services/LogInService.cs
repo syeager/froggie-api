@@ -35,7 +35,7 @@ internal sealed class LogInService : ILogInService
         }
         else
         {
-            result = LogInResult.Fail(new[] {"Incorrect email or password."});
+            result = LogInResult.Fail(new[] { "Incorrect email or password." });
         }
 
         return result;

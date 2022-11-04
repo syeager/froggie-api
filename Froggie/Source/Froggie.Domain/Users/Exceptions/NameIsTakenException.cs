@@ -12,19 +12,20 @@ public sealed class NameIsTakenException : Exception
         NameValue = nameValue;
     }
 
-    public NameIsTakenException(SerializationInfo info, StreamingContext context, string nameValue) : base(info,
-        context)
+    public NameIsTakenException(SerializationInfo info, StreamingContext context, string nameValue)
+        : base(info, context)
     {
         NameValue = nameValue;
     }
 
-    public NameIsTakenException(string? message, string nameValue) : base(message)
+    public NameIsTakenException(string? message, string nameValue)
+        : base(message)
     {
         NameValue = nameValue;
     }
 
-    public NameIsTakenException(string? message, Exception? innerException, string nameValue) : base(message,
-        innerException)
+    public NameIsTakenException(string? message, Exception? innerException, string nameValue)
+        : base(message, innerException)
     {
         NameValue = nameValue;
     }

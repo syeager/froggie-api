@@ -2,5 +2,5 @@
 
 public interface IAddTaskCommand
 {
-    void Add(Task validTask);
+    void Add(Task task);
 }

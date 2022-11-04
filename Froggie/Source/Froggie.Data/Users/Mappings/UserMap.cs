@@ -19,9 +19,9 @@ internal sealed class UserMap : ITypeConverter<User, UserDao>, ITypeConverter<Us
     {
         var dao = new UserDao
         {
-            Id = source.Id.Value,
-            Email = source.Email.Value,
-            UserName = source.Name.Value
+            Id = source.Id,
+            Email = source.Email,
+            UserName = source.Name
         };
 
         dao.NormalizedEmail = userManager.NormalizeEmail(dao.Email);

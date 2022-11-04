@@ -13,14 +13,14 @@ public sealed class LogInTest : ApiIntegrationTest<LogInUserController>
     {
         var registerService = services.GetRequiredService<IUserRegisterService>();
         await registerService.RegisterAsync(
-            Valid.Users.Email.Value,
-            Valid.Users.Name.Value,
-            Valid.Users.Password.Value);
+            Valid.Users.Email,
+            Valid.Users.Name,
+            Valid.Users.Password);
 
         var request = new LogInUserRequest
         {
-            Email = Valid.Users.Email.Value,
-            Password = Valid.Users.Password.Value
+            Email = Valid.Users.Email,
+            Password = Valid.Users.Password
         };
 
         var response = await controller.LogIn(request);
@@ -33,8 +33,8 @@ public sealed class LogInTest : ApiIntegrationTest<LogInUserController>
     {
         var request = new LogInUserRequest
         {
-            Email = Valid.Users.Email.Value,
-            Password = Valid.Users.Password.Value
+            Email = Valid.Users.Email,
+            Password = Valid.Users.Password
         };
 
         var response = await controller.LogIn(request);

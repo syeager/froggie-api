@@ -21,10 +21,10 @@ public sealed class CreateTaskServiceTest : UnitTest
     {
         var expectedTask = Valid.Tasks.New();
         taskFactory
-            .Create(Arg.Any<Guid>(), expectedTask.Title.Value)
+            .Create(Arg.Any<Guid>(), expectedTask.Title)
             .Returns(expectedTask);
 
-        var task = await testObj.CreateAsync(expectedTask.Title.Value);
+        var task = await testObj.CreateAsync(expectedTask.Title);
 
         Assert.AreNotEqual(Guid.Empty, task.Id.Value);
         Assert.AreSame(expectedTask, task);

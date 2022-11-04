@@ -12,9 +12,9 @@ public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
     {
         var request = new CreateUserRequest
         {
-            Email = Valid.Users.Email.Value,
-            Name = Valid.Users.Name.Value,
-            Password = Valid.Users.Password.Value
+            Email = Valid.Users.Email,
+            Name = Valid.Users.Name,
+            Password = Valid.Users.Password
         };
 
         var response = await controller.Create(request);
@@ -27,8 +27,8 @@ public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
     {
         var request = new CreateUserRequest
         {
-            Email = Valid.Users.Email.Value,
-            Name = Valid.Users.Name.Value,
+            Email = Valid.Users.Email,
+            Name = Valid.Users.Name,
             Password = ""
         };
 

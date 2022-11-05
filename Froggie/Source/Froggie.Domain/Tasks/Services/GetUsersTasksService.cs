@@ -3,7 +3,12 @@ using LittleByte.Common.Infra.Models;
 
 namespace Froggie.Domain.Tasks;
 
-internal sealed class GetUsersTasksService
+public interface IGetUsersTasksService
+{
+    ValueTask<PageResponse<Task>> FindAsync(Id<User> userId);
+}
+
+internal sealed class GetUsersTasksService : IGetUsersTasksService
 {
     private readonly IGetTasksByUserQuery getTasksQuery;
 

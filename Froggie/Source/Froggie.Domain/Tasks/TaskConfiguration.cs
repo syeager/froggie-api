@@ -7,5 +7,6 @@ internal static class TaskConfiguration
     public static IServiceCollection AddTasks(this IServiceCollection @this) => @this
         .AddTransient<ICreateTaskService, CreateTaskService>()
         .AddTransient<IDeleteTaskService, DeleteTaskService>()
+        .AddTransient<IGetUsersTasksService, GetUsersTasksService>()
         .AddTransient<ITaskFactory, TaskFactory>();
 }

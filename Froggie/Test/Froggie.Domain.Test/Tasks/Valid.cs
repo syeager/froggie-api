@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Tasks;
 using LittleByte.Common.Domain;
-using Task = Froggie.Domain.Tasks.Task;
+using LittleByte.Common.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Froggie.Domain.Test;
@@ -11,9 +11,11 @@ public static partial class Valid
     {
         public static readonly Title Title = new(new string('a', TitleRules.LengthMin));
 
-        public static Task New()
+        public static Task New() => Task.Create(new Id<Task>(), Title);
+
+        public static IReadOnlyList<Task> New(int count)
         {
-            return Task.Create(new Id<Task>(), Title);
+            return new List<Task>().Init(count, i => Task.Create(new Id<Task>(), new Title($"{Title}-{i}")));
         }
     }
 }

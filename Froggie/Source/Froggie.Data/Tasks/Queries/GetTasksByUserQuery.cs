@@ -20,7 +20,7 @@ internal sealed class GetTasksByUserQuery : IGetTasksByUserQuery
 
     public async ValueTask<PageResponse<Task>> RunAsync(Id<User> userId)
     {
-        var daos = await froggieDb.Tasks.ToArrayAsync();
+        var daos = await froggieDb.Tasks.ToArrayAsync().ConfigureAwait(false);
         var tasks = mapper.MapRange<Task>(daos);
         var response = new PageResponse<Task>(0, 0, 0, 0, tasks);
 

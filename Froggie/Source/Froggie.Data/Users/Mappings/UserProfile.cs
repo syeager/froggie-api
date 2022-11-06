@@ -10,6 +10,6 @@ internal sealed class UserProfile : Profile
 {
     public UserProfile()
     {
-        this.MapBoth<User, UserDao, UserMap>();
+        this.MapBothConvertBoth<User, UserDao, UserMap>();
     }
 }

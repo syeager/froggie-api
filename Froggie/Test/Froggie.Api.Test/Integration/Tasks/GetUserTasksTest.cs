@@ -14,7 +14,7 @@ public sealed class GetUserTasksTest : ApiIntegrationTest<GetTasksByUserControll
     public async ValueTask GetUserTasks_Success()
     {
         var user = Valid.Users.New();
-        var tasks = Valid.Tasks.New(2);
+        var tasks = Valid.Tasks.New(2, user.Id);
         var addTaskCommand = services.GetRequiredService<IAddTaskCommand>();
         tasks.ForEach((_, task) => addTaskCommand.Add(task));
         await services.GetRequiredService<ISaveContextCommand>().CommitChangesAsync();

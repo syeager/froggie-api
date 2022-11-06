@@ -19,7 +19,7 @@ public sealed class GetUsersTasksServiceTest : UnitTest
     public async ValueTask With_ValidData_Return_Tasks()
     {
         var user = Valid.Users.New();
-        var tasks = Valid.Tasks.New(2);
+        var tasks = Valid.Tasks.New(2, user.Id);
         getTasksQuery.RunAsync(user.Id).Returns(new PageResponse<Task>(0, 0, 0, 0, tasks));
 
         var response = await testObj.FindAsync(user.Id);
@@ -27,5 +27,6 @@ public sealed class GetUsersTasksServiceTest : UnitTest
         Assert.IsNotNull(response);
         await getTasksQuery.Received(1).RunAsync(user.Id);
         CollectionAssert.AreEqual(tasks, response.Results);
+        Assert.IsTrue(response.Results.All(t => t.CreatorId == user.Id));
     }
 }

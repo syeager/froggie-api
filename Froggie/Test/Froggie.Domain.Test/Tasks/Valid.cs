@@ -11,11 +11,11 @@ public static partial class Valid
     {
         public static readonly Title Title = new(new string('a', TitleRules.LengthMin));
 
-        public static Task New() => Task.Create(new Id<Task>(), Title);
+        public static Task New(Guid creatorId) => Task.Create(new Id<Task>(), Title, creatorId);
 
-        public static IReadOnlyList<Task> New(int count)
+        public static IReadOnlyList<Task> New(int count, Guid creatorId)
         {
-            return new List<Task>().Init(count, i => Task.Create(new Id<Task>(), new Title($"{Title}-{i}")));
+            return new List<Task>().Init(count, i => Task.Create(new Id<Task>(), new Title($"{Title}-{i}"), creatorId));
         }
     }
 }

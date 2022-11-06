@@ -5,6 +5,11 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Froggie.Data.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>

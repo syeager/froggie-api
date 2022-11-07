@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Tasks;
 using LittleByte.Test.Validation;
 
 namespace Froggie.Domain.Test.Tasks.Validators;
@@ -25,8 +24,10 @@ public sealed class TaskValidatorTest : UnitTest
     [Test]
     public void When_InvalidCreatorId_Then_Fail()
     {
-        var exception = Assert.Throws<ValidationException>(() => Valid.Tasks.New(Guid.Empty));
+        var task = Valid.Tasks.New(Guid.Empty);
 
-        exception!.AssertFailure(nameof(Task.CreatorId));
+        var result = testObj.Validate(task);
+
+        result.AssertFailure(nameof(Task.CreatorId));
     }
 }

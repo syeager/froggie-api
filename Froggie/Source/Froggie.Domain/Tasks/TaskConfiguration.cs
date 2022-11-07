@@ -8,5 +8,6 @@ internal static class TaskConfiguration
         .AddTransient<ICreateTaskService, CreateTaskService>()
         .AddTransient<IDeleteTaskService, DeleteTaskService>()
         .AddTransient<IGetUsersTasksService, GetUsersTasksService>()
-        .AddTransient<ITaskFactory, TaskFactory>();
+        .AddTransient<ITaskFactory, TaskFactory>()
+        .AddTransient<ModelValidator<Task>, TaskValidator>();
 }

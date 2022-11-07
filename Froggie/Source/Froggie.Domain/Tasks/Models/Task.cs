@@ -14,10 +14,9 @@ public sealed class Task : DomainModel<Task>
         CreatorId = creatorId;
     }
 
-    internal static Task Create(Id<Task> id, Title title, Id<User> creatorId)
+    internal static Task Create(ModelValidator<Task> validator, Id<Task> id, Title title, Id<User> creatorId)
     {
         var task = new Task(id, title, creatorId);
-        var validator = new TaskValidator();
         validator.SignOrThrow(task);
 
         return task;

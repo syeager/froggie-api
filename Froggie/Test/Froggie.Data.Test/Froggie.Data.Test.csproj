@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Froggie.Data\Froggie.Data.csproj" />
-    <ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\Froggie.Data\Froggie.Data.csproj" />
+		<ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	</ItemGroup>
 </Project>

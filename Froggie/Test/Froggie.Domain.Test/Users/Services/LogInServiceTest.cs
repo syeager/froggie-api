@@ -2,15 +2,10 @@
 using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 using LittleByte.Common.Identity.Services;
+using LittleByte.Common.Validation;
 
 namespace Froggie.Domain.Test.Users.Services;
 
-/*
- * can't find user with
- *  email
- *  password
- * check claims
- */
 public sealed class LogInServiceTest : UnitTest
 {
     private IFindUserByEmailAndPasswordQuery findUserQuery = null!;
@@ -58,7 +53,8 @@ public sealed class LogInServiceTest : UnitTest
 
     private User AddUser()
     {
-        var user = User.Create(new Id<User>(), Valid.Users.Email, Valid.Users.Name);
+        var validator = new SuccessModelValidator<User>();
+        var user = User.Create(validator, new Id<User>(), Valid.Users.Email, Valid.Users.Name);
         findUserQuery
             .TryFindAsync(Valid.Users.Email, Valid.Users.Password)
             .Returns(user);

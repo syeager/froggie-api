@@ -1,5 +1,6 @@
 ﻿using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
+using LittleByte.Common.Validation;
 
 // ReSharper disable once CheckNamespace
 namespace Froggie.Domain.Test;
@@ -16,7 +17,7 @@ public static partial class Valid
 
         public static User New()
         {
-            return User.Create(new Id<User>(), Email, Name);
+            return User.Create(new SuccessModelValidator<User>(), new Id<User>(), Email, Name);
         }
     }
 }

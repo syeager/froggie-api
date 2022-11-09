@@ -7,8 +7,9 @@ namespace Froggie.Data.Tasks;
 internal static class TaskConfiguration
 {
     internal static IServiceCollection AddTasks(this IServiceCollection @this) => @this
-        .AddScoped<ITaskPageQuery, TaskPageQuery>()
-        .AddScoped<IFindByIdQuery<Task>, FindByIdQuery<Task, TaskDao, FroggieDb>>()
         .AddScoped<IAddTaskCommand, AddTaskCommand>()
-        .AddScoped<IDeleteTaskCommand, DeleteTaskCommand>();
+        .AddScoped<IDeleteTaskCommand, DeleteTaskCommand>()
+        .AddScoped<IFindByIdQuery<Task>, FindByIdQuery<Task, TaskDao, FroggieDb>>()
+        .AddScoped<IGetTasksByUserQuery, GetTasksByUserQuery>()
+        .AddScoped<ITaskPageQuery, TaskPageQuery>();
 }

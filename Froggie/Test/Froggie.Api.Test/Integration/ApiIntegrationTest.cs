@@ -1,6 +1,7 @@
 ﻿using Froggie.Data;
 using Froggie.Domain;
 using LittleByte.Common.AspNet.Core;
+using LittleByte.Common.Infra.Commands;
 using LittleByte.Test.Categories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ public abstract class ApiIntegrationTest<T> : IntegrationTest
     where T : Controller
 {
     protected T controller = null!;
+    protected ISaveContextCommand saveCommand = null!;
 
     protected sealed override void SetupInternal(IServiceCollection serviceCollection)
     {
@@ -26,6 +28,7 @@ public abstract class ApiIntegrationTest<T> : IntegrationTest
         base.SetUp();
 
         controller = services.GetRequiredService<T>();
+        saveCommand = services.GetRequiredService<ISaveContextCommand>();
     }
 
     [TearDown]

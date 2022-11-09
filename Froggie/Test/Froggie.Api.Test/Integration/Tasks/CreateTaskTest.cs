@@ -11,9 +11,12 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
     [Test]
     public async ValueTask CreateTask_Success()
     {
+        var user = Valid.Users.New();
+        await saveCommand.CommitChangesAsync();
         var request = new CreateTaskRequest
         {
-            Title = Valid.Tasks.Title
+            Title = Valid.Tasks.Title,
+            CreatorId = user.Id,
         };
 
         var response = await controller.Create(request);

@@ -7,5 +7,6 @@ internal static class UserConfiguration
     public static IServiceCollection AddUsers(this IServiceCollection @this) => @this
         .AddSingleton<IUserFactory, UserFactory>()
         .AddTransient<IUserRegisterService, UserRegisterService>()
-        .AddTransient<ILogInService, LogInService>();
+        .AddTransient<ILogInService, LogInService>()
+        .AddTransient<ModelValidator<User>, UserValidator>();
 }

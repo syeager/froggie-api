@@ -10,4 +10,6 @@ public sealed class CreateTaskRequest
     [Required]
     [StringRange(TitleRules.LengthMin, TitleRules.LengthMax)]
     public string Title { get; init; } = null!;
+    [Required]
+    public Guid CreatorId { get; init; }
 }

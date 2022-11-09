@@ -19,12 +19,13 @@ public sealed class CreateTaskServiceTest : UnitTest
     [Test]
     public async ValueTask With_ValidData_Then_CreateNewTask()
     {
-        var expectedTask = Valid.Tasks.New();
+        var creator = Valid.Users.New();
+        var expectedTask = Valid.Tasks.New(creator.Id);
         taskFactory
-            .Create(Arg.Any<Guid>(), expectedTask.Title)
+            .Create(Arg.Any<Guid>(), expectedTask.Title, creator.Id)
             .Returns(expectedTask);
 
-        var task = await testObj.CreateAsync(expectedTask.Title);
+        var task = await testObj.CreateAsync(expectedTask.Title, creator.Id);
 
         Assert.AreNotEqual(Guid.Empty, task.Id.Value);
         Assert.AreSame(expectedTask, task);

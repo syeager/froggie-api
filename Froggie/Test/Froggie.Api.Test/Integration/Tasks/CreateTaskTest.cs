@@ -17,6 +17,7 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
         {
             Title = Valid.Tasks.Title,
             CreatorId = user.Id,
+            DueDate = Valid.Tasks.DueDate
         };
 
         var response = await controller.Create(request);
@@ -27,7 +28,7 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
     [Test]
     public void CreateTask_Failure()
     {
-        var request = new CreateTaskRequest { Title = "" };
+        var request = new CreateTaskRequest {Title = ""};
 
         Assert.ThrowsAsync<ValidationException>(() => controller.Create(request).AsTask());
     }

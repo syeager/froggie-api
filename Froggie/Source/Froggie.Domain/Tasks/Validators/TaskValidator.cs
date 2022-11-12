@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Tasks;
+﻿using FluentValidation;
+
+namespace Froggie.Domain.Tasks;
 
 internal class TaskValidator : ModelValidator<Task>
 {
@@ -6,5 +8,6 @@ internal class TaskValidator : ModelValidator<Task>
     {
         RuleFor(t => t.CreatorId).IsNotEmpty();
         RuleFor(t => t.Title).IsTitle();
+        RuleFor(t => t.DueDate).NotEqual(DateTime.MinValue);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Froggie.Domain.Groups.Models;
+﻿namespace Froggie.Domain.Groups;
 
 public sealed class Group : DomainModel<Group>
 {

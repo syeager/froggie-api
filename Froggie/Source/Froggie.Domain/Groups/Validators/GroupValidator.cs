@@ -1,6 +1,4 @@
-﻿using Froggie.Domain.Groups.Models;
-
-namespace Froggie.Domain.Groups.Validators;
+﻿namespace Froggie.Domain.Groups;
 
 internal sealed class GroupValidator : ModelValidator<Group>
 {

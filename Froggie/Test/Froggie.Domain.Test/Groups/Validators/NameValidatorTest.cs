@@ -22,4 +22,15 @@ public sealed class NameValidatorTest : UnitTest
 
         Assert.IsTrue(result);
     }
+
+    [TestCase(NameRules.LengthMax + 1)]
+    [TestCase(NameRules.LengthMin - 1)]
+    public void With_InvalidData_Then_Fail(int length)
+    {
+        var name = new Name(new string('a', length));
+
+        var result = testObj.IsValid(null!, name);
+
+        Assert.IsFalse(result);
+    }
 }

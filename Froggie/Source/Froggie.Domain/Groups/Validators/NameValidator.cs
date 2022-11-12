@@ -8,7 +8,8 @@ internal sealed class NameValidator<T> : PropertyValidator<T, Name>
 {
     public override string Name => nameof(NameValidator<X>);
 
-    public override bool IsValid(ValidationContext<T> context, Name value) => true;
+    public override bool IsValid(ValidationContext<T> context, Name value) =>
+        value.Value.Length is>= NameRules.LengthMin and<= NameRules.LengthMax;
 }
 
 public static class NameRules

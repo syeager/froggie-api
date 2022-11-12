@@ -12,7 +12,8 @@ public sealed class NameValidatorTest : UnitTest
         testObj = new NameValidator<Name>();
     }
 
-    [TestCase(0)]
+    [TestCase(NameRules.LengthMax)]
+    [TestCase(NameRules.LengthMin)]
     public void With_ValidData_Then_Pass(int length)
     {
         var name = new Name(new string('a', length));

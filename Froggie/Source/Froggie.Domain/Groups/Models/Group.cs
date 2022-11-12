@@ -1,7 +1,12 @@
-﻿namespace Froggie.Domain.Groups;
+namespace Froggie.Domain.Groups;
 
 public sealed class Group : DomainModel<Group>
 {
-    private Group(Id<Group> id)
-        : base(id) { }
+    public Name Name { get; }
+
+    private Group(Id<Group> id, Name name)
+        : base(id)
+    {
+        Name = name;
+}
 }

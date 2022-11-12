@@ -4,6 +4,14 @@ using LittleByte.Common;
 
 namespace Froggie.Domain.Groups;
 
+[SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
+[ExcludeFromCodeCoverage]
+internal static class NameValidatorExtension
+{
+    public static IRuleBuilderOptions<T, Name> IsName<T>(this IRuleBuilder<T, Name> @this) =>
+        @this.SetValidator(new NameValidator<T>());
+}
+
 internal sealed class NameValidator<T> : PropertyValidator<T, Name>
 {
     public override string Name => nameof(NameValidator<X>);

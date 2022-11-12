@@ -12,7 +12,7 @@ internal static class TitleValidatorExtension
         @this.SetValidator(new TitleValidator<T>());
 }
 
-internal class TitleValidator<T> : PropertyValidator<T, Title>
+internal sealed class TitleValidator<T> : PropertyValidator<T, Title>
 {
     public override string Name => nameof(TitleValidator<X>);
 

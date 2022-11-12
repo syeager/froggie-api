@@ -2,7 +2,7 @@
 
 namespace Froggie.Domain.Tasks;
 
-internal class TaskValidator : ModelValidator<Task>
+internal sealed class TaskValidator : ModelValidator<Task>
 {
     public TaskValidator()
     {

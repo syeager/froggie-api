@@ -6,12 +6,14 @@ public sealed class CreateGroupServiceTest : UnitTest
 {
     private CreateGroupService testObj = null!;
     private IGroupFactory groupFactory = null!;
+    private IAddGroupCommand addGroupCommand = null!;
 
     [SetUp]
     public void SetUp()
     {
         groupFactory = Substitute.For<IGroupFactory>();
-        testObj = new CreateGroupService(groupFactory);
+        addGroupCommand = Substitute.For<IAddGroupCommand>();
+        testObj = new CreateGroupService(groupFactory, addGroupCommand);
     }
 
     [Test]
@@ -24,5 +26,6 @@ public sealed class CreateGroupServiceTest : UnitTest
         var result = await testObj.CreateAsync(expected.Name);
 
         Assert.AreSame(expected, result);
+        addGroupCommand.Received(1).Add(expected);
     }
 }

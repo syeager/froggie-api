@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 
-namespace Froggie.Domain.Test.Groups.Validators;
+namespace Froggie.Domain.Test.Groups;
 
 public sealed class GroupValidatorTest : UnitTest
 {
@@ -16,7 +16,7 @@ public sealed class GroupValidatorTest : UnitTest
     public void When_Created_Then_HaveAllPropertyValidators()
     {
         var descriptor = testObj.CreateDescriptor();
-            
+
         CollectionAssert.IsNotEmpty(descriptor.GetValidatorsForMember(nameof(Group.Name)));
     }
 }

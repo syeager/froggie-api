@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 
-namespace Froggie.Domain.Test.Groups.Validators;
+namespace Froggie.Domain.Test.Groups;
 
 public sealed class NameValidatorTest : UnitTest
 {

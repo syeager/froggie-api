@@ -1,4 +1,4 @@
-namespace Froggie.Domain.Groups;
+﻿namespace Froggie.Domain.Groups;
 
 public sealed class Group : DomainModel<Group>
 {
@@ -8,5 +8,12 @@ public sealed class Group : DomainModel<Group>
         : base(id)
     {
         Name = name;
-}
+    }
+
+    internal static Group Create(IModelValidator<Group> validator, Id<Group> id, Name name)
+    {
+        var group = new Group(id, name);
+        validator.SignOrThrow(group);
+        return group;
+    }
 }

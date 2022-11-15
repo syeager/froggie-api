@@ -12,7 +12,7 @@ public sealed class User : DomainModel<User>
         Name = name;
     }
 
-    internal static User Create(ModelValidator<User> validator, Id<User> id, Email email, Name name)
+    internal static User Create(IModelValidator<User> validator, Id<User> id, Email email, Name name)
     {
         var user = new User(id, email, name);
         validator.SignOrThrow(user);

@@ -16,7 +16,7 @@ public sealed class Task : DomainModel<Task>
         DueDate = dueDate;
     }
 
-    internal static Task Create(ModelValidator<Task> validator,
+    internal static Task Create(IModelValidator<Task> validator,
                                 Id<Task> id,
                                 Title title,
                                 Id<User> creatorId,

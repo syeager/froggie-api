@@ -32,7 +32,7 @@
       "launchBrowser": false,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": false,
-      "useSSL": false
+      "useSSL": true
     }
   }
 }

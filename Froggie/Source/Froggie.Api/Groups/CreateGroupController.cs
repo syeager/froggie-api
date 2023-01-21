@@ -22,7 +22,7 @@ public sealed class CreateGroupController : GroupController
     [HttpPost]
     public async ValueTask<ApiResponse<GroupDto>> Create(CreateGroupRequest request)
     {
-        var group = await createGroupService.CreateAsync("");
+        var group = await createGroupService.CreateAsync(request.Name);
         var groupDto = mapper.Map<GroupDto>(group);
         return new CreatedResponse<GroupDto>(groupDto);
     }

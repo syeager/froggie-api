@@ -1,3 +1,9 @@
-﻿namespace Froggie.Api.Groups;
+﻿using System.ComponentModel.DataAnnotations;
 
-public sealed class CreateGroupRequest { }
+namespace Froggie.Api.Groups;
+
+public sealed class CreateGroupRequest
+{
+    [Required]
+    public string Name { get; init; } = null!;
+}

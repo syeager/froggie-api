@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 namespace Froggie.Api.Tasks;
 
 [UsedImplicitly]
-internal sealed class TaskProfile : Profile
+internal sealed class TaskMappingProfile : Profile
 {
-    public TaskProfile()
+    public TaskMappingProfile()
     {
         CreateMap<Task, TaskDto>();
     }

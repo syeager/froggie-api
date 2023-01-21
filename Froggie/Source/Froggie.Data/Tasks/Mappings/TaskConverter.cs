@@ -4,11 +4,11 @@ using Froggie.Domain.Tasks;
 namespace Froggie.Data.Tasks;
 
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-internal sealed class TaskMap : ITypeConverter<TaskDao, Task>
+internal sealed class TaskConverter : ITypeConverter<TaskDao, Task>
 {
     private readonly ITaskFactory taskFactory;
 
-    public TaskMap(ITaskFactory taskFactory)
+    public TaskConverter(ITaskFactory taskFactory)
     {
         this.taskFactory = taskFactory;
     }

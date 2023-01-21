@@ -1,6 +1,11 @@
 ﻿namespace Froggie.Domain.Groups;
 
-internal sealed class CreateGroupService
+public interface ICreateGroupService
+{
+    ValueTask<Group> CreateAsync(string nameValue);
+}
+
+internal sealed class CreateGroupService : ICreateGroupService
 {
     private readonly IGroupFactory groupFactory;
     private readonly IAddGroupCommand addGroupCommand;

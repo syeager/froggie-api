@@ -23,6 +23,8 @@ public sealed class CreateGroupController : GroupController
     public async ValueTask<ApiResponse<GroupDto>> Create(CreateGroupRequest request)
     {
         var group = await createGroupService.CreateAsync(request.Name);
+        await saveContextCommand.CommitChangesAsync();
+
         var groupDto = mapper.Map<GroupDto>(group);
         return new CreatedResponse<GroupDto>(groupDto);
     }

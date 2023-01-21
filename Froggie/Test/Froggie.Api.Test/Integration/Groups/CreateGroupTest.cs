@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Froggie.Api.Groups;
+using Froggie.Data;
 using LittleByte.Test.AspNet;
 
 namespace Froggie.Api.Test.Integration.Groups;
@@ -18,5 +19,6 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
 
         ApiAssert.IsSuccess(response, HttpStatusCode.Created);
         Assert.AreEqual(request.Name, response.Obj!.Name);
+        Assert.AreEqual(1, GetService<FroggieDb>().Groups.Count());
     }
 }

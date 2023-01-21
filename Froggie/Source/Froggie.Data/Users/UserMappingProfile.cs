@@ -6,9 +6,9 @@ using LittleByte.Common.AspNet.AutoMapper;
 namespace Froggie.Data.Users;
 
 [UsedImplicitly]
-internal sealed class UserProfile : Profile
+internal sealed class UserMappingProfile : Profile
 {
-    public UserProfile()
+    public UserMappingProfile()
     {
         this.MapBothConvertBoth<User, UserDao, UserMap>();
     }

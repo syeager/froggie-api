@@ -19,7 +19,8 @@ public sealed class GetUsersTasksServiceTest : UnitTest
     public async ValueTask With_ValidData_Return_Tasks()
     {
         var user = Valid.Users.New();
-        var tasks = Valid.Tasks.New(2, user.Id);
+        var group = Valid.Groups.New();
+        var tasks = Valid.Tasks.New(2, user.Id, group.Id);
         getTasksQuery.RunAsync(user.Id).Returns(new PageResponse<Task>(0, 0, 0, 0, tasks));
 
         var response = await testObj.FindAsync(user.Id);

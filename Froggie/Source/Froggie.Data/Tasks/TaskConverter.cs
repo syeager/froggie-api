@@ -14,5 +14,5 @@ internal sealed class TaskConverter : ITypeConverter<TaskDao, Task>
     }
 
     public Task Convert(TaskDao source, Task destination, ResolutionContext context) =>
-        taskFactory.Create(source.Id, source.Title, source.CreatorId, source.DueDate);
+        taskFactory.Create(source.Id, source.Title, source.CreatorId, source.DueDate, source.GroupId);
 }

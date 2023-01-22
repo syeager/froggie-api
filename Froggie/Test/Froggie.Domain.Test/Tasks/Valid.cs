@@ -16,14 +16,14 @@ public static partial class Valid
         public static readonly Title Title = new(new string('a', TitleRules.LengthMin));
         public static readonly DateTime DueDate = DateTime.MaxValue;
 
-        public static Task New(Guid creatorId) =>
-            Task.Create(validator, new Id<Task>(), Title, creatorId, DueDate);
+        public static Task New(Guid creatorId, Guid groupId) =>
+            Task.Create(validator, new Id<Task>(), Title, creatorId, DueDate, groupId);
 
-        public static IReadOnlyList<Task> New(int count, Guid creatorId)
+        public static IReadOnlyList<Task> New(int count, Guid creatorId, Guid groupId)
         {
             return new List<Task>().Init(count,
                 i => Task.Create(validator, new Id<Task>(), new Title($"{Title}-{i}"),
-                    creatorId, DueDate));
+                    creatorId, DueDate, groupId));
         }
     }
 }

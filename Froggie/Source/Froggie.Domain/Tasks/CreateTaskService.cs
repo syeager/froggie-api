@@ -2,7 +2,7 @@
 
 public interface ICreateTaskService
 {
-    ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate);
+    ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate, Guid groupId);
 }
 
 internal sealed class CreateTaskService : ICreateTaskService
@@ -16,10 +16,10 @@ internal sealed class CreateTaskService : ICreateTaskService
         this.taskFactory = taskFactory;
     }
 
-    public ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate)
+    public ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate, Guid groupId)
     {
         var id = Guid.NewGuid();
-        var task = taskFactory.Create(id, title, creatorId, dueDate);
+        var task = taskFactory.Create(id, title, creatorId, dueDate, groupId);
         addTask.Add(task);
 
         return ValueTask.FromResult(task);

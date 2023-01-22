@@ -23,10 +23,11 @@ public sealed class GetTasksByUserQueryTest : DataIntegrationTest
     [Test]
     public async ValueTask When_NotAllTasksAreUsers_Return_OnlyUsersTasks()
     {
+        var group = Valid.Groups.New();
         var user = Valid.Users.New();
         var userOther = Valid.Users.New();
-        var tasks = Valid.Tasks.New(2, user.Id);
-        var tasksOther = Valid.Tasks.New(3, userOther.Id);
+        var tasks = Valid.Tasks.New(2, user.Id, group.Id);
+        var tasksOther = Valid.Tasks.New(3, userOther.Id, group.Id);
         froggieDb.Add<User, UserDao>(user);
         froggieDb.Add<User, UserDao>(userOther);
         froggieDb.AddRange<Task, TaskDao>(tasks);

@@ -14,4 +14,6 @@ public sealed class CreateTaskRequest
     public Guid CreatorId { get; init; }
     [Required]
     public DateTime DueDate { get; init; }
+    [Required]
+    public Guid GroupId { get; init; }
 }

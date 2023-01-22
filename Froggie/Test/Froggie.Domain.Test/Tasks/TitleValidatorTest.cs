@@ -2,7 +2,7 @@
 using LittleByte.Common;
 using LittleByte.Test.Validation;
 
-namespace Froggie.Domain.Test.Tasks.Validators;
+namespace Froggie.Domain.Test.Tasks;
 
 internal sealed class TitleValidatorTest : UnitTest
 {

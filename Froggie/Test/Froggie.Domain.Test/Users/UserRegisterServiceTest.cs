@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Users;
 
-namespace Froggie.Domain.Test.Users.Services;
+namespace Froggie.Domain.Test.Users;
 
 public sealed class UserRegisterServiceTest : UnitTest
 {

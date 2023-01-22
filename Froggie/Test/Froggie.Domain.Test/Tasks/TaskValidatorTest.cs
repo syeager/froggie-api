@@ -4,7 +4,7 @@ using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 using LittleByte.Test.Validation;
 
-namespace Froggie.Domain.Test.Tasks.Validators;
+namespace Froggie.Domain.Test.Tasks;
 
 public sealed class TaskValidatorTest : UnitTest
 {

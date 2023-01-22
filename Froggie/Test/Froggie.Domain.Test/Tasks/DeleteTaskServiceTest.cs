@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Tasks;
 
-namespace Froggie.Domain.Test.Tasks.Services;
+namespace Froggie.Domain.Test.Tasks;
 
 public sealed class DeleteTaskServiceTest : UnitTest
 {

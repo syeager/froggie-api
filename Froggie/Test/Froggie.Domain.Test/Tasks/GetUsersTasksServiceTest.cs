@@ -1,7 +1,7 @@
 ﻿using Froggie.Domain.Tasks;
 using LittleByte.Common.Infra.Models;
 
-namespace Froggie.Domain.Test.Tasks.Services;
+namespace Froggie.Domain.Test.Tasks;
 
 public sealed class GetUsersTasksServiceTest : UnitTest
 {

@@ -27,7 +27,6 @@ public sealed class GetUserTasksTest : ApiIntegrationTest<GetTasksByUserControll
             PageSize = 10,
         };
 
-
         var response = await controller.GetTasksByUser(request);
 
         ApiAssert.IsSuccess(response);

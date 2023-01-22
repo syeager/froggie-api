@@ -1,4 +1,5 @@
-﻿using Froggie.Data.Tasks;
+﻿using Froggie.Data.Groups;
+using Froggie.Data.Tasks;
 using Froggie.Data.Users;
 using LittleByte.Common.Infra.Commands;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ public static class PersistenceConfiguration
     public static IServiceCollection AddPersistence(this IServiceCollection @this)
     {
         return @this
+            .AddGroups()
             .AddTasks()
             .AddUsers()
             .AddScoped<ISaveContextCommand, SaveContextCommand<FroggieDb>>()

@@ -40,7 +40,7 @@ public sealed class TaskValidatorTest : UnitTest
     {
         var dueDate = DateTime.Parse(dueDateString);
         var task = Task.Create(
-            new SuccessModelValidator<Task>(),
+            Validator.WillPass<Task>(),
             new Id<Task>(),
             Valid.Tasks.Title,
             new Id<User>(),
@@ -55,7 +55,7 @@ public sealed class TaskValidatorTest : UnitTest
     public void With_MinDueDate_Then_Fail()
     {
         var task = Task.Create(
-            new SuccessModelValidator<Task>(),
+            Validator.WillPass<Task>(),
             new Id<Task>(),
             Valid.Tasks.Title,
             new Id<User>(),

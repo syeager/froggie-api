@@ -2,7 +2,7 @@
 using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 using LittleByte.Common.Identity.Services;
-using LittleByte.Common.Validation;
+using LittleByte.Test.Validation;
 
 namespace Froggie.Domain.Test.Users.Services;
 
@@ -53,7 +53,7 @@ public sealed class LogInServiceTest : UnitTest
 
     private User AddUser()
     {
-        var validator = new SuccessModelValidator<User>();
+        var validator = Validator.WillPass<User>();
         var user = User.Create(validator, new Id<User>(), Valid.Users.Email, Valid.Users.Name);
         findUserQuery
             .TryFindAsync(Valid.Users.Email, Valid.Users.Password)

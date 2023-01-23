@@ -21,6 +21,7 @@ public static class UserConfiguration
             .AddEntityFrameworkStores<FroggieDb>();
 
         return @this
+            .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
             .AddTransient<UserConverter>()
             .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
             .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()

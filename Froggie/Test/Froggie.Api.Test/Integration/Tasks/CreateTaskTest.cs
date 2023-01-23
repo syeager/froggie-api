@@ -12,9 +12,12 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
     public async ValueTask CreateTask_Success()
     {
         var group = Valid.Groups.New();
-
         var user = Valid.Users.New();
+        
+        // TODO: Add user to group.
+
         await saveCommand.CommitChangesAsync();
+
         var request = new CreateTaskRequest
         {
             Title = Valid.Tasks.Title,

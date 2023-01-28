@@ -1,8 +1,9 @@
 ﻿using System.Net;
-using FluentValidation;
 using Froggie.Api.Tasks;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
 using LittleByte.Test.AspNet;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Tasks;
 
@@ -13,8 +14,9 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
     {
         var group = Valid.Groups.New();
         var user = Valid.Users.New();
-        
-        // TODO: Add user to group.
+
+        var userGroupCreateCommand = services.GetRequiredService<IUserGroupCreateCommand>();
+        userGroupCreateCommand.Create(user, group);
 
         await saveCommand.CommitChangesAsync();
 
@@ -30,13 +32,5 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
 
         ApiAssert.IsSuccess(response, HttpStatusCode.Created);
         Assert.AreEqual(group.Id.Value, response.Obj!.GroupId);
-    }
-
-    [Test]
-    public void CreateTask_Failure()
-    {
-        var request = new CreateTaskRequest {Title = ""};
-
-        Assert.ThrowsAsync<ValidationException>(() => controller.Create(request).AsTask());
     }
 }

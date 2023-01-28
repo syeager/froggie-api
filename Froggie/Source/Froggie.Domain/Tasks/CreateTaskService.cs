@@ -1,10 +1,11 @@
-﻿using Froggie.Domain.Users;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
 
 namespace Froggie.Domain.Tasks;
 
 public interface ICreateTaskService
 {
-    ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate, Guid groupId);
+    ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTime dueDate, Id<Group> groupId);
 }
 
 internal sealed class CreateTaskService : ICreateTaskService
@@ -20,14 +21,13 @@ internal sealed class CreateTaskService : ICreateTaskService
         this.taskFactory = taskFactory;
     }
 
-    public async ValueTask<Task> CreateAsync(string title, Guid creatorId, DateTime dueDate, Guid groupId)
+    public async ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTime dueDate, Id<Group> groupId)
     {
-        // TODO: Validate user is in group.
         var isUserInGroup = await userGroupExistsQuery.QueryAsync(creatorId, groupId);
 
         if(!isUserInGroup)
         {
-            throw new Exception();
+            throw new UserNotInGroupException(creatorId, groupId);
         }
 
         var id = Guid.NewGuid();

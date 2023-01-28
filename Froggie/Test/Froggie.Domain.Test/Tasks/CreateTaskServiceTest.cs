@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 
 namespace Froggie.Domain.Test.Tasks;
@@ -43,7 +44,7 @@ public sealed class CreateTaskServiceTest : UnitTest
         var creator = Valid.Users.New();
         var group = Valid.Groups.New();
 
-        Assert.ThrowsAsync<Exception>(() => testObj.CreateAsync(
+        Assert.ThrowsAsync<UserNotInGroupException>(() => testObj.CreateAsync(
             Valid.Tasks.Title,
             creator.Id,
             Valid.Tasks.DueDate,

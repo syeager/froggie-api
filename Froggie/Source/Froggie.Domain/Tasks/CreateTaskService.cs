@@ -30,7 +30,7 @@ internal sealed class CreateTaskService : ICreateTaskService
             throw new UserNotInGroupException(creatorId, groupId);
         }
 
-        var id = Guid.NewGuid();
+        var id = new Id<Task>();
         var task = taskFactory.Create(id, title, creatorId, dueDate, groupId);
         addTask.Add(task);
 

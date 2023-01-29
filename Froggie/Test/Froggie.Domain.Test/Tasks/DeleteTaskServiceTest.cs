@@ -1,4 +1,5 @@
 ﻿using Froggie.Domain.Tasks;
+using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -17,7 +18,7 @@ public sealed class DeleteTaskServiceTest : UnitTest
     [Test]
     public async ValueTask With_ValidData_Then_DeleteTask()
     {
-        var id = Guid.NewGuid();
+        var id = new Id<Task>();
 
         await testObj.DeleteAsync(id);
 

@@ -20,8 +20,8 @@ public sealed class CreateGroupServiceTest : UnitTest
     public async ValueTask When_ValidData_Then_CreateGroup()
     {
         var expected = Valid.Groups.New();
-        groupFactory.Create(Arg.Any<Guid>(), expected.Name)
-            .Returns(expected);
+        groupFactory.Create(default, default!)
+            .ReturnsForAnyArgs(expected);
 
         var result = await testObj.CreateAsync(expected.Name);
 

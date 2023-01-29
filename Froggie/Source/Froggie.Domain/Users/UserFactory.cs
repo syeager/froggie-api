@@ -2,7 +2,7 @@
 
 public interface IUserFactory
 {
-    User Create(Guid idValue, string emailValue, string nameValue);
+    User Create(Id<User> id, string emailValue, string nameValue);
 }
 
 internal sealed class UserFactory : IUserFactory
@@ -14,11 +14,11 @@ internal sealed class UserFactory : IUserFactory
         this.userValidator = userValidator;
     }
 
-    public User Create(Guid idValue, string emailValue, string nameValue)
+    public User Create(Id<User> id, string emailValue, string nameValue)
     {
         var email = new Email(emailValue);
         var name = new Name(nameValue);
-        var user = User.Create(userValidator, idValue, email, name);
+        var user = User.Create(userValidator, id, email, name);
 
         return user;
     }

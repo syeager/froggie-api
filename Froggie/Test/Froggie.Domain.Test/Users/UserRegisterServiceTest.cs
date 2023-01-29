@@ -1,4 +1,5 @@
 ﻿using Froggie.Domain.Users;
+using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Users;
 
@@ -25,15 +26,15 @@ public sealed class UserRegisterServiceTest : UnitTest
     {
         var expectedUser = Valid.Users.New();
         userFactory
-            .Create(Arg.Any<Guid>(), expectedUser.Email, expectedUser.Name)
-            .Returns(expectedUser);
+            .Create(default, default!, default!)
+            .ReturnsForAnyArgs(expectedUser);
 
         var user = await testObj.RegisterAsync(
             expectedUser.Email,
             expectedUser.Name,
             Valid.Users.Password);
 
-        Assert.AreNotEqual(Guid.Empty, user.Id.Value);
+        Assert.AreNotEqual(Id<User>.Empty, user.Id);
         Assert.AreSame(expectedUser, user);
         await addUserCommand.Received(1).AddAsync(expectedUser, Valid.Users.Password);
     }

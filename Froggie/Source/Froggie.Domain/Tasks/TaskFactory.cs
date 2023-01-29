@@ -1,8 +1,11 @@
-﻿namespace Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
+
+namespace Froggie.Domain.Tasks;
 
 public interface ITaskFactory
 {
-    Task Create(Guid idValue, string titleValue, Guid userId, DateTime dueDate, Guid groupId);
+    Task Create(Id<Task> idValue, string titleValue, Id<User> userId, DateTime dueDate, Id<Group> groupId);
 }
 
 internal sealed class TaskFactory : ITaskFactory
@@ -15,11 +18,11 @@ internal sealed class TaskFactory : ITaskFactory
     }
 
     public Task Create(
-        Guid idValue,
+        Id<Task> idValue,
         string titleValue,
-        Guid userId,
+        Id<User> userId,
         DateTime dueDate,
-        Guid groupId)
+        Id<Group> groupId)
     {
         var title = new Title(titleValue);
         var task = Task.Create(

@@ -1,6 +1,7 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
+using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -25,15 +26,15 @@ public sealed class CreateTaskServiceTest : UnitTest
     {
         var creator = Valid.Users.New();
         var group = Valid.Groups.New();
-        userGroupExistsQuery.QueryAsync(creator.Id, group.Id).Returns(true);
-        var expectedTask = Valid.Tasks.New(creator.Id, group.Id);
+        userGroupExistsQuery.QueryAsync(creator, group).Returns(true);
+        var expectedTask = Valid.Tasks.New(creator, group);
         taskFactory
-            .Create(Arg.Any<Guid>(), expectedTask.Title, creator.Id, Valid.Tasks.DueDate, group.Id)
-            .Returns(expectedTask);
+            .Create(default, default!, default, default, default)
+            .ReturnsForAnyArgs(expectedTask);
 
         var task = await testObj.CreateAsync(expectedTask.Title, creator.Id, Valid.Tasks.DueDate, group.Id);
 
-        Assert.AreNotEqual(Guid.Empty, task.Id.Value);
+        Assert.AreNotEqual(Id<Task>.Empty, task.Id);
         Assert.AreSame(expectedTask, task);
         addTaskCommand.Received(1).Add(task);
     }
@@ -46,8 +47,8 @@ public sealed class CreateTaskServiceTest : UnitTest
 
         Assert.ThrowsAsync<UserNotInGroupException>(() => testObj.CreateAsync(
             Valid.Tasks.Title,
-            creator.Id,
+            creator,
             Valid.Tasks.DueDate,
-            group.Id).AsTask());
+            group).AsTask());
     }
 }

@@ -21,7 +21,9 @@ public sealed class DeleteTaskController : TaskController
     [ResponseType(HttpStatusCode.OK)]
     public async ValueTask<ApiResponse> Delete(DeleteTaskRequest request)
     {
-        await deleteTask.DeleteAsync(request.Id);
+        var taskId = new Id<Task>(request.Id);
+
+        await deleteTask.DeleteAsync(taskId);
         await saveContext.CommitChangesAsync();
 
         return new OkResponse();

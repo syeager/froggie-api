@@ -15,7 +15,11 @@ internal sealed class UserGroupCreateCommand : IUserGroupCreateCommand
 
     public void Create(User user, Group group)
     {
-        var userGroup = new UserGroupMap(user.Id, group.Id);
+        var userGroup = new UserGroupMap
+        {
+            UserId = user,
+            GroupId = group
+        };
         froggieDb.UserGroupMaps.Add(userGroup);
     }
 }

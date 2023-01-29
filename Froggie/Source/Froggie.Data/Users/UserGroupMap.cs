@@ -1,3 +1,11 @@
-﻿namespace Froggie.Data.Users;
+﻿using Froggie.Data.Groups;
 
-internal sealed record UserGroupMap(Guid UserId, Guid GroupId);
+namespace Froggie.Data.Users;
+
+internal sealed class UserGroupMap
+{
+    public Guid UserId { get; init; }
+    public Guid GroupId { get; init; }
+    public UserDao? User { get; init; }
+    public GroupDao? Group { get; init; }
+}

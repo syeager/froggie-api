@@ -2,7 +2,12 @@
 
 namespace Froggie.Domain.Groups;
 
-internal sealed class AddUserToGroupService
+public interface IAddUserToGroupService
+{
+    ValueTask AddAsync(User user, Group group);
+}
+
+internal sealed class AddUserToGroupService : IAddUserToGroupService
 {
     private readonly IUserGroupExistsQuery existsQuery;
     private readonly IUserGroupCreateCommand createCommand;
@@ -15,7 +20,7 @@ internal sealed class AddUserToGroupService
 
     public async ValueTask AddAsync(User user, Group group)
     {
-        var alreadyInGroup = await existsQuery.QueryAsync(user.Id, group.Id);
+        var alreadyInGroup = await existsQuery.QueryAsync(user, group);
         if(alreadyInGroup)
         {
             throw new Exception();

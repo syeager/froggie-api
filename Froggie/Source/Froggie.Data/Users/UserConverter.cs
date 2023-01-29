@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Froggie.Domain.Users;
+using LittleByte.Common.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Froggie.Data.Users;

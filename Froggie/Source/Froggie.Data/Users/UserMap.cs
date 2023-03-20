@@ -32,7 +32,7 @@ internal sealed class UserMap : ITypeConverter<User, UserDao>, ITypeConverter<Us
 
     public User Convert(UserDao source, User destination, ResolutionContext context)
     {
-        var user = userFactory.Create(source.Id, source.Email, source.UserName);
+        var user = userFactory.Create(source.Id, source.Email!, source.UserName!);
         return user;
     }
 }

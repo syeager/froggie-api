@@ -33,7 +33,8 @@ internal sealed class UserConverter : ITypeConverter<User, UserDao>, ITypeConver
 
     public User Convert(UserDao source, User destination, ResolutionContext context)
     {
-        var user = userFactory.Create(source.Id, source.Email!, source.UserName!);
+        var userId = new Id<User>(source.Id);
+        var user = userFactory.Create(userId, source.Email!, source.UserName!);
         return user;
     }
 }

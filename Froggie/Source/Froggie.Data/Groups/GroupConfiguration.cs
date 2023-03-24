@@ -11,6 +11,7 @@ public static class GroupConfiguration
         return @this
             .AddScoped<IAddGroupCommand, AddGroupCommand>()
             .AddScoped<IGetUsersInGroupQuery, GetUsersInGroupQuery>()
+            .AddScoped<IGetTasksByGroupQuery, GetTasksByGroupQuery>()
             .AddScoped<IUserGroupCreateCommand, UserGroupCreateCommand>()
             .AddScoped<IFindByIdQuery<Group>, FindByIdQuery<Group, GroupDao, FroggieDb>>();
     }

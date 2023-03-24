@@ -13,7 +13,7 @@ public sealed class GetUsersGroupController : GroupController
         this.usersInGroupQuery = usersInGroupQuery;
     }
 
-    [HttpGet]
+    [HttpGet("users")]
     public async ValueTask<ApiResponse<PageResponse<UserDto>>> GetUsers(Guid id)
     {
         var groupId = new Id<Group>(id);

@@ -13,7 +13,7 @@ public sealed class GetTasksGroupController : GroupController
         this.getTasksByGroupQuery = getTasksByGroupQuery;
     }
 
-    [HttpGet]
+    [HttpGet("tasks")]
     public async ValueTask<ApiResponse<PageResponse<TaskDto>>> GetTasks(Guid id)
     {
         var groupId = new Id<Group>(id);

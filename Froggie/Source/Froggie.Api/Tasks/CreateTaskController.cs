@@ -1,11 +1,7 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Domain.Groups;
+﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
-using LittleByte.Common.AspNet.Responses;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks;
 

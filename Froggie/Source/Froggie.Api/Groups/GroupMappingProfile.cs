@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Froggie.Domain.Groups;
+﻿using Froggie.Domain.Groups;
 using JetBrains.Annotations;
 
 namespace Froggie.Api.Groups;

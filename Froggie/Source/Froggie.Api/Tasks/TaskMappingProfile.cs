@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace Froggie.Api.Tasks;
 

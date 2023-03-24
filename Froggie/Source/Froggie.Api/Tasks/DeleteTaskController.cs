@@ -1,8 +1,5 @@
-﻿using System.Net;
-using Froggie.Domain.Tasks;
-using LittleByte.Common.AspNet.Responses;
+﻿using Froggie.Domain.Tasks;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks;
 

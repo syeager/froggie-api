@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 using JetBrains.Annotations;
 
 namespace Froggie.Api.Users;

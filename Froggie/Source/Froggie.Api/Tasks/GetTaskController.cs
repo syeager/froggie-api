@@ -1,10 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Queries;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Froggie.Api.Tasks;
+﻿namespace Froggie.Api.Tasks;
 
 public sealed class GetTaskController : TaskController
 {

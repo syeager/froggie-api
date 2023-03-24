@@ -1,10 +1,5 @@
-﻿using AutoMapper;
-using Froggie.Api.Users;
+﻿using Froggie.Api.Users;
 using Froggie.Domain.Groups;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Models;
-using LittleByte.Common.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Groups;
 

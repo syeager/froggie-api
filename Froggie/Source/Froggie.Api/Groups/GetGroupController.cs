@@ -1,9 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Domain.Groups;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Queries;
-using Microsoft.AspNetCore.Mvc;
+﻿using Froggie.Domain.Groups;
 
 namespace Froggie.Api.Groups;
 

@@ -1,9 +1,5 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Domain.Users;
-using LittleByte.Common.AspNet.Responses;
+﻿using Froggie.Domain.Users;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Users;
 

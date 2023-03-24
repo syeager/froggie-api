@@ -1,5 +1,14 @@
-﻿global using LittleByte.Common.AspNet.Core;
+﻿global using AutoMapper;
+global using LittleByte.Common.AspNet.Core;
+global using LittleByte.Common.AspNet.Responses;
 global using LittleByte.Common.Domain;
+global using LittleByte.Common.Infra.Models;
+global using LittleByte.Common.Infra.Queries;
+global using LittleByte.Common.Tasks;
+global using Microsoft.AspNetCore.Mvc;
+global using NSwag.Annotations;
 global using System.Diagnostics.CodeAnalysis;
+global using System.Net;
 global using Controller = LittleByte.Common.AspNet.Core.Controller;
+global using ResponseType = LittleByte.Common.AspNet.Responses.ResponseTypeAttribute;
 global using Task = Froggie.Domain.Tasks.Task;

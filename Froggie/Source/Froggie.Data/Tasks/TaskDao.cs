@@ -8,4 +8,5 @@ internal sealed class TaskDao : Entity
     public string Title { get; init; } = null!;
     public Guid CreatorId { get; init; }
     public DateTime DueDate { get; init; }
+    public Guid GroupId { get; init; }
 }

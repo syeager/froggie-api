@@ -1,4 +1,4 @@
-﻿using Froggie.Domain.Users;
+using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +21,8 @@ public static class UserConfiguration
             .AddEntityFrameworkStores<FroggieDb>();
 
         return @this
-            .AddTransient<UserMap>()
+            .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
+            .AddTransient<UserConverter>()
             .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
             .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
             .AddTransient<IUserPageQuery, UserPageQuery>()

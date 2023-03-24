@@ -9,5 +9,8 @@ public sealed class TaskDto : Dto
 {
     [Required]
     [StringRange(TitleRules.LengthMin, TitleRules.LengthMax)]
-    public string Title { get; set; } = null!;
+    public string Title { get; init; } = null!;
+
+    [Required]
+    public Guid GroupId { get; init; }
 }

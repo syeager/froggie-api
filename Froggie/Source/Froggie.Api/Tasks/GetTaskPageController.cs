@@ -1,9 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Data.Tasks;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Froggie.Data.Tasks;
 
 namespace Froggie.Api.Tasks;
 

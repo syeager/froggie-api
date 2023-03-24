@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
-
-namespace Froggie.Api.Tasks;
+﻿namespace Froggie.Api.Tasks;
 
 [OpenApiTag("Tasks")]
 [Route("tasks", Name = "Tasks")]

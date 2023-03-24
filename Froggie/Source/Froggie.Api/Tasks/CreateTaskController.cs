@@ -1,9 +1,7 @@
-﻿using System.Net;
-using AutoMapper;
+﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
-using LittleByte.Common.AspNet.Responses;
+using Froggie.Domain.Users;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Tasks;
 
@@ -24,7 +22,10 @@ public sealed class CreateTaskController : TaskController
     [ResponseType(HttpStatusCode.Created, typeof(TaskDto))]
     public async ValueTask<ApiResponse<TaskDto>> Create(CreateTaskRequest request)
     {
-        var task = await createTask.CreateAsync(request.Title, request.CreatorId, request.DueDate);
+        var userId = new Id<User>(request.CreatorId);
+        var groupId = new Id<Group>(request.GroupId);
+
+        var task = await createTask.CreateAsync(request.Title, userId, request.DueDate, groupId);
 
         await saveContext.CommitChangesAsync();
 

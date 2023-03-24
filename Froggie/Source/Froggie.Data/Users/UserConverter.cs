@@ -1,15 +1,16 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Froggie.Domain.Users;
+using LittleByte.Common.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Froggie.Data.Users;
 
-internal sealed class UserMap : ITypeConverter<User, UserDao>, ITypeConverter<UserDao, User>
+internal sealed class UserConverter : ITypeConverter<User, UserDao>, ITypeConverter<UserDao, User>
 {
     private readonly IUserFactory userFactory;
     private readonly UserManager<UserDao> userManager;
 
-    public UserMap(UserManager<UserDao> userManager, IUserFactory userFactory)
+    public UserConverter(UserManager<UserDao> userManager, IUserFactory userFactory)
     {
         this.userManager = userManager;
         this.userFactory = userFactory;
@@ -32,7 +33,8 @@ internal sealed class UserMap : ITypeConverter<User, UserDao>, ITypeConverter<Us
 
     public User Convert(UserDao source, User destination, ResolutionContext context)
     {
-        var user = userFactory.Create(source.Id, source.Email!, source.UserName!);
+        var userId = new Id<User>(source.Id);
+        var user = userFactory.Create(userId, source.Email!, source.UserName!);
         return user;
     }
 }

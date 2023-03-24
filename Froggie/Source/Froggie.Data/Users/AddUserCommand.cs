@@ -23,7 +23,9 @@ internal sealed class AddUserCommand : IAddUserCommand
 
         if(!result.Succeeded)
         {
-            throw new BadRequestException(result.ToString());
+            var errors = string.Join("\n- ", result.Errors.Select(e => $"{e.Code}: {e.Description}"));
+            var message = $"Failed to create user:\n- {errors}";
+            throw new BadRequestException(message);
         }
     }
 }

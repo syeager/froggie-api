@@ -1,21 +1,19 @@
-﻿using AutoMapper;
-using Froggie.Domain.Groups;
-using LittleByte.Common.AspNet.Responses;
+﻿using Froggie.Domain.Groups;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Froggie.Api.Groups;
 
 public sealed class CreateGroupController : GroupController
 {
     private readonly ICreateGroupService createGroupService;
-    private readonly IMapper mapper;
     private readonly ISaveContextCommand saveContextCommand;
 
-    public CreateGroupController(ICreateGroupService createGroupService, IMapper mapper, ISaveContextCommand saveContextCommand)
+    public CreateGroupController(ICreateGroupService createGroupService,
+                                 IMapper mapper,
+                                 ISaveContextCommand saveContextCommand)
+        : base(mapper)
     {
         this.createGroupService = createGroupService;
-        this.mapper = mapper;
         this.saveContextCommand = saveContextCommand;
     }
 

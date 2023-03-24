@@ -42,7 +42,7 @@ internal sealed class UserRegisterService : IUserRegisterService
             throw new EmailIsTakenException(emailValue);
         }
 
-        var id = Guid.NewGuid();
+        var id = new Id<User>();
         user = userFactory.Create(id, emailValue, nameValue);
 
         var password = new Password(passwordValue);

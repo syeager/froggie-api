@@ -12,5 +12,7 @@ internal sealed class GroupConverter : ITypeConverter<GroupDao, Group>
         this.groupFactory = groupFactory;
     }
 
-    public Group Convert(GroupDao source, Group destination, ResolutionContext context) => groupFactory.Create(source.Id, source.Name);
+    public Group Convert(GroupDao source, Group destination, ResolutionContext context) => groupFactory.Create(
+        new Id<Group>(source.Id),
+        source.Name);
 }

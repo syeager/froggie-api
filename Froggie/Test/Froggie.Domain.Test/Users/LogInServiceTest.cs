@@ -4,7 +4,7 @@ using LittleByte.Common.Domain;
 using LittleByte.Common.Identity.Services;
 using LittleByte.Test.Validation;
 
-namespace Froggie.Domain.Test.Users.Services;
+namespace Froggie.Domain.Test.Users;
 
 public sealed class LogInServiceTest : UnitTest
 {

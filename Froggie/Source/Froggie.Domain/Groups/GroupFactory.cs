@@ -2,7 +2,7 @@
 
 public interface IGroupFactory
 {
-    Group Create(Guid id, string nameValue);
+    Group Create(Id<Group> id, string nameValue);
 }
 
 internal sealed class GroupFactory : IGroupFactory
@@ -14,7 +14,7 @@ internal sealed class GroupFactory : IGroupFactory
         this.validator = validator;
     }
 
-    public Group Create(Guid id, string nameValue)
+    public Group Create(Id<Group> id, string nameValue)
     {
         var name = new Name(nameValue);
         var group = Group.Create(validator, id, name);

@@ -1,29 +1,28 @@
-﻿using Froggie.Domain.Tasks;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Groups;
 using LittleByte.Common.AspNet.AutoMapper;
 using LittleByte.Common.Tasks;
 
-namespace Froggie.Data.Tasks;
+namespace Froggie.Data.Groups;
 
-internal sealed class GetTasksByUserQuery : IGetTasksByUserQuery
+internal sealed class GetTasksByGroupQuery : IGetTasksByGroupQuery
 {
     private readonly FroggieDb froggieDb;
     private readonly IMapper mapper;
 
-    public GetTasksByUserQuery(FroggieDb froggieDb, IMapper mapper)
+    public GetTasksByGroupQuery(FroggieDb froggieDb, IMapper mapper)
     {
         this.froggieDb = froggieDb;
         this.mapper = mapper;
     }
 
-    public async ValueTask<PageResponse<Task>> RunAsync(Id<User> userId)
+    public async ValueTask<PageResponse<Task>> QueryAsync(Id<Group> groupId)
     {
         var daos = await froggieDb.Tasks
-            .Where(t => t.CreatorId == userId.Value)
+            .Where(t => t.GroupId == groupId.Value)
             .ToArrayAsync()
             .NoAwait();
         var tasks = mapper.MapRange<Task>(daos);
-        var response = new PageResponse<Task>(0, 0, 0, 0, tasks);
+        var response = new PageResponse<Task>(0, 0, 0, tasks.Length, tasks);
 
         return response;
     }

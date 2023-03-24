@@ -1,9 +1,5 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Domain.Tasks;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Froggie.Domain.Tasks;
+using Froggie.Domain.Users;
 
 namespace Froggie.Api.Tasks;
 
@@ -22,9 +18,10 @@ public sealed class GetTasksByUserController : TaskController
     [ResponseType(HttpStatusCode.OK, typeof(PageResponse<TaskDto>))]
     public async ValueTask<ApiResponse<PageResponse<TaskDto>>> GetTasksByUser(GetTasksByUserRequest request)
     {
-        var tasks = await usersTasksService.FindAsync(request.UserId);
-        var response = tasks.CastResults<TaskDto>(mapper);
+        var userId = new Id<User>(request.UserId);
+        var tasks = await usersTasksService.FindAsync(userId);
 
+        var response = tasks.CastResults<TaskDto>(mapper);
         return new OkResponse<PageResponse<TaskDto>>(response);
     }
 }

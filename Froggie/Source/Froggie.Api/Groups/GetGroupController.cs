@@ -1,21 +1,15 @@
-﻿using System.Net;
-using AutoMapper;
-using Froggie.Domain.Groups;
-using LittleByte.Common.AspNet.Responses;
-using LittleByte.Common.Infra.Queries;
-using Microsoft.AspNetCore.Mvc;
+﻿using Froggie.Domain.Groups;
 
 namespace Froggie.Api.Groups;
 
 public sealed class GetGroupController : GroupController
 {
     private readonly IFindByIdQuery<Group> getGroup;
-    private readonly IMapper mapper;
 
     public GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper)
+        : base(mapper)
     {
         this.getGroup = getGroup;
-        this.mapper = mapper;
     }
 
     [HttpGet(Routes.GetById)]

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using LittleByte.Common.Infra.Models;
 
 namespace Froggie.Api.Tasks;
 

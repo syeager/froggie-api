@@ -10,12 +10,11 @@ namespace Froggie.Api.Groups;
 public sealed class GetGroupController : GroupController
 {
     private readonly IFindByIdQuery<Group> getGroup;
-    private readonly IMapper mapper;
 
     public GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper)
+        : base(mapper)
     {
         this.getGroup = getGroup;
-        this.mapper = mapper;
     }
 
     [HttpGet(Routes.GetById)]

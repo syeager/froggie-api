@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 using LittleByte.Common.AspNet.AutoMapper;
-using LittleByte.Common.Domain;
-using Microsoft.EntityFrameworkCore;
+using LittleByte.Common.Tasks;
 
 namespace Froggie.Data.Tasks;
 
@@ -23,7 +21,7 @@ internal sealed class GetTasksByUserQuery : IGetTasksByUserQuery
         var daos = await froggieDb.Tasks
             .Where(t => t.CreatorId == userId.Value)
             .ToArrayAsync()
-            .ConfigureAwait(false);
+            .NoAwait();
         var tasks = mapper.MapRange<Task>(daos);
         var response = new PageResponse<Task>(0, 0, 0, 0, tasks);
 

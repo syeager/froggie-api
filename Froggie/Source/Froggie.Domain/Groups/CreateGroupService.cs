@@ -1,10 +1,11 @@
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 
 namespace Froggie.Domain.Groups;
 
 public interface ICreateGroupService
 {
     ValueTask<Group> CreateAsync(User creator, string nameValue);
+    ValueTask<Group> CreatePersonalAsync(User creator);
 }
 
 internal sealed class CreateGroupService : ICreateGroupService
@@ -32,4 +33,6 @@ internal sealed class CreateGroupService : ICreateGroupService
 
         return group;
     }
+
+    public ValueTask<Group> CreatePersonalAsync(User creator) => CreateAsync(creator, NameRules.PersonalName);
 }

@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using Froggie.Api.Groups;
 using Froggie.Data;
 using Froggie.Domain.Test;
@@ -27,6 +27,7 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
 
         ApiAssert.IsSuccess(response, HttpStatusCode.Created);
         Assert.AreEqual(request.Name, response.Obj!.Name);
-        Assert.AreEqual(1, GetService<FroggieDb>().Groups.Count());
+        // There will be 2 groups because registering a user creates a personal group.
+        Assert.AreEqual(2, GetService<FroggieDb>().Groups.Count());
     }
 }

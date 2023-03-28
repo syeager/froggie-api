@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Users;
+﻿using Froggie.Domain.Groups;
+
+namespace Froggie.Domain.Users;
 
 public interface IUserRegisterService
 {
@@ -11,16 +13,19 @@ internal sealed class UserRegisterService : IUserRegisterService
     private readonly IDoesUserWithNameExistQuery doesUserWithNameExistQuery;
     private readonly IFindUserByEmailQuery findUserByEmailQuery;
     private readonly IUserFactory userFactory;
+    private readonly ICreateGroupService createGroupService;
 
     public UserRegisterService(IAddUserCommand addUserCommand,
                                IUserFactory userFactory,
                                IFindUserByEmailQuery findUserByEmailQuery,
-                               IDoesUserWithNameExistQuery doesUserWithNameExistQuery)
+                               IDoesUserWithNameExistQuery doesUserWithNameExistQuery,
+                               ICreateGroupService createGroupService)
     {
         this.addUserCommand = addUserCommand;
         this.userFactory = userFactory;
         this.findUserByEmailQuery = findUserByEmailQuery;
         this.doesUserWithNameExistQuery = doesUserWithNameExistQuery;
+        this.createGroupService = createGroupService;
     }
 
     public async ValueTask<User> RegisterAsync(string emailValue, string nameValue, string passwordValue)
@@ -47,6 +52,9 @@ internal sealed class UserRegisterService : IUserRegisterService
 
         var password = new Password(passwordValue);
         await addUserCommand.AddAsync(user, password);
+
+        // TODO: Add to a new RegisterResult.
+        _ = await createGroupService.CreatePersonalAsync(user);
 
         return user;
     }

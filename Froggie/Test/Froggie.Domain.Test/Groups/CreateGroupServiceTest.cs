@@ -32,4 +32,16 @@ public sealed class CreateGroupServiceTest : UnitTest
         addGroupCommand.Received(1).Add(ExpectedGroup);
         await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
     }
+
+    [Test]
+    public async ValueTask When_CreatingPersonalGroup_Then_CreateGroup()
+    {
+        var groupName = "";
+        groupFactory.WhenForAnyArgs(gf => gf.Create(default, null!)).Do(info => groupName = info.Arg<string>());
+
+        await testObj.CreatePersonalAsync(User);
+
+        Assert.AreEqual(NameRules.PersonalName, groupName);
+        await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
+    }
 }

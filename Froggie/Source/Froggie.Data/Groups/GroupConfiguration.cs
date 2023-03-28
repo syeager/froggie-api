@@ -1,4 +1,5 @@
 ﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
 using LittleByte.Common.Infra.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ public static class GroupConfiguration
     {
         return @this
             .AddScoped<IAddGroupCommand, AddGroupCommand>()
+            .AddScoped<IGetUsersGroupsQuery, GetUsersGroupsQuery>()
             .AddScoped<IGetUsersInGroupQuery, GetUsersInGroupQuery>()
             .AddScoped<IGetTasksByGroupQuery, GetTasksByGroupQuery>()
             .AddScoped<IUserGroupCreateCommand, UserGroupCreateCommand>()

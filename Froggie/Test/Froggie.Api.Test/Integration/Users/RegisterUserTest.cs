@@ -1,5 +1,8 @@
 ﻿using Froggie.Api.Users;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
+using Froggie.Domain.Users;
+using LittleByte.Common.Domain;
 using LittleByte.Common.Exceptions;
 using LittleByte.Test.AspNet;
 
@@ -20,6 +23,12 @@ public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
         var response = await controller.Create(request);
 
         ApiAssert.IsSuccess(response);
+
+        var userId = new Id<User>(response.Obj!.User!.Id);
+        var userGroups = await GetService<IGetUsersGroupsQuery>().QueryAsync(userId);
+
+        Assert.AreEqual(1, userGroups.Count);
+        Assert.AreEqual(NameRules.PersonalName, userGroups.First().Name.Value);
     }
 
     [Test]

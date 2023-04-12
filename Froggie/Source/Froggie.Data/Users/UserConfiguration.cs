@@ -1,4 +1,5 @@
 using Froggie.Domain.Users;
+using LittleByte.Common.Infra.Queries;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,7 @@ public static class UserConfiguration
         return @this
             .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
             .AddTransient<UserConverter>()
+            .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, UserDao, FroggieDb>>()
             .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
             .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
             .AddTransient<IUserPageQuery, UserPageQuery>()

@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Users;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Users;
@@ -10,6 +11,7 @@ public sealed class UserRegisterServiceTest : UnitTest
     private IFindUserByEmailQuery findUserByEmailQuery = null!;
     private UserRegisterService testObj = null!;
     private IUserFactory userFactory = null!;
+    private ICreateGroupService createGroupService = null!;
 
     [SetUp]
     public void SetUp()
@@ -18,13 +20,18 @@ public sealed class UserRegisterServiceTest : UnitTest
         doesUserWithNameExistQuery = Substitute.For<IDoesUserWithNameExistQuery>();
         findUserByEmailQuery = Substitute.For<IFindUserByEmailQuery>();
         userFactory = Substitute.For<IUserFactory>();
-        testObj = new UserRegisterService(addUserCommand, userFactory, findUserByEmailQuery, doesUserWithNameExistQuery);
+        createGroupService = Substitute.For<ICreateGroupService>();
+        testObj = new UserRegisterService(addUserCommand, userFactory, findUserByEmailQuery, doesUserWithNameExistQuery, createGroupService);
     }
 
     [Test]
     public async ValueTask With_ValidData_Then_CreateUser()
     {
+        var userId = Id<User>.Empty;
         var expectedUser = Valid.Users.New();
+        userFactory
+            .WhenForAnyArgs(c => c.Create(default, null!, null!))
+            .Do(info => userId = info.Arg<Id<User>>());
         userFactory
             .Create(default, default!, default!)
             .ReturnsForAnyArgs(expectedUser);
@@ -37,6 +44,7 @@ public sealed class UserRegisterServiceTest : UnitTest
         Assert.AreNotEqual(Id<User>.Empty, user.Id);
         Assert.AreSame(expectedUser, user);
         await addUserCommand.Received(1).AddAsync(expectedUser, Valid.Users.Password);
+        await createGroupService.Received(1).CreatePersonalAsync(user);
     }
 
     [Test]

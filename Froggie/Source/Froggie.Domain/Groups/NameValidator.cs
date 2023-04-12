@@ -22,6 +22,7 @@ internal sealed class NameValidator<T> : PropertyValidator<T, Name>
 
 public static class NameRules
 {
+    public const string PersonalName = "Personal";
     public const int LengthMax = 25;
     public const int LengthMin = 5;
 }

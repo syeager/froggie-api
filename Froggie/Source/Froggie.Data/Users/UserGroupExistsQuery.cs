@@ -1,7 +1,5 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Froggie.Data.Users;
 

@@ -10,7 +10,7 @@ namespace Froggie.Api.Test.Integration.Groups;
 public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
 {
     [Test]
-    public async ValueTask CreateTask_Success()
+    public async ValueTask CreateGroup_Success()
     {
         var user = await GetService<IUserRegisterService>()
             .RegisterAsync(Valid.Users.Email, Valid.Users.Name, Valid.Users.Password);

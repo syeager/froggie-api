@@ -1,6 +1,6 @@
-﻿using Froggie.Domain.Groups;
+﻿using Froggie.Domain.Users;
 
-namespace Froggie.Domain.Users;
+namespace Froggie.Domain.Groups;
 
 public interface IGetUsersGroupsQuery
 {

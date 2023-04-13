@@ -1,9 +1,9 @@
-﻿using Froggie.Api.Users;
+﻿using FluentValidation;
+using Froggie.Api.Users;
 using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
 using LittleByte.Common.Domain;
-using LittleByte.Common.Exceptions;
 using LittleByte.Test.AspNet;
 
 namespace Froggie.Api.Test.Integration.Users;
@@ -36,11 +36,11 @@ public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
     {
         var request = new CreateUserRequest
         {
-            Email = Valid.Users.Email,
+            Email = "",
             Name = Valid.Users.Name,
             Password = ""
         };
 
-        Assert.ThrowsAsync<BadRequestException>(() => controller.Create(request).AsTask());
+        Assert.ThrowsAsync<ValidationException>(() => controller.Create(request).AsTask());
     }
 }

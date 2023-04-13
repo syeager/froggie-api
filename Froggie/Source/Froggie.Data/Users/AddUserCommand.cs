@@ -13,6 +13,8 @@ internal sealed class AddUserCommand : IAddUserCommand
     public AddUserCommand(UserManager<UserDao> userManager, IMapper mapper)
     {
         this.userManager = userManager;
+        userManager.UserValidators.Clear();
+        userManager.PasswordValidators.Clear();
         this.mapper = mapper;
     }
 

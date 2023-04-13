@@ -10,14 +10,18 @@ public static class UserConfiguration
     public static IServiceCollection AddUsers(this IServiceCollection @this)
     {
         @this
-            .AddIdentity<UserDao, IdentityRole<Guid>>(options => options.Password = new PasswordOptions
+            .AddIdentity<UserDao, IdentityRole<Guid>>(options =>
             {
-                RequireDigit = false,
-                RequiredLength = 1,
-                RequireLowercase = false,
-                RequireUppercase = false,
-                RequiredUniqueChars = 0,
-                RequireNonAlphanumeric = false
+                options.Password = new PasswordOptions
+                {
+                    RequireDigit = false,
+                    RequireLowercase = false,
+                    RequireUppercase = false,
+                    RequireNonAlphanumeric = false,
+                    RequiredLength = 0,
+                    RequiredUniqueChars = 0
+                };
+                options.User = new UserOptions();
             })
             .AddEntityFrameworkStores<FroggieDb>();
 

@@ -2,7 +2,6 @@
 using Froggie.Data.Tasks;
 using Froggie.Data.Users;
 using LittleByte.Common.Infra.Commands;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data;

@@ -48,4 +48,6 @@ app
     .UseEndpoints(endpoints => endpoints.MapControllers())
     .UseOpenApi();
 
+await app.AddSeedDataAsync(app.Services.CreateScope().ServiceProvider);
+
 app.Run();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using Froggie.Domain.Tasks;
 
 namespace Froggie.Api.Tasks;
@@ -12,4 +13,7 @@ public sealed class TaskDto : Dto
 
     [Required]
     public Guid GroupId { get; init; }
+
+    [Required]
+    public List<Guid> Assignees { get; init; } = null!;
 }

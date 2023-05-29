@@ -8,9 +8,9 @@ namespace Froggie.Api.Test.Integration.Groups;
 
 public static class CreateGroupAndUsersHelper
 {
-    public static async ValueTask<Group> CreateAsync(IServiceProvider services,
-                                                     string groupName = "test-group",
-                                                     int userCount = 2)
+    public static async ValueTask<(Group group, IReadOnlyList<User> users)> CreateAsync(IServiceProvider services,
+                                                       string groupName = "test-group",
+                                                       int userCount = 2)
     {
         var registerUser = services.GetRequiredService<IUserRegisterService>();
         var createGroup = services.GetRequiredService<ICreateGroupService>();
@@ -28,6 +28,6 @@ public static class CreateGroupAndUsersHelper
             await addUserToGroup.AddAsync(users[i], group);
         }
 
-        return group;
+        return (group, users);
     }
 }

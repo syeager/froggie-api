@@ -1,4 +1,4 @@
-﻿using Froggie.Api.Groups;
+using Froggie.Api.Groups;
 using Froggie.Data.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Test;
@@ -11,11 +11,9 @@ public sealed class GetGroupTasksTest : ApiIntegrationTest<GetTasksGroupControll
     [Test]
     public async ValueTask QueryAllTasks()
     {
-        var group = await CreateGroupAndUsersHelper.CreateAsync(services);
+        var (group, users) = await CreateGroupAndUsersHelper.CreateAsync(services);
         await saveCommand.CommitChangesAsync();
-
-        var users = await GetService<IGetUsersInGroupQuery>().QueryAsync(group);
-        var author = users.Results.First();
+        var author = users.First();
 
         await GetService<ICreateTaskService>().CreateAsync(Valid.Tasks.Title, author, Valid.Tasks.DueDate, group);
         await GetService<ICreateTaskService>().CreateAsync(Valid.Tasks.Title, author, Valid.Tasks.DueDate, group);

@@ -9,7 +9,7 @@ public sealed class GetGroupUsersTest : ApiIntegrationTest<GetUsersGroupControll
     public async ValueTask QueryAllUsers()
     {
         const int userCount = 3;
-        var group = await CreateGroupAndUsersHelper.CreateAsync(services, "group", userCount);
+        var (group, _) = await CreateGroupAndUsersHelper.CreateAsync(services, "group", userCount);
         _ = await CreateGroupAndUsersHelper.CreateAsync(services);
         await saveCommand.CommitChangesAsync();
 

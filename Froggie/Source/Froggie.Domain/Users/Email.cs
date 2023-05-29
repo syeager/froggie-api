@@ -1,3 +1,7 @@
 ﻿namespace Froggie.Domain.Users;
 
-public record Email(string Value) : StringValueObject(Value);
+public sealed record Email(string Value) : StringValueObject(Value), ILoggable
+{
+    public string LogKey => $"{nameof(User)}.{nameof(Email)}";
+    public string LogValue => Value;
+}

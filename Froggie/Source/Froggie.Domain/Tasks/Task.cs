@@ -62,8 +62,19 @@ public sealed class Task : DomainModel<Task>
         }
     }
 
-    public void RemoveAssignee(Id<User> userId)
+    public void RemoveAssignee(Id<User> assignee)
     {
-        assignees.Remove(userId);
+        var log = this.NewLogger();
+
+        if(assignee == Id<User>.Empty)
+        {
+            throw new ArgumentNullException(nameof(assignee), "Can't remove an empty user from task");
+        }
+
+        log
+            .Push(assignee)
+            .Info("Removing assignee to task");
+
+        assignees.Remove(assignee);
     }
 }

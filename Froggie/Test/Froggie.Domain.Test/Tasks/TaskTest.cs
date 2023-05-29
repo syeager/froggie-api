@@ -3,7 +3,6 @@ using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
 
-// user not in list
 // empty user
 public sealed class TaskTest : UnitTest
 {
@@ -50,5 +49,11 @@ public sealed class TaskTest : UnitTest
         testObj.RemoveAssignee(userId);
 
         Assert.AreEqual(0, testObj.Assignees.Count);
+    }
+
+    [Test]
+    public void RemoveEmptyUser()
+    {
+        Assert.Throws<ArgumentNullException>(() => testObj.RemoveAssignee(Id<User>.Empty));
     }
 }

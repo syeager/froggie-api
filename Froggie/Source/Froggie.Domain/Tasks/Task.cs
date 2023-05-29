@@ -61,4 +61,9 @@ public sealed class Task : DomainModel<Task>
             log.Info("User is already assigned to this task");
         }
     }
+
+    public void RemoveAssignee(Id<User> userId)
+    {
+        assignees.Remove(userId);
+    }
 }

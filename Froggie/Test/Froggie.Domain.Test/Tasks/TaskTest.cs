@@ -3,30 +3,32 @@ using LittleByte.Common.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
 
+// user not in list
+// empty user
 public sealed class TaskTest : UnitTest
 {
     private Task testObj = null!;
+    private Id<User> userId;
 
     [SetUp]
     public void SetUp()
     {
         testObj = Valid.Tasks.New(Guid.NewGuid(), Guid.NewGuid());
+
+        userId = new Id<User>();
     }
 
     [Test]
-    public void Given_Assignee_Then_AddAssignee()
+    public void AddNewAssignee()
     {
-        var userId = new Id<User>();
-
         testObj.AddAssignee(userId);
 
         CollectionAssert.Contains(testObj.Assignees, userId);
     }
 
     [Test]
-    public void Given_ExistingAssignee_Then_DoNotAdd()
+    public void AddExistingAssignee()
     {
-        var userId = new Id<User>();
         testObj.AddAssignee(userId);
 
         testObj.AddAssignee(userId);
@@ -35,8 +37,18 @@ public sealed class TaskTest : UnitTest
     }
 
     [Test]
-    public void Given_EmptyAssignee_Then_Throw()
+    public void AddEmptyAssignee()
     {
         Assert.Throws<ArgumentNullException>(() => testObj.AddAssignee(Id<User>.Empty));
+    }
+
+    [Test]
+    public void RemoveAssignee()
+    {
+        testObj.AddAssignee(userId);
+
+        testObj.RemoveAssignee(userId);
+
+        Assert.AreEqual(0, testObj.Assignees.Count);
     }
 }

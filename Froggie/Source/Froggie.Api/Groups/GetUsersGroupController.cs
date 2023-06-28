@@ -1,4 +1,4 @@
-﻿using Froggie.Api.Users;
+using Froggie.Api.Users;
 using Froggie.Data.Groups;
 using Froggie.Domain.Groups;
 using Froggie.Domain.Users;

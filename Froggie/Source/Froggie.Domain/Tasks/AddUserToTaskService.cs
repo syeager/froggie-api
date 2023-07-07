@@ -13,15 +13,23 @@ public interface IAddUserToTaskService
 internal sealed class AddUserToTaskService : IAddUserToTaskService
 {
     private readonly IFindByIdQuery<Task> findTaskQuery;
+    private readonly IIsUserInGroupQuery isUserInGroupQuery;
 
-    public AddUserToTaskService(IFindByIdQuery<Task> findTaskQuery)
+    public AddUserToTaskService(IFindByIdQuery<Task> findTaskQuery, IIsUserInGroupQuery isUserInGroupQuery)
     {
         this.findTaskQuery = findTaskQuery;
+        this.isUserInGroupQuery = isUserInGroupQuery;
     }
 
     public async ValueTask<Task> AddAsync(Id<User> userId, Id<Task> taskId)
     {
         var task = await findTaskQuery.FindRequiredForEditAsync(taskId).NoWait();
+
+        var isUserInGroup = await isUserInGroupQuery.QueryAsync(userId, task.GroupId).NoWait();
+        if(!isUserInGroup)
+        {
+            throw new UserNotInGroupException(userId, task.GroupId);
+        }
 
         task.AddAssignee(userId);
 

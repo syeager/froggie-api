@@ -13,6 +13,7 @@ public static class GroupConfiguration
             .AddScoped<IGetUsersGroupsQuery, GetUsersGroupsQuery>()
             .AddScoped<IGetUsersInGroupQuery, GetUsersInGroupQuery>()
             .AddScoped<IGetTasksByGroupQuery, GetTasksByGroupQuery>()
+            .AddScoped<IIsUserInGroupQuery, IsUserInGroupQuery>()
             .AddScoped<IUserGroupCreateCommand, UserGroupCreateCommand>()
             .AddScoped<IFindByIdQuery<Group>, FindByIdQuery<Group, GroupDao, FroggieDb>>();
     }

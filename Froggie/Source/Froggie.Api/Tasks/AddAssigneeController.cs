@@ -21,7 +21,7 @@ public sealed class AddAssigneeController : TaskController
         var taskId = new Id<Task>(request.TaskId);
         var userId = new Id<User>(request.UserId);
 
-        var task = await addUserToTask.AddAsync(userId, taskId);
+        var task = await addUserToTask.AddAsync(userId, taskId).NoWait();
 
         var dto = mapper.Map<TaskDto>(task);
         return new OkResponse<TaskDto>(dto);

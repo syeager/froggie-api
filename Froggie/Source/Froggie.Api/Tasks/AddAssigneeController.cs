@@ -1,18 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 
 namespace Froggie.Api.Tasks;
-
-public sealed class AddAssigneeRequest
-{
-    [Required]
-    public Guid TaskId { get; init; }
-
-    [Required]
-    public Guid UserId { get; init; }
-}
-
 
 public sealed class AddAssigneeController : TaskController
 {

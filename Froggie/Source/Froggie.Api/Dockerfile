@@ -15,7 +15,7 @@ RUN dotnet test -c Debug -o /app/test
 
 FROM source AS publish
 WORKDIR /src/Source/Froggie.Api
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
 FROM source AS final
 WORKDIR /app

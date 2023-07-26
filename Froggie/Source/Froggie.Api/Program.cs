@@ -5,7 +5,6 @@ using LittleByte.Common.AspNet.Configuration;
 using LittleByte.Common.AspNet.Middleware;
 using LittleByte.Common.Identity.Configuration;
 using LittleByte.Common.Logging.Configuration;
-using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,18 +26,7 @@ builder.Services
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 
-var forwardOptions = new ForwardedHeadersOptions 
-{ 
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | 
-                       ForwardedHeaders.XForwardedHost, 
-    AllowedHosts = new List<string> { "*" }, 
-    RequireHeaderSymmetry = false 
-}; 
- 
-forwardOptions.KnownNetworks.Clear(); 
-forwardOptions.KnownProxies.Clear(); 
- 
-app.UseForwardedHeaders(forwardOptions); 
+app.UseForwardedHeaders();
 
 if(app.Environment.IsDevelopment())
 {
@@ -52,7 +40,6 @@ else
 }
 
 app
-    .UseHttpsRedirection()
     .UseHsts()
     .UseRouting()
     .UseAuthentication()

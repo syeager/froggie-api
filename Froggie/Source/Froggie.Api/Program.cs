@@ -7,48 +7,61 @@ using LittleByte.Common.Identity.Configuration;
 using LittleByte.Common.Logging.Configuration;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.UseSerilog();
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-builder.Services.AddControllers();
-
-builder.Services
-    .AddLogs()
-    .AddOpenApi("Froggie")
-    .AddSingleton<IDateService, DateService>()
-    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-    .AddEndpointsApiExplorer()
-    .AddSwaggerGen()
-    .AddDomain()
-    .AddPersistence()
-    .AddJwtAuthentication(builder.Configuration);
-
-var app = builder.Build();
-app.UseSerilogRequestLogging();
-
-app.UseForwardedHeaders();
-
-if(app.Environment.IsDevelopment())
+try
 {
+
+    var builder = WebApplication.CreateBuilder(args);
+    builder.UseSerilog();
+
+    builder.Services.AddControllers();
+
+    builder.Services
+        .AddLogs()
+        .AddOpenApi("Froggie")
+        .AddSingleton<IDateService, DateService>()
+        .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+        .AddEndpointsApiExplorer()
+        .AddSwaggerGen()
+        .AddDomain()
+        .AddPersistence()
+        .AddJwtAuthentication(builder.Configuration);
+
+    var app = builder.Build();
+    app.UseSerilogRequestLogging();
+
+    app.UseForwardedHeaders();
+
+    if(app.Environment.IsDevelopment())
+    {
+        app
+            .UseDeveloperExceptionPage()
+            .UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+    }
+
     app
-        .UseDeveloperExceptionPage()
-        .UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+        .UseHsts()
+        .UseRouting()
+        .UseAuthentication()
+        .UseAuthorization()
+        .UseHttpExceptions()
+        .UseModelValidationExceptions()
+        .UseEndpoints(endpoints => endpoints.MapControllers())
+        .UseOpenApi();
+
+    //await app.AddSeedDataAsync(app.Services.CreateScope().ServiceProvider);
+
+    app.Run();
 }
-else
+catch(Exception exception)
 {
-    app.UseExceptionHandler("/Error");
+    Log.Fatal(exception, "An unhandled exception occurred during bootstrapping");
+    throw;
 }
-
-app
-    .UseHsts()
-    .UseRouting()
-    .UseAuthentication()
-    .UseAuthorization()
-    .UseHttpExceptions()
-    .UseModelValidationExceptions()
-    .UseEndpoints(endpoints => endpoints.MapControllers())
-    .UseOpenApi();
-
-//await app.AddSeedDataAsync(app.Services.CreateScope().ServiceProvider);
-
-app.Run();

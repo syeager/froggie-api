@@ -5,6 +5,7 @@ using LittleByte.Common.AspNet.Configuration;
 using LittleByte.Common.AspNet.Middleware;
 using LittleByte.Common.Identity.Configuration;
 using LittleByte.Common.Logging.Configuration;
+using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -33,7 +34,16 @@ try
     var app = builder.Build();
     app.UseSerilogRequestLogging();
 
-    app.UseForwardedHeaders();
+    var forwardOptions = new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+        RequireHeaderSymmetry = false
+    };
+
+    forwardOptions.KnownNetworks.Clear();
+    forwardOptions.KnownProxies.Clear();
+
+    app.UseForwardedHeaders(forwardOptions);
 
     if(app.Environment.IsDevelopment())
     {

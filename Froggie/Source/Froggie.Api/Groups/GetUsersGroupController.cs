@@ -18,7 +18,7 @@ public sealed class GetUsersGroupController : GroupController
     {
         var groupId = new Id<Group>(id);
 
-        var users = await usersInGroupQuery.QueryAsync(groupId).NoAwait();
+        var users = await usersInGroupQuery.QueryAsync(groupId).NoWait();
         var dto = users.CastResults<UserDto>(mapper);
 
         return new OkResponse<PageResponse<UserDto>>(dto);

@@ -14,6 +14,7 @@ public sealed class GetTasksGroupController : GroupController
     }
 
     [HttpGet("tasks")]
+    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<TaskDto>))]
     public async ValueTask<ApiResponse<PageResponse<TaskDto>>> GetTasks(Guid id)
     {
         var groupId = new Id<Group>(id);

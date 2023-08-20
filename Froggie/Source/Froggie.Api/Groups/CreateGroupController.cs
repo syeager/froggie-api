@@ -21,7 +21,9 @@ public sealed class CreateGroupController : GroupController
         this.findUserQuery = findUserQuery;
     }
 
-    [HttpPost]
+    [HttpPost(Routes.Create)]
+    [ResponseType(HttpStatusCode.Created, typeof(GroupDto))]
+    [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<GroupDto>> Create(CreateGroupRequest request)
     {
         var creator = await findUserQuery.FindRequiredAsync(request.CreatorId);

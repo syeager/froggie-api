@@ -13,6 +13,7 @@ public sealed class GetTaskController : TaskController
 
     [HttpGet(Routes.GetById)]
     [ResponseType(HttpStatusCode.OK, typeof(TaskDto))]
+    [ResponseType(HttpStatusCode.NotFound)]
     public async ValueTask<ApiResponse<TaskDto>> GetTask(Guid id)
     {
         var validTask = await getTask.FindRequiredAsync(id);

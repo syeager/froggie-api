@@ -16,6 +16,7 @@ public sealed class GetTasksByUserController : TaskController
 
     [HttpGet("get-user-tasks")]
     [ResponseType(HttpStatusCode.OK, typeof(PageResponse<TaskDto>))]
+    [ResponseType(HttpStatusCode.NotFound)]
     public async ValueTask<ApiResponse<PageResponse<TaskDto>>> GetTasksByUser(GetTasksByUserRequest request)
     {
         var userId = new Id<User>(request.UserId);

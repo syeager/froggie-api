@@ -24,6 +24,7 @@ public sealed class CreateUserController : UserController
     // TODO: Should have RegisterResponse.
     [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.OK, typeof(LogInResponse))]
+    [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<LogInResponse>> Create(CreateUserRequest request)
     {
         var user = await registerService.RegisterAsync(request.Email, request.Name, request.Password);
@@ -36,6 +37,7 @@ public sealed class CreateUserController : UserController
 
         await saveCommand.CommitChangesAsync();
 
+        // TODO: Should be CreatedResponse.
         return new OkResponse<LogInResponse>(response);
     }
 }

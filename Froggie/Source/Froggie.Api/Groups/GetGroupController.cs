@@ -14,6 +14,7 @@ public sealed class GetGroupController : GroupController
 
     [HttpGet(Routes.GetById)]
     [ResponseType(HttpStatusCode.OK, typeof(GroupDto))]
+    [ResponseType(HttpStatusCode.NotFound)]
     public async ValueTask<ApiResponse<GroupDto>> GetGroup(Guid id)
     {
         var group = await getGroup.FindRequiredAsync(id);

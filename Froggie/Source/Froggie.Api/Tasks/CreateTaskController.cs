@@ -18,8 +18,9 @@ public sealed class CreateTaskController : TaskController
         this.mapper = mapper;
     }
 
-    [HttpPost("create")]
+    [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.Created, typeof(TaskDto))]
+    [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<TaskDto>> Create(CreateTaskRequest request)
     {
         var userId = new Id<User>(request.CreatorId);

@@ -14,6 +14,7 @@ public sealed class GetUsersGroupController : GroupController
     }
 
     [HttpGet("users")]
+    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<UserDto>))]
     public async ValueTask<ApiResponse<PageResponse<UserDto>>> GetUsers(Guid id)
     {
         var groupId = new Id<Group>(id);

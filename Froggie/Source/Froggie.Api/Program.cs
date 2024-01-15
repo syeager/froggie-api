@@ -47,9 +47,9 @@ try
         .SetForwardedHeaders()
         .UseHsts()
         .UseRouting()
+        .UseHttpExceptions()
         .UseAuthentication()
         .UseAuthorization()
-        .UseHttpExceptions()
         .UseModelValidationExceptions()
         .UseEndpoints(endpoints => endpoints.MapControllers())
         .UseOpenApi();

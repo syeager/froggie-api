@@ -1,27 +1,19 @@
 ﻿using Froggie.Domain.Tasks;
-using LittleByte.Common.Infra.Commands;
+using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class DeleteTaskController : TaskController
+public sealed class DeleteTaskController(IDeleteTaskService task, ISaveContextCommand context)
+    : TaskController
 {
-    private readonly IDeleteTaskService deleteTask;
-    private readonly ISaveContextCommand saveContext;
-
-    public DeleteTaskController(IDeleteTaskService deleteTask, ISaveContextCommand saveContext)
-    {
-        this.deleteTask = deleteTask;
-        this.saveContext = saveContext;
-    }
-
     [HttpDelete("delete")]
     [ResponseType(HttpStatusCode.OK)]
     public async ValueTask<ApiResponse> Delete(DeleteTaskRequest request)
     {
         var taskId = new Id<Task>(request.Id);
 
-        await deleteTask.DeleteAsync(taskId);
-        await saveContext.CommitChangesAsync();
+        await task.DeleteAsync(taskId);
+        await context.CommitChangesAsync();
 
         return new OkResponse();
     }

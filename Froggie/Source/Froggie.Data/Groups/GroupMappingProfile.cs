@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Froggie.Domain.Groups;
+﻿using Froggie.Domain.Groups;
 using JetBrains.Annotations;
-using LittleByte.Common.AspNet.AutoMapper;
+using LittleByte.AutoMapper;
 
 namespace Froggie.Data.Groups;
 

@@ -1,7 +1,7 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Common.Extensions;
+using LittleByte.Common;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Groups;

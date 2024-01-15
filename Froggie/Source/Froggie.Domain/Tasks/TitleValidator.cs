@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using LittleByte.Common;
 
 namespace Froggie.Domain.Tasks;
 
@@ -14,7 +13,7 @@ internal static class TitleValidatorExtension
 
 internal sealed class TitleValidator<T> : PropertyValidator<T, Title>
 {
-    public override string Name => nameof(TitleValidator<X>);
+    public override string Name => nameof(TitleValidator<T>);
 
     public override bool IsValid(ValidationContext<T> context, Title value) =>
         value.Value.Length is>= TitleRules.LengthMin and<= TitleRules.LengthMax;

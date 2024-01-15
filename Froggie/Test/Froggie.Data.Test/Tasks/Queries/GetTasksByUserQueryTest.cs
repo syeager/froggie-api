@@ -1,6 +1,5 @@
 ﻿using Froggie.Data.Tasks;
 using Froggie.Data.Users;
-using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +19,14 @@ public sealed class GetTasksByUserQueryTest : DataIntegrationTest
         testObj = services.GetRequiredService<IGetTasksByUserQuery>();
     }
 
+    [TearDown]
+    public override void TearDown()
+    {
+        base.TearDown();
+
+        froggieDb.Dispose();
+    }
+
     [Test]
     public async ValueTask When_NotAllTasksAreUsers_Return_OnlyUsersTasks()
     {
@@ -36,6 +43,6 @@ public sealed class GetTasksByUserQueryTest : DataIntegrationTest
 
         var result = await testObj.RunAsync(user.Id);
 
-        Assert.AreEqual(tasks.Count, result.Results.Count);
+        Assert.That(result.Results.Count, Is.EqualTo(tasks.Count));
     }
 }

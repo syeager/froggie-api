@@ -20,7 +20,7 @@ public sealed class NameValidatorTest : UnitTest
 
         var result = testObj.IsValid(null!, name);
 
-        Assert.IsTrue(result);
+        Assert.That(result);
     }
 
     [TestCase(NameRules.LengthMax + 1)]
@@ -31,6 +31,6 @@ public sealed class NameValidatorTest : UnitTest
 
         var result = testObj.IsValid(null!, name);
 
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 }

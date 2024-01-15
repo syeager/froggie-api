@@ -3,8 +3,8 @@ using Froggie.Api.Users;
 using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
+using LittleByte.Common;
 
 namespace Froggie.Api.Test.Integration.Users;
 
@@ -27,8 +27,11 @@ public sealed class RegisterUserTest : ApiIntegrationTest<CreateUserController>
         var userId = new Id<User>(response.Obj!.User!.Id);
         var userGroups = await GetService<IGetUsersGroupsQuery>().QueryAsync(userId);
 
-        Assert.AreEqual(1, userGroups.Count);
-        Assert.AreEqual(NameRules.PersonalName, userGroups.First().Name.Value);
+        Assert.Multiple(() =>
+        {
+            Assert.That(userGroups.Count, Is.EqualTo(1));
+            Assert.That(userGroups.First().Name.Value, Is.EqualTo(NameRules.PersonalName));
+        });
     }
 
     [Test]

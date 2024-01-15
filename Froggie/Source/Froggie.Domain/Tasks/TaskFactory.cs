@@ -1,28 +1,21 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
+using LittleByte.Validation;
 
 namespace Froggie.Domain.Tasks;
 
 public interface ITaskFactory
 {
-    Task Create(Id<Task> idValue, string titleValue, Id<User> userId, DateTime dueDate, Id<Group> groupId);
+    Task Create(Id<Task> idValue, string titleValue, Id<User> userId, DateTimeOffset dueDate, Id<Group> groupId);
 }
 
-internal sealed class TaskFactory : ITaskFactory
+internal sealed class TaskFactory(ModelValidator<Task> validator) : ITaskFactory
 {
-    private readonly ModelValidator<Task> validator;
-
-    public TaskFactory(ModelValidator<Task> validator)
-    {
-        this.validator = validator;
-    }
-
-    public Task Create(
-        Id<Task> idValue,
-        string titleValue,
-        Id<User> userId,
-        DateTime dueDate,
-        Id<Group> groupId)
+    public Task Create(Id<Task> idValue,
+                       string titleValue,
+                       Id<User> userId,
+                       DateTimeOffset dueDate,
+                       Id<Group> groupId)
     {
         var title = new Title(titleValue);
         var task = Task.Create(

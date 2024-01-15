@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LittleByte.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Domain.Groups;
 
-internal static class GroupsConfiguration
+public static class GroupsConfiguration
 {
-    public static IServiceCollection AddGroups(this IServiceCollection @this)
+    public static IServiceCollection AddGroupsDomain(this IServiceCollection @this)
     {
         return @this
             .AddTransient<IAddUserToGroupService, AddUserToGroupService>()

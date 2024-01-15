@@ -5,25 +5,19 @@ namespace Froggie.Domain.Tasks;
 
 public interface ICreateTaskService
 {
-    ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTime dueDate, Id<Group> groupId);
+    ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTimeOffset dueDate, Id<Group> groupId);
 }
 
-internal sealed class CreateTaskService : ICreateTaskService
+internal sealed class CreateTaskService(
+    IAddTaskCommand addTask,
+    IUserGroupExistsQuery groupExistsQuery,
+    ITaskFactory factory)
+    : ICreateTaskService
 {
-    private readonly IAddTaskCommand addTask;
-    private readonly IUserGroupExistsQuery userGroupExistsQuery;
-    private readonly ITaskFactory taskFactory;
-
-    public CreateTaskService(IAddTaskCommand addTask, IUserGroupExistsQuery userGroupExistsQuery, ITaskFactory taskFactory)
+    public async ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTimeOffset dueDate,
+                                             Id<Group> groupId)
     {
-        this.addTask = addTask;
-        this.userGroupExistsQuery = userGroupExistsQuery;
-        this.taskFactory = taskFactory;
-    }
-
-    public async ValueTask<Task> CreateAsync(string title, Id<User> creatorId, DateTime dueDate, Id<Group> groupId)
-    {
-        var isUserInGroup = await userGroupExistsQuery.QueryAsync(creatorId, groupId);
+        var isUserInGroup = await groupExistsQuery.QueryAsync(creatorId, groupId);
 
         if(!isUserInGroup)
         {
@@ -31,7 +25,7 @@ internal sealed class CreateTaskService : ICreateTaskService
         }
 
         var id = new Id<Task>();
-        var task = taskFactory.Create(id, title, creatorId, dueDate, groupId);
+        var task = factory.Create(id, title, creatorId, dueDate, groupId);
         addTask.Add(task);
 
         return task;

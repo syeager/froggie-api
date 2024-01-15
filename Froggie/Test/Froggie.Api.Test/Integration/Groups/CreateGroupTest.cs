@@ -3,7 +3,7 @@ using Froggie.Api.Groups;
 using Froggie.Data;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
 
@@ -25,9 +25,12 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
 
         var response = await controller.Create(request);
 
-        ApiAssert.IsSuccess(response, HttpStatusCode.Created);
-        Assert.AreEqual(request.Name, response.Obj!.Name);
-        // There will be 2 groups because registering a user creates a personal group.
-        Assert.AreEqual(2, GetService<FroggieDb>().Groups.Count());
+        Assert.Multiple(() =>
+        {
+            ApiAssert.IsSuccess(response, HttpStatusCode.Created);
+            Assert.That(response.Obj!.Name, Is.EqualTo(request.Name));
+            // There will be 2 groups because registering a user creates a personal group.
+            Assert.That(GetService<FroggieDb>().Groups.Count(), Is.EqualTo(2));
+        });
     }
 }

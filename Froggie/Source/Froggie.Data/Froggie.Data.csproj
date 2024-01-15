@@ -15,9 +15,13 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.EntityFramework\LittleByte.AutoMapper.EntityFramework.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.Data\LittleByte.Data.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.EntityFramework\LittleByte.EntityFramework.csproj" />
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
 	</ItemGroup>
 </Project>

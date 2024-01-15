@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Groups;
+﻿using LittleByte.Validation;
+
+namespace Froggie.Domain.Groups;
 
 internal sealed class GroupValidator : ModelValidator<Group>
 {

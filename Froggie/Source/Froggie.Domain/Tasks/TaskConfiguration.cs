@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LittleByte.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Domain.Tasks;
 
-internal static class TaskConfiguration
+public static class TaskConfiguration
 {
-    public static IServiceCollection AddTasks(this IServiceCollection @this) => @this
+    public static IServiceCollection AddTasksDomain(this IServiceCollection services) => services
         .AddTransient<ICreateTaskService, CreateTaskService>()
         .AddTransient<IDeleteTaskService, DeleteTaskService>()
-        .AddTransient<IGetUsersTasksService, GetUsersTasksService>()
         .AddTransient<ITaskFactory, TaskFactory>()
         .AddTransient<ModelValidator<Task>, TaskValidator>();
 }

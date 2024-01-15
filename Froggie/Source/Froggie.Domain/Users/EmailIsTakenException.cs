@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Froggie.Domain.Users;
+﻿namespace Froggie.Domain.Users;
 
 [ExcludeFromCodeCoverage]
 public sealed class EmailIsTakenException : Exception
@@ -8,12 +6,6 @@ public sealed class EmailIsTakenException : Exception
     public string EmailValue { get; }
 
     public EmailIsTakenException(string emailValue)
-    {
-        EmailValue = emailValue;
-    }
-
-    public EmailIsTakenException(SerializationInfo info, StreamingContext context, string emailValue)
-        : base(info, context)
     {
         EmailValue = emailValue;
     }

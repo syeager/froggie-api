@@ -1,7 +1,7 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
+using LittleByte.Common;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -34,8 +34,11 @@ public sealed class CreateTaskServiceTest : UnitTest
 
         var task = await testObj.CreateAsync(expectedTask.Title, creator.Id, Valid.Tasks.DueDate, group.Id);
 
-        Assert.AreNotEqual(Id<Task>.Empty, task.Id);
-        Assert.AreSame(expectedTask, task);
+       Assert.Multiple(() =>
+       {
+           Assert.That(task.Id, Is.Not.EqualTo(Id<Task>.Empty));
+           Assert.That(task, Is.SameAs(expectedTask));
+       });
         addTaskCommand.Received(1).Add(task);
     }
 

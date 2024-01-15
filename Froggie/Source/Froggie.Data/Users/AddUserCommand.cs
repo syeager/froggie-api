@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Froggie.Domain.Users;
-using LittleByte.Common.Exceptions;
+﻿using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 
 namespace Froggie.Data.Users;
@@ -25,9 +23,8 @@ internal sealed class AddUserCommand : IAddUserCommand
 
         if(!result.Succeeded)
         {
-            var errors = string.Join("\n- ", result.Errors.Select(e => $"{e.Code}: {e.Description}"));
-            var message = $"Failed to create user:\n- {errors}";
-            throw new BadRequestException(message);
+            throw new UserCreationException(result.Errors.Select(e =>
+                new UserCreationException.Error(e.Code, e.Description)));
         }
     }
 }

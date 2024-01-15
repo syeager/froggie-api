@@ -8,21 +8,12 @@ public interface ICreateGroupService
     ValueTask<Group> CreatePersonalAsync(User creator);
 }
 
-internal sealed class CreateGroupService : ICreateGroupService
+internal sealed class CreateGroupService(
+    IGroupFactory groupFactory,
+    IAddGroupCommand addGroupCommand,
+    IAddUserToGroupService addUserToGroupService)
+    : ICreateGroupService
 {
-    private readonly IGroupFactory groupFactory;
-    private readonly IAddGroupCommand addGroupCommand;
-    private readonly IAddUserToGroupService addUserToGroupService;
-
-    public CreateGroupService(IGroupFactory groupFactory,
-                              IAddGroupCommand addGroupCommand,
-                              IAddUserToGroupService addUserToGroupService)
-    {
-        this.groupFactory = groupFactory;
-        this.addGroupCommand = addGroupCommand;
-        this.addUserToGroupService = addUserToGroupService;
-    }
-
     public async ValueTask<Group> CreateAsync(User creator, string nameValue)
     {
         var id = new Id<Group>();

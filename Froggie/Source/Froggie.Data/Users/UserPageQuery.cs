@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using Froggie.Domain.Users;
-using Microsoft.EntityFrameworkCore;
+﻿using Froggie.Domain.Users;
 
 namespace Froggie.Data.Users;
 
 public interface IUserPageQuery
 {
-    ValueTask<PageResponse<User>> RunAsync(PageRequest request);
+    ValueTask<Page<User>> RunAsync(PageRequest request);
 }
 
 internal sealed class UserPageQuery : IUserPageQuery
@@ -20,10 +18,10 @@ internal sealed class UserPageQuery : IUserPageQuery
         this.mapper = mapper;
     }
 
-    public async ValueTask<PageResponse<User>> RunAsync(PageRequest request)
+    public async ValueTask<Page<User>> RunAsync(PageRequest request)
     {
         var userDaos = await froggieDb.Users
-            .Skip(request.Page * request.PageSize)
+            .Skip(request.PageIndex * request.PageSize)
             .Take(request.PageSize)
             .ToArrayAsync().ConfigureAwait(false);
 
@@ -31,7 +29,7 @@ internal sealed class UserPageQuery : IUserPageQuery
             .Select(u => mapper.Map<User>(u))
             .ToArray();
 
-        var response = new PageResponse<User>(request.PageSize, request.Page, 0, 0, users);
+        var response = new Page<User>(request.PageSize, request.PageIndex, 0, 0, users);
         return response;
     }
 }

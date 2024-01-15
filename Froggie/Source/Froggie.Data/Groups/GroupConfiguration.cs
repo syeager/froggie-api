@@ -1,13 +1,12 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Groups;
 
 public static class GroupConfiguration
 {
-    public static IServiceCollection AddGroups(this IServiceCollection @this)
+    public static IServiceCollection AddGroupsData(this IServiceCollection @this)
     {
         return @this
             .AddScoped<IAddGroupCommand, AddGroupCommand>()

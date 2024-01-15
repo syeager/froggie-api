@@ -1,8 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using Froggie.Api.Users;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
-using LittleByte.Common.Identity.Services;
-using LittleByte.Test.Validation;
+using LittleByte.AspNet;
+using LittleByte.Common;
+using LittleByte.Test.Categories;
+using LittleByte.Validation.Test;
+using NSubstitute;
 
 namespace Froggie.Domain.Test.Users;
 
@@ -64,18 +67,24 @@ public sealed class LogInServiceTest : UnitTest
 
     private static void AssertSuccess(LogInResult result, User user)
     {
-        Assert.IsNotNull(result.AccessToken);
-        Assert.IsNull(result.Errors);
-        Assert.IsTrue(result.Succeeded);
-        Assert.AreSame(user, result.User);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.AccessToken, Is.Not.Null);
+            Assert.That(result.Errors, Is.Null);
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(result.User, Is.SameAs(user));
+        });
     }
 
     private static void AssertFailure(LogInResult result)
     {
-        Assert.IsNull(result.AccessToken);
-        Assert.IsNotEmpty(result.Errors!);
-        Assert.IsFalse(result.Succeeded);
-        Assert.IsNull(result.User);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.AccessToken, Is.Null);
+            Assert.That(result.Errors, Is.Not.Empty);
+            Assert.That(result.Succeeded, Is.False);
+            Assert.That(result.User, Is.Null);
+        });
     }
 
     #endregion

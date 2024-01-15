@@ -1,7 +1,4 @@
-﻿using Froggie.Data.Groups;
-using Froggie.Data.Tasks;
-using Froggie.Data.Users;
-using LittleByte.Common.Infra.Commands;
+﻿using LittleByte.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data;
@@ -9,12 +6,11 @@ namespace Froggie.Data;
 public static class PersistenceConfiguration
 {
     [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
-    public static IServiceCollection AddPersistence(this IServiceCollection @this)
+    public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
-        return @this
-            .AddGroups()
-            .AddTasks()
-            .AddUsers()
+        return services
+            .AddSingleton<StringValueObjectConverter>()
+            .AddSingleton(TimeProvider.System)
             .AddScoped<ISaveContextCommand, SaveContextCommand<FroggieDb>>()
             .AddDbContext<FroggieDb>(options => options.UseInMemoryDatabase("froggie-in_memory"));
     }

@@ -1,8 +1,14 @@
-﻿<Project>
+﻿<!--Froggie Solution-->
+<Project>
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<Deterministic>true</Deterministic>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>12.0</LangVersion>
 		<Nullable>enable</Nullable>
+		<PlatformTarget>x64</PlatformTarget>
+		<TargetFramework>net8.0</TargetFramework>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 </Project>

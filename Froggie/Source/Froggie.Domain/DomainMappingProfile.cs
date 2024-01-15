@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JetBrains.Annotations;
+using LittleByte.AutoMapper;
 
 namespace Froggie.Domain;
 

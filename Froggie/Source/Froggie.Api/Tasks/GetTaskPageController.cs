@@ -1,25 +1,17 @@
 ﻿using Froggie.Data.Tasks;
+using LittleByte.Data;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class GetTaskPageController : TaskController
+public sealed class GetTaskPageController(ITaskPageQuery pageQuery, IMapper mapper) : TaskController
 {
-    private readonly IMapper mapper;
-    private readonly ITaskPageQuery taskPageQuery;
-
-    public GetTaskPageController(ITaskPageQuery taskPageQuery, IMapper mapper)
-    {
-        this.taskPageQuery = taskPageQuery;
-        this.mapper = mapper;
-    }
-
     [HttpGet(Routes.GetByPage)]
-    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<TaskDto>))]
-    public async Task<ApiResponse<PageResponse<TaskDto>>> GetPage([FromQuery] PageRequest? request)
+    [ResponseType(HttpStatusCode.OK, typeof(Page<TaskDto>))]
+    public async Task<ApiResponse<Page<TaskDto>>> GetPage([FromQuery] PageRequest? request)
     {
         request ??= new PageRequest();
-        var response = await taskPageQuery.RunAsync(request);
+        var response = await pageQuery.RunAsync(request);
         var dtos = response.CastResults(mapper.Map<TaskDto>);
-        return new OkResponse<PageResponse<TaskDto>>(dtos);
+        return new OkResponse<Page<TaskDto>>(dtos);
     }
 }

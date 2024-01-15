@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 using JetBrains.Annotations;
-using LittleByte.Common.AspNet.AutoMapper;
+using LittleByte.AutoMapper;
 
 namespace Froggie.Data.Users;
 
@@ -11,5 +10,6 @@ internal sealed class UserMappingProfile : Profile
     public UserMappingProfile()
     {
         this.MapBothConvertBoth<User, UserDao, UserConverter>();
+        this.MapBothConvertOne<StringValueObject, string, StringValueObjectConverter>();
     }
 }

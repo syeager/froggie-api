@@ -2,7 +2,7 @@
 using Froggie.Api.Tasks;
 using Froggie.Domain.Groups;
 using Froggie.Domain.Test;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Tasks;
@@ -30,7 +30,10 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
 
         var response = await controller.Create(request);
 
-        ApiAssert.IsSuccess(response, HttpStatusCode.Created);
-        Assert.AreEqual(group.Id.Value, response.Obj!.GroupId);
+       Assert.Multiple(() =>
+       {
+           ApiAssert.IsSuccess(response, HttpStatusCode.Created);
+           Assert.That(response.Obj!.GroupId, Is.EqualTo(group.Id.Value));
+       });
     }
 }

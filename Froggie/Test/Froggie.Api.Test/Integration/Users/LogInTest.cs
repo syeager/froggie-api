@@ -1,7 +1,7 @@
 ﻿using Froggie.Api.Users;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Users;

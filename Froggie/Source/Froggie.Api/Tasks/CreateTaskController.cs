@@ -1,23 +1,13 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Commands;
+using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class CreateTaskController : TaskController
+public sealed class CreateTaskController(ICreateTaskService createTask, ISaveContextCommand context, IMapper mapper)
+    : TaskController
 {
-    private readonly ICreateTaskService createTask;
-    private readonly IMapper mapper;
-    private readonly ISaveContextCommand saveContext;
-
-    public CreateTaskController(ICreateTaskService createTask, ISaveContextCommand saveContext, IMapper mapper)
-    {
-        this.createTask = createTask;
-        this.saveContext = saveContext;
-        this.mapper = mapper;
-    }
-
     [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.Created, typeof(TaskDto))]
     [ResponseType(HttpStatusCode.BadRequest)]
@@ -28,7 +18,7 @@ public sealed class CreateTaskController : TaskController
 
         var task = await createTask.CreateAsync(request.Title, userId, request.DueDate, groupId);
 
-        await saveContext.CommitChangesAsync();
+        await context.CommitChangesAsync();
 
         var dto = mapper.Map<TaskDto>(task);
         return new CreatedResponse<TaskDto>(dto);

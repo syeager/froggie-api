@@ -1,5 +1,4 @@
 using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Queries;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,10 +6,21 @@ namespace Froggie.Data.Users;
 
 public static class UserConfiguration
 {
-    public static IServiceCollection AddUsers(this IServiceCollection @this)
+    public static IServiceCollection AddUsersData(this IServiceCollection services) => services
+        .AddIdentity()
+        .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
+        .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, UserDao, FroggieDb>>()
+        .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
+        .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
+        .AddTransient<IUserPageQuery, UserPageQuery>()
+        .AddTransient<IAddUserCommand, AddUserCommand>()
+        .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>()
+        .AddTransient<UserConverter>();
+
+    private static IServiceCollection AddIdentity(this IServiceCollection services)
     {
-        @this
-            .AddIdentity<UserDao, IdentityRole<Guid>>(options =>
+        services
+            .AddIdentityCore<UserDao>(options =>
             {
                 options.Password = new PasswordOptions
                 {
@@ -23,16 +33,9 @@ public static class UserConfiguration
                 };
                 options.User = new UserOptions();
             })
-            .AddEntityFrameworkStores<FroggieDb>();
-
-        return @this
-            .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
-            .AddTransient<UserConverter>()
-            .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, UserDao, FroggieDb>>()
-            .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
-            .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
-            .AddTransient<IUserPageQuery, UserPageQuery>()
-            .AddTransient<IAddUserCommand, AddUserCommand>()
-            .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>();
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<FroggieDb>()
+            ;
+        return services;
     }
 }

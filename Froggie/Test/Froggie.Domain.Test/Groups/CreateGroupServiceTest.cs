@@ -28,7 +28,7 @@ public sealed class CreateGroupServiceTest : UnitTest
     {
         var result = await testObj.CreateAsync(User, ExpectedGroup.Name);
 
-        Assert.AreSame(ExpectedGroup, result);
+        Assert.That(result, Is.SameAs(ExpectedGroup));
         addGroupCommand.Received(1).Add(ExpectedGroup);
         await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
     }
@@ -41,7 +41,7 @@ public sealed class CreateGroupServiceTest : UnitTest
 
         await testObj.CreatePersonalAsync(User);
 
-        Assert.AreEqual(NameRules.PersonalName, groupName);
+        Assert.That(groupName, Is.EqualTo(NameRules.PersonalName));
         await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
     }
 }

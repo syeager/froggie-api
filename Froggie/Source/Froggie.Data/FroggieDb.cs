@@ -1,7 +1,7 @@
 ﻿using Froggie.Data.Groups;
 using Froggie.Data.Tasks;
 using Froggie.Data.Users;
-using LittleByte.Common.Infra.Contexts;
+using LittleByte.AutoMapper.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 
 namespace Froggie.Data;

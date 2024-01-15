@@ -1,36 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-
-namespace Froggie.Data.Tasks;
+﻿namespace Froggie.Data.Tasks;
 
 public interface ITaskPageQuery
 {
-    Task<PageResponse<Task>> RunAsync(PageRequest request);
+    Task<Page<Task>> RunAsync(PageRequest request);
 }
 
-internal sealed class TaskPageQuery : ITaskPageQuery
+internal sealed class TaskPageQuery(FroggieDb db, IMapper mapper) : ITaskPageQuery
 {
-    private readonly FroggieDb froggieDb;
-    private readonly IMapper mapper;
-
-    public TaskPageQuery(FroggieDb froggieDb, IMapper mapper)
+    public async Task<Page<Task>> RunAsync(PageRequest request)
     {
-        this.froggieDb = froggieDb;
-        this.mapper = mapper;
-    }
-
-    public async Task<PageResponse<Task>> RunAsync(PageRequest request)
-    {
-        var taskDaos = await froggieDb.Tasks
-            .Skip(request.Page * request.PageSize)
+        var taskDaos = await db.Tasks
+            .Skip(request.PageIndex * request.PageSize)
             .Take(request.PageSize)
             .ToArrayAsync();
 
         var tasks = taskDaos
-            .Select(t => mapper.Map<Task>(t))
+            .Select(mapper.Map<Task>)
             .ToArray();
 
-        var response = new PageResponse<Task>(request.PageSize, request.Page, 0, 0, tasks);
+        var response = new Page<Task>(request.PageSize, request.PageIndex, 0, 0, tasks);
         return response;
     }
 }

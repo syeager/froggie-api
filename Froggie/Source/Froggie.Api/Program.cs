@@ -15,7 +15,8 @@ try
         .CreateBuilder(args)
         .UseSerilog();
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .ThrowValidationExceptions();
 
     builder.Services
         .AddOpenApi("Froggie")

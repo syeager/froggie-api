@@ -10,7 +10,7 @@ public sealed class AddUserToGroupTest : ApiIntegrationTest<AddUserToGroupContro
     [Test]
     public async ValueTask AddNewUserToGroup()
     {
-       var group = await CreateGroupAndUsersHelper.CreateAsync(services);
+       var (group, _) = await CreateGroupAndUsersHelper.CreateAsync(services);
        var user = Valid.Users.New();
        await GetService<IAddUserCommand>().AddAsync(user, Valid.Users.Password);
        await saveCommand.CommitChangesAsync();

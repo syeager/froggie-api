@@ -3,7 +3,7 @@ using Froggie.Api.Test.Integration.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Tasks;
 
@@ -23,9 +23,12 @@ public sealed class AddAssigneeTest : ApiIntegrationTest<AddAssigneeController>
         };
         var response = await controller.AddAssignee(request);
 
-        ApiAssert.IsSuccess(response);
-        Assert.AreEqual(1, response.Obj!.Assignees.Count);
-        CollectionAssert.Contains(response.Obj!.Assignees, userId.Value);
+        Assert.Multiple(() =>
+        {
+            ApiAssert.IsSuccess(response);
+            Assert.That(response.Obj!.Assignees.Count, Is.EqualTo(1));
+            Assert.That(response.Obj!.Assignees, Contains.Item(userId.Value));
+        });
     }
 
     [Test]
@@ -49,9 +52,12 @@ public sealed class AddAssigneeTest : ApiIntegrationTest<AddAssigneeController>
         };
         var response = await controller.AddAssignee(request);
 
-        ApiAssert.IsSuccess(response);
-        Assert.AreEqual(2, response.Obj!.Assignees.Count);
-        CollectionAssert.Contains(response.Obj!.Assignees, userId.Value);
+        Assert.Multiple(() =>
+        {
+            ApiAssert.IsSuccess(response);
+            Assert.That(response.Obj!.Assignees.Count, Is.EqualTo(2));
+            Assert.That(response.Obj!.Assignees, Contains.Item(userId.Value));
+        });
     }
 
     #region Helpers

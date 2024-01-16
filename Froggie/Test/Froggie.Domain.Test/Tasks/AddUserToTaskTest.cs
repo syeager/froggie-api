@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
-using LittleByte.Common.Infra.Queries;
+using LittleByte.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -31,7 +31,7 @@ public sealed class AddUserToTaskTest : UnitTest
 
         await testObj.AddAsync(user, task);
 
-        CollectionAssert.Contains(task.Assignees, user.Id);
+        Assert.That(task.Assignees, Contains.Item(user.Id));
     }
 
     [Test]

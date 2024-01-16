@@ -49,7 +49,7 @@ public sealed class Task : DomainModel<Task>
         }
 
         log
-            .Push(assignee)
+            .Push("Assignee.Email", assignee)
             .Info("Adding assignee to task");
 
         if(!assignees.Contains(assignee))
@@ -72,7 +72,7 @@ public sealed class Task : DomainModel<Task>
         }
 
         log
-            .Push(assignee)
+            .Push("Assignee.Email", assignee)
             .Info("Removing assignee to task");
 
         assignees.Remove(assignee);

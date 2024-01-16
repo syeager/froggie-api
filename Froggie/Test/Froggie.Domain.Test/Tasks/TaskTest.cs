@@ -1,5 +1,5 @@
 ﻿using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
+using LittleByte.Common;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -21,7 +21,7 @@ public sealed class TaskTest : UnitTest
     {
         testObj.AddAssignee(userId);
 
-        CollectionAssert.Contains(testObj.Assignees, userId);
+        Assert.That(testObj.Assignees, Contains.Item(userId));
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class TaskTest : UnitTest
 
         testObj.AddAssignee(userId);
 
-        Assert.AreEqual(1, testObj.Assignees.Count);
+        Assert.That(testObj.Assignees.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -47,7 +47,7 @@ public sealed class TaskTest : UnitTest
 
         testObj.RemoveAssignee(userId);
 
-        Assert.AreEqual(0, testObj.Assignees.Count);
+        Assert.That(testObj.Assignees.Count, Is.EqualTo(0));
     }
 
     [Test]

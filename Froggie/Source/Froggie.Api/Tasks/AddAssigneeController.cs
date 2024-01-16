@@ -3,17 +3,8 @@ using Froggie.Domain.Users;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class AddAssigneeController : TaskController
+public sealed class AddAssigneeController(IAddUserToTaskService addUserToTask, IMapper mapper) : TaskController
 {
-    private readonly IAddUserToTaskService addUserToTask;
-    private readonly IMapper mapper;
-
-    public AddAssigneeController(IAddUserToTaskService addUserToTask, IMapper mapper)
-    {
-        this.addUserToTask = addUserToTask;
-        this.mapper = mapper;
-    }
-
     [HttpPost("assignee-add")]
     [ResponseType(HttpStatusCode.OK, typeof(TaskDto))]
     public async ValueTask<ApiResponse<TaskDto>> AddAssignee(AddAssigneeRequest request)
@@ -21,7 +12,7 @@ public sealed class AddAssigneeController : TaskController
         var taskId = new Id<Task>(request.TaskId);
         var userId = new Id<User>(request.UserId);
 
-        var task = await addUserToTask.AddAsync(userId, taskId).NoWait();
+        var task = await addUserToTask.AddAsync(userId, taskId).NoAwait();
 
         var dto = mapper.Map<TaskDto>(task);
         return new OkResponse<TaskDto>(dto);

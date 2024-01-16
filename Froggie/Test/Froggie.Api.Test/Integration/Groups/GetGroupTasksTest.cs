@@ -1,8 +1,8 @@
 ﻿using Froggie.Api.Groups;
-using Froggie.Domain.Groups;
+using Froggie.Data.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Test;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
 
@@ -23,7 +23,10 @@ public sealed class GetGroupTasksTest : ApiIntegrationTest<GetTasksGroupControll
 
         var tasks = await controller.GetTasks(group.Id);
 
-        ApiAssert.IsSuccess(tasks);
-        Assert.AreEqual(2, tasks.Obj!.TotalResults);
+        Assert.Multiple(() =>
+        {
+            ApiAssert.IsSuccess(tasks);
+            Assert.That(tasks.Obj!.TotalResults, Is.EqualTo(2));
+        });
     }
 }

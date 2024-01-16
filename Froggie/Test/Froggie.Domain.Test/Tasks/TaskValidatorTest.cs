@@ -1,8 +1,8 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
-using LittleByte.Test.Validation;
+using LittleByte.Common;
+using LittleByte.Validation.Test;
 
 namespace Froggie.Domain.Test.Tasks;
 
@@ -21,7 +21,7 @@ public sealed class TaskValidatorTest : UnitTest
     {
         var validatedMembers = testObj.CreateDescriptor().GetMembersWithValidators();
 
-        Assert.IsTrue(validatedMembers.Any(group => group.Key == nameof(Title)));
+        Assert.That(validatedMembers.Any(group => group.Key == nameof(Title)));
     }
 
     [Test]
@@ -49,7 +49,7 @@ public sealed class TaskValidatorTest : UnitTest
 
         var result = testObj.Validate(task);
 
-        Assert.IsTrue(result.IsValid);
+        Assert.That(result.IsValid);
     }
 
     [Test]

@@ -1,5 +1,5 @@
 ﻿using Froggie.Domain.Groups;
-using LittleByte.Test.Validation;
+using LittleByte.Validation.Test;
 
 namespace Froggie.Domain.Test.Groups;
 
@@ -21,6 +21,6 @@ public sealed class GroupFactoryTest : UnitTest
         var result = testObj.Create(expected.Id, expected.Name);
 
         // TODO: Assert that all property values are the same.
-        Assert.AreEqual(expected.Name, result.Name);
+        Assert.That(result.Name, Is.EqualTo(expected.Name));
     }
 }

@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LittleByte.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Domain.Users;
 
-internal static class UserConfiguration
+public static class UserConfiguration
 {
-    public static IServiceCollection AddUsers(this IServiceCollection @this) => @this
+    public static IServiceCollection AddUsersDomain(this IServiceCollection services) => services
         .AddSingleton<IUserFactory, UserFactory>()
         .AddTransient<IUserRegisterService, UserRegisterService>()
-        .AddTransient<ILogInService, LogInService>()
         .AddTransient<ModelValidator<User>, UserValidator>();
 }

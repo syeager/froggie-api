@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Froggie.Domain.Tasks;
-using LittleByte.Common.AspNet.Attributes;
 
 namespace Froggie.Api.Tasks;
 

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LittleByte.Validation;
 
 namespace Froggie.Domain.Tasks;
 

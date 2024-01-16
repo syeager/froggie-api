@@ -1,17 +1,10 @@
 ﻿using Froggie.Domain.Groups;
+using LittleByte.Data;
 
 namespace Froggie.Api.Groups;
 
-public sealed class GetGroupController : GroupController
+public sealed class GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper) : GroupController(mapper)
 {
-    private readonly IFindByIdQuery<Group> getGroup;
-
-    public GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper)
-        : base(mapper)
-    {
-        this.getGroup = getGroup;
-    }
-
     [HttpGet(Routes.GetById)]
     [ResponseType(HttpStatusCode.OK, typeof(GroupDto))]
     [ResponseType(HttpStatusCode.NotFound)]

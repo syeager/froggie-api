@@ -17,6 +17,6 @@ public sealed class GroupValidatorTest : UnitTest
     {
         var descriptor = testObj.CreateDescriptor();
 
-        CollectionAssert.IsNotEmpty(descriptor.GetValidatorsForMember(nameof(Group.Name)));
+        Assert.That(descriptor.GetValidatorsForMember(nameof(Group.Name)), Is.Not.Empty);
     }
 }

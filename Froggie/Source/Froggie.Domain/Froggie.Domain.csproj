@@ -1,10 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+	  <Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Froggie.Api.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>Froggie.Domain.Test</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\LittleByte.Common\LittleByte.Common.csproj" />
+	  <ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper\LittleByte.AutoMapper.csproj" />
+	  <ProjectReference Include="..\..\Common\Source\LittleByte.Common\LittleByte.Common.csproj" />
+	  <ProjectReference Include="..\..\Common\Source\LittleByte.Validation\LittleByte.Validation.csproj" />
 	</ItemGroup>
 </Project>

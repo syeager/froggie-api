@@ -1,17 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Froggie.Api.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 	<PropertyGroup>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<UserSecretsId>a667cda1-3938-4b88-840d-57932ea7b535</UserSecretsId>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AspNet\LittleByte.AspNet.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.Data\LittleByte.AutoMapper.Data.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.Serilog.AspNet\LittleByte.Serilog.AspNet.csproj" />
 		<ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
 		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 </Project>

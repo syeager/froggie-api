@@ -1,19 +1,12 @@
 ﻿using Froggie.Domain.Users;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Froggie.Data.Users;
 
-internal sealed class DoesUserWithNameExistQuery : IDoesUserWithNameExistQuery
+internal sealed class DoesUserWithNameExistQuery(FroggieDb database, UserManager<UserDao> userManager)
+    : IDoesUserWithNameExistQuery
 {
-    private readonly FroggieDb database;
-    private readonly UserManager<UserDao> userManager;
-
-    public DoesUserWithNameExistQuery(FroggieDb database, UserManager<UserDao> userManager)
-    {
-        this.database = database;
-        this.userManager = userManager;
-    }
+    private readonly UserManager<UserDao> userManager = userManager;
 
     public async ValueTask<bool> SearchAsync(string nameValue)
     {

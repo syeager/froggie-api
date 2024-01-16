@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Froggie.Domain.Groups;
-using LittleByte.Common.AspNet.Attributes;
 
 namespace Froggie.Api.Groups;
 

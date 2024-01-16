@@ -1,3 +1,7 @@
-﻿<Project>
+﻿<!--Froggie Source-->
+<Project>
 	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+	<PropertyGroup>
+		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Froggie.Domain.Tasks;
-using LittleByte.Common.Domain;
+using LittleByte.Common;
 
 namespace Froggie.Domain.Test.Tasks;
 

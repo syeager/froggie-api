@@ -1,41 +1,30 @@
 ﻿using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Commands;
+using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Users;
 
-public sealed class CreateUserController : UserController
+public sealed class CreateUserController(
+    ILogInService inService,
+    IUserRegisterService service,
+    IMapper mapper,
+    ISaveContextCommand command)
+    : UserController
 {
-    private readonly ILogInService logInService;
-    private readonly IMapper mapper;
-    private readonly IUserRegisterService registerService;
-    private readonly ISaveContextCommand saveCommand;
-
-    public CreateUserController(ILogInService logInService,
-                                IUserRegisterService registerService,
-                                IMapper mapper,
-                                ISaveContextCommand saveCommand)
-    {
-        this.logInService = logInService;
-        this.registerService = registerService;
-        this.mapper = mapper;
-        this.saveCommand = saveCommand;
-    }
-
     // TODO: Should have RegisterResponse.
     [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.OK, typeof(LogInResponse))]
     [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<LogInResponse>> Create(CreateUserRequest request)
     {
-        var user = await registerService.RegisterAsync(request.Email, request.Name, request.Password);
+        var user = await service.RegisterAsync(request.Email, request.Name, request.Password);
 
         // TODO: There has to be a better way to get the password. Maybe RegisterAsync should return a RegisterResult?
         var password = new Password(request.Password);
 
-        var logInResult = await logInService.LogInAsync(user.Email, password);
+        var logInResult = await inService.LogInAsync(user.Email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
 
-        await saveCommand.CommitChangesAsync();
+        await command.CommitChangesAsync();
 
         // TODO: Should be CreatedResponse.
         return new OkResponse<LogInResponse>(response);

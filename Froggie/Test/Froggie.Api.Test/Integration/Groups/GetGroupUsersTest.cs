@@ -1,5 +1,5 @@
 ﻿using Froggie.Api.Groups;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
 
@@ -15,7 +15,10 @@ public sealed class GetGroupUsersTest : ApiIntegrationTest<GetUsersGroupControll
 
         var users = await controller.GetUsers(group);
 
-        ApiAssert.IsSuccess(users);
-        Assert.AreEqual(userCount, users.Obj!.TotalResults);
+        Assert.Multiple(() =>
+        {
+            ApiAssert.IsSuccess(users);
+            Assert.That(users.Obj!.TotalResults, Is.EqualTo(userCount));
+        });
     }
 }

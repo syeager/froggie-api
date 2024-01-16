@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Groups;
+﻿using LittleByte.Validation;
+
+namespace Froggie.Domain.Groups;
 
 public sealed class Group : DomainModel<Group>
 {

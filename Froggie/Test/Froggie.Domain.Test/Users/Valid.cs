@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
-using LittleByte.Test.Validation;
+using LittleByte.Common;
+using LittleByte.Validation.Test;
 
 // ReSharper disable once CheckNamespace
 namespace Froggie.Domain.Test;

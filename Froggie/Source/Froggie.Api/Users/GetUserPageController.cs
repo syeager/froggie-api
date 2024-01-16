@@ -1,25 +1,17 @@
 ﻿using Froggie.Data.Users;
+using LittleByte.Data;
 
 namespace Froggie.Api.Users;
 
-public sealed class GetUserPageController : UserController
+public sealed class GetUserPageController(IMapper mapper, IUserPageQuery pageQuery) : UserController
 {
-    private readonly IMapper mapper;
-    private readonly IUserPageQuery userPageQuery;
-
-    public GetUserPageController(IMapper mapper, IUserPageQuery userPageQuery)
-    {
-        this.mapper = mapper;
-        this.userPageQuery = userPageQuery;
-    }
-
     [HttpGet(Routes.GetByPage)]
-    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<UserDto>))]
-    public async ValueTask<ApiResponse<PageResponse<UserDto>>> GetPage([FromQuery] PageRequest? request)
+    [ResponseType(HttpStatusCode.OK, typeof(Page<UserDto>))]
+    public async ValueTask<ApiResponse<Page<UserDto>>> GetPage([FromQuery] PageRequest? request)
     {
         request ??= new PageRequest();
-        var response = await userPageQuery.RunAsync(request);
+        var response = await pageQuery.RunAsync(request);
         var dtos = response.CastResults(mapper.Map<UserDto>);
-        return new OkResponse<PageResponse<UserDto>>(dtos);
+        return new OkResponse<Page<UserDto>>(dtos);
     }
 }

@@ -1,3 +1,5 @@
+using LittleByte.Validation;
+
 namespace Froggie.Domain.Users;
 
 public class RegisterResult

@@ -1,27 +1,19 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using LittleByte.Common.Identity.Services;
+using Froggie.Domain.Users;
 
-namespace Froggie.Domain.Users;
+namespace Froggie.Api.Users;
 
 public interface ILogInService
 {
     public Task<LogInResult> LogInAsync(Email email, Password password);
 }
 
-internal sealed class LogInService : ILogInService
-{
-    private readonly IFindUserByEmailAndPasswordQuery findUserByEmailAndPasswordQuery;
-    private readonly ITokenGenerator tokenGenerator;
-
-    public LogInService(
+internal sealed class LogInService(
         ITokenGenerator tokenGenerator,
         IFindUserByEmailAndPasswordQuery findUserByEmailAndPasswordQuery)
-    {
-        this.tokenGenerator = tokenGenerator;
-        this.findUserByEmailAndPasswordQuery = findUserByEmailAndPasswordQuery;
-    }
-
+    : ILogInService
+{
     public async Task<LogInResult> LogInAsync(Email email, Password password)
     {
         LogInResult result;
@@ -41,7 +33,7 @@ internal sealed class LogInService : ILogInService
         return result;
     }
 
-    private static IEnumerable<Claim> GetUserClaims(User user)
+    private static IReadOnlyList<Claim> GetUserClaims(User user)
     {
         var claims = new[]
         {

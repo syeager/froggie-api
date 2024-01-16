@@ -1,16 +1,27 @@
-﻿using Froggie.Domain;
+﻿using Froggie.Data.Groups;
+using Froggie.Data.Tasks;
+using Froggie.Data.Users;
+using Froggie.Domain.Groups;
+using Froggie.Domain.Tasks;
+using Froggie.Domain.Users;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Test;
 
 public abstract class DataIntegrationTest : IntegrationTest
 {
-    protected sealed override void SetupInternal(IServiceCollection serviceCollection)
+    protected sealed override void SetupInternal(IServiceCollection serviceCollection, IConfiguration configuration)
     {
         serviceCollection
             .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-            .AddDomain()
-            .AddPersistence();
+            .AddPersistence()
+            .AddUsersData()
+            .AddUsersDomain()
+            .AddTasksData()
+            .AddTasksDomain()
+            .AddGroupsData()
+            .AddGroupsDomain();
     }
 
     [TearDown]

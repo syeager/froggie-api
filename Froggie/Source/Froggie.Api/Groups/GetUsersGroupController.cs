@@ -1,27 +1,24 @@
 ﻿using Froggie.Api.Users;
+using Froggie.Data.Groups;
 using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
+using LittleByte.Data;
+using LittleByte.AutoMapper.Data;
 
 namespace Froggie.Api.Groups;
 
-public sealed class GetUsersGroupController : GroupController
+public sealed class GetUsersGroupController(IGetUsersInGroupQuery inGroupQuery, IMapper mapper)
+    : GroupController(mapper)
 {
-    private readonly IGetUsersInGroupQuery usersInGroupQuery;
-
-    public GetUsersGroupController(IGetUsersInGroupQuery usersInGroupQuery, IMapper mapper)
-        : base(mapper)
-    {
-        this.usersInGroupQuery = usersInGroupQuery;
-    }
-
     [HttpGet("users")]
-    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<UserDto>))]
-    public async ValueTask<ApiResponse<PageResponse<UserDto>>> GetUsers(Guid id)
+    [ResponseType(HttpStatusCode.OK, typeof(Page<UserDto>))]
+    public async ValueTask<ApiResponse<Page<UserDto>>> GetUsers(Guid id)
     {
         var groupId = new Id<Group>(id);
 
-        var users = await usersInGroupQuery.QueryAsync(groupId).NoWait();
-        var dto = users.CastResults<UserDto>(mapper);
+        var users = await inGroupQuery.QueryAsync(groupId).NoAwait();
+        var dto = users.CastResults<User, UserDto>(mapper);
 
-        return new OkResponse<PageResponse<UserDto>>(dto);
+        return new OkResponse<Page<UserDto>>(dto);
     }
 }

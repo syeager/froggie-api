@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Users;
+﻿using LittleByte.Validation;
+
+namespace Froggie.Domain.Users;
 
 public sealed class User : DomainModel<User>
 {

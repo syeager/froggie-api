@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using JetBrains.Annotations;
-using LittleByte.Common.AspNet.AutoMapper;
+﻿using JetBrains.Annotations;
+using LittleByte.AutoMapper;
 
 namespace Froggie.Data.Tasks;
 

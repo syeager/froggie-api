@@ -1,28 +1,21 @@
-﻿using Froggie.Domain.Tasks;
+﻿using Froggie.Data.Tasks;
 using Froggie.Domain.Users;
+using LittleByte.Data;
+using LittleByte.AutoMapper.Data;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class GetTasksByUserController : TaskController
+public sealed class GetTasksByUserController(IGetUsersTasksService tasksService, IMapper mapper) : TaskController
 {
-    private readonly IMapper mapper;
-    private readonly IGetUsersTasksService usersTasksService;
-
-    public GetTasksByUserController(IGetUsersTasksService usersTasksService, IMapper mapper)
-    {
-        this.usersTasksService = usersTasksService;
-        this.mapper = mapper;
-    }
-
     [HttpGet("get-user-tasks")]
-    [ResponseType(HttpStatusCode.OK, typeof(PageResponse<TaskDto>))]
+    [ResponseType(HttpStatusCode.OK, typeof(Page<TaskDto>))]
     [ResponseType(HttpStatusCode.NotFound)]
-    public async ValueTask<ApiResponse<PageResponse<TaskDto>>> GetTasksByUser(GetTasksByUserRequest request)
+    public async ValueTask<ApiResponse<Page<TaskDto>>> GetTasksByUser(GetTasksByUserRequest request)
     {
         var userId = new Id<User>(request.UserId);
-        var tasks = await usersTasksService.FindAsync(userId);
+        var tasks = await tasksService.FindAsync(userId);
 
-        var response = tasks.CastResults<TaskDto>(mapper);
-        return new OkResponse<PageResponse<TaskDto>>(response);
+        var response = tasks.CastResults<Task, TaskDto>(mapper);
+        return new OkResponse<Page<TaskDto>>(response);
     }
 }

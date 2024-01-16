@@ -1,18 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Froggie.Api\Froggie.Api.csproj" />
-    <ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="coverlet.collector" Version="3.2.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-    <PackageReference Update="NUnit.Analyzers" Version="3.6.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Update="NUnit3TestAdapter" Version="4.4.2" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<ProjectReference Include="..\..\Common\Test\LittleByte.AspNet.Test\LittleByte.AspNet.Test.csproj" />
+		<ProjectReference Include="..\..\Source\Froggie.Api\Froggie.Api.csproj" />
+		<ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />
+	</ItemGroup>
 </Project>

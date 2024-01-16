@@ -1,7 +1,7 @@
-﻿using Froggie.Domain.Tasks;
-using LittleByte.Common.Infra.Models;
+﻿using Froggie.Data.Tasks;
+using LittleByte.Data;
 
-namespace Froggie.Domain.Test.Tasks;
+namespace Froggie.Data.Test.Tasks;
 
 public sealed class GetUsersTasksServiceTest : UnitTest
 {
@@ -21,13 +21,17 @@ public sealed class GetUsersTasksServiceTest : UnitTest
         var user = Valid.Users.New();
         var group = Valid.Groups.New();
         var tasks = Valid.Tasks.New(2, user.Id, group.Id);
-        getTasksQuery.RunAsync(user.Id).Returns(new PageResponse<Task>(0, 0, 0, 0, tasks));
+        getTasksQuery.RunAsync(user.Id).Returns(new Page<Task>(0, 0, 0, 0, tasks));
 
         var response = await testObj.FindAsync(user.Id);
 
-        Assert.IsNotNull(response);
         await getTasksQuery.Received(1).RunAsync(user.Id);
-        CollectionAssert.AreEqual(tasks, response.Results);
-        Assert.IsTrue(response.Results.All(t => t.CreatorId == user.Id));
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Results, Is.EqualTo(tasks));
+            Assert.That(response.Results.All(t => t.CreatorId == user.Id), Is.True);
+        });
     }
 }

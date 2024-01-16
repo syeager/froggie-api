@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.Domain;
+using LittleByte.Common;
 
 namespace Froggie.Domain.Test.Users;
 
@@ -27,11 +27,10 @@ public sealed class UserRegisterServiceTest : UnitTest
     [Test]
     public async ValueTask With_ValidData_Then_CreateUser()
     {
-        var userId = Id<User>.Empty;
         var expectedUser = Valid.Users.New();
         userFactory
             .WhenForAnyArgs(c => c.Create(default, null!, null!))
-            .Do(info => userId = info.Arg<Id<User>>());
+            .Do(info => info.Arg<Id<User>>());
         userFactory
             .Create(default, default!, default!)
             .ReturnsForAnyArgs(expectedUser);
@@ -41,8 +40,12 @@ public sealed class UserRegisterServiceTest : UnitTest
             expectedUser.Name,
             Valid.Users.Password);
 
-        Assert.AreNotEqual(Id<User>.Empty, user.Id);
-        Assert.AreSame(expectedUser, user);
+        Assert.Multiple(() =>
+        {
+            Assert.That(user.Id, Is.Not.EqualTo(Id<User>.Empty));
+            Assert.That(user, Is.SameAs(expectedUser));
+        });
+
         await addUserCommand.Received(1).AddAsync(expectedUser, Valid.Users.Password);
         await createGroupService.Received(1).CreatePersonalAsync(user);
     }
@@ -58,7 +61,7 @@ public sealed class UserRegisterServiceTest : UnitTest
             Valid.Users.Name2,
             Valid.Users.Password).AsTask());
 
-        Assert.AreEqual(existingUser.Email.Value, exception!.EmailValue);
+        Assert.That(exception!.EmailValue, Is.EqualTo(existingUser.Email.Value));
     }
 
     [Test]
@@ -72,6 +75,6 @@ public sealed class UserRegisterServiceTest : UnitTest
             existingUser.Name,
             Valid.Users.Password).AsTask());
 
-        Assert.AreEqual(existingUser.Name.Value, exception!.NameValue);
+        Assert.That(exception!.NameValue, Is.EqualTo(existingUser.Name.Value));
     }
 }

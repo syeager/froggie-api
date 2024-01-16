@@ -1,8 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
+using Froggie.Domain.Users;
 
-namespace Froggie.Domain.Users;
+namespace Froggie.Api.Users;
 
-public class LogInResult
+public sealed class LogInResult
 {
     [MemberNotNullWhen(true, nameof(Succeeded))]
     public JwtSecurityToken? AccessToken { get; }
@@ -23,7 +24,7 @@ public class LogInResult
         Errors = errors?.ToArray();
     }
 
-    public static LogInResult Success(JwtSecurityToken authToken, User user) => new(true, authToken, user, null);
+    public static LogInResult Success(JwtSecurityToken accessToken, User user) => new(true, accessToken, user, null);
 
     public static LogInResult Fail(IEnumerable<string> error) => new(false, null, null, error);
 }

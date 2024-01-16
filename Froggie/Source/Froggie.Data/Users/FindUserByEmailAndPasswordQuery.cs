@@ -1,24 +1,15 @@
-﻿using AutoMapper;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 using LittleByte.Common.Logging;
 using Microsoft.AspNetCore.Identity;
 
 namespace Froggie.Data.Users;
 
-internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPasswordQuery
+internal sealed class FindUserByEmailAndPasswordQuery(UserManager<UserDao> userManager, IMapper mapper)
+    : IFindUserByEmailAndPasswordQuery
 {
-    private readonly IMapper mapper;
-    private readonly UserManager<UserDao> userManager;
-
-    public FindUserByEmailAndPasswordQuery(UserManager<UserDao> userManager, IMapper mapper)
-    {
-        this.userManager = userManager;
-        this.mapper = mapper;
-    }
-
     public async ValueTask<User?> TryFindAsync(Email email, Password password)
     {
-        using var logger = this.NewLogger().Push(email);
+        using var logger = this.NewLogger().Push("User.Email", email.ToString());
 
         var userEntity = await userManager
             .FindByEmailAsync(email)

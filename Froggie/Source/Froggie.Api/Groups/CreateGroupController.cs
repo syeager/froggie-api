@@ -1,35 +1,26 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Commands;
+using LittleByte.Data;
+using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Groups;
 
-public sealed class CreateGroupController : GroupController
+public sealed class CreateGroupController(
+    ICreateGroupService groupService,
+    IMapper mapper,
+    ISaveContextCommand contextCommand,
+    IFindByIdQuery<User> userQuery)
+    : GroupController(mapper)
 {
-    private readonly ICreateGroupService createGroupService;
-    private readonly ISaveContextCommand saveContextCommand;
-    private readonly IFindByIdQuery<User> findUserQuery;
-
-    public CreateGroupController(ICreateGroupService createGroupService,
-                                 IMapper mapper,
-                                 ISaveContextCommand saveContextCommand,
-                                 IFindByIdQuery<User> findUserQuery)
-        : base(mapper)
-    {
-        this.createGroupService = createGroupService;
-        this.saveContextCommand = saveContextCommand;
-        this.findUserQuery = findUserQuery;
-    }
-
     [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.Created, typeof(GroupDto))]
     [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<GroupDto>> Create(CreateGroupRequest request)
     {
-        var creator = await findUserQuery.FindRequiredAsync(request.CreatorId);
+        var creator = await userQuery.FindRequiredAsync(request.CreatorId);
 
-        var group = await createGroupService.CreateAsync(creator, request.Name);
-        await saveContextCommand.CommitChangesAsync();
+        var group = await groupService.CreateAsync(creator, request.Name);
+        await contextCommand.CommitChangesAsync();
 
         var groupDto = mapper.Map<GroupDto>(group);
         return new CreatedResponse<GroupDto>(groupDto);

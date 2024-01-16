@@ -1,5 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
+using LittleByte.Validation;
 
 namespace Froggie.Domain.Tasks;
 
@@ -7,10 +8,10 @@ public sealed class Task : DomainModel<Task>
 {
     public Title Title { get; }
     public Id<User> CreatorId { get; }
-    public DateTime DueDate { get; }
+    public DateTimeOffset DueDate { get; }
     public Id<Group> GroupId { get; }
 
-    private Task(Id<Task> id, Title title, Id<User> creatorId, DateTime dueDate, Id<Group> groupId)
+    private Task(Id<Task> id, Title title, Id<User> creatorId, DateTimeOffset dueDate, Id<Group> groupId)
         : base(id)
     {
         Title = title;
@@ -23,7 +24,7 @@ public sealed class Task : DomainModel<Task>
                                 Id<Task> id,
                                 Title title,
                                 Id<User> creatorId,
-                                DateTime dueDate,
+                                DateTimeOffset dueDate,
                                 Id<Group> groupId)
     {
         var task = new Task(id, title, creatorId, dueDate, groupId);

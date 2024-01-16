@@ -7,6 +7,7 @@
 	<PropertyGroup>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<UserSecretsId>a667cda1-3938-4b88-840d-57932ea7b535</UserSecretsId>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Source\LittleByte.AspNet\LittleByte.AspNet.csproj" />

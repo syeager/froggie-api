@@ -1,5 +1,5 @@
 ﻿using Froggie.Domain.Groups;
-using LittleByte.Data;
+using LittleByte.Domain;
 
 namespace Froggie.Api.Groups;
 

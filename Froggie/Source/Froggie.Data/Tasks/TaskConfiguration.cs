@@ -1,4 +1,5 @@
 ﻿using Froggie.Domain.Tasks;
+using LittleByte.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Tasks;

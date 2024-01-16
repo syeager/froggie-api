@@ -1,4 +1,4 @@
-﻿using Froggie.Api.Tasks;
+using Froggie.Api.Tasks;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Test;
 using LittleByte.AspNet.Test;
@@ -18,7 +18,7 @@ public sealed class GetUserTasksTest : ApiIntegrationTest<GetTasksByUserControll
         var tasks = Valid.Tasks.New(2, user.Id, group.Id);
         var addTaskCommand = services.GetRequiredService<IAddTaskCommand>();
         tasks.ForEach((task, _) => addTaskCommand.Add(task!));
-        await services.GetRequiredService<ISaveContextCommand>().CommitChangesAsync();
+        await saveCommand.CommitChangesAsync();
 
         var request = new GetTasksByUserRequest(user.Id);
 

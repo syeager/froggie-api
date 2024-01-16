@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-	  <Platforms>AnyCPU;x64</Platforms>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
@@ -13,8 +13,9 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper\LittleByte.AutoMapper.csproj" />
-	  <ProjectReference Include="..\..\Common\Source\LittleByte.Common\LittleByte.Common.csproj" />
-	  <ProjectReference Include="..\..\Common\Source\LittleByte.Validation\LittleByte.Validation.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper\LittleByte.AutoMapper.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.Common\LittleByte.Common.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.Domain\LittleByte.Domain.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.Validation\LittleByte.Validation.csproj" />
 	</ItemGroup>
 </Project>

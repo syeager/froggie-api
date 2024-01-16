@@ -2,30 +2,26 @@
 
 namespace Froggie.Domain.Groups;
 
+public sealed class UserAlreadyInGroup() : OperationResult(false, "User is already in this group.");
+
 public interface IAddUserToGroupService
 {
-    ValueTask AddAsync(User user, Group group);
+    ValueTask<OperationResult> AddAsync(User user, Group group);
 }
 
-internal sealed class AddUserToGroupService : IAddUserToGroupService
+internal sealed class AddUserToGroupService(IUserGroupExistsQuery existsQuery, IUserGroupCreateCommand createCommand)
+    : IAddUserToGroupService
 {
-    private readonly IUserGroupExistsQuery existsQuery;
-    private readonly IUserGroupCreateCommand createCommand;
-
-    public AddUserToGroupService(IUserGroupExistsQuery existsQuery, IUserGroupCreateCommand createCommand)
-    {
-        this.existsQuery = existsQuery;
-        this.createCommand = createCommand;
-    }
-
-    public async ValueTask AddAsync(User user, Group group)
+    public async ValueTask<OperationResult> AddAsync(User user, Group group)
     {
         var alreadyInGroup = await existsQuery.QueryAsync(user, group);
         if(alreadyInGroup)
         {
-            throw new Exception();
+            return new UserAlreadyInGroup();
         }
 
         createCommand.Create(user, group);
+
+        return new OperationResult(true);
     }
 }

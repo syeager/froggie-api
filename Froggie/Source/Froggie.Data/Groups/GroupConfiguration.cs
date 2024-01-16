@@ -1,5 +1,5 @@
 ﻿using Froggie.Domain.Groups;
-using Froggie.Domain.Users;
+using LittleByte.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Groups;

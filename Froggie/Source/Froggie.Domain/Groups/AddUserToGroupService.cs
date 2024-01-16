@@ -2,7 +2,7 @@
 
 namespace Froggie.Domain.Groups;
 
-public sealed class UserAlreadyInGroup() : OperationResult(false, "User is already in this group.");
+public sealed record UserAlreadyInGroup() : OperationResult(false, "User is already in this group.");
 
 public interface IAddUserToGroupService
 {

@@ -29,13 +29,17 @@ public sealed class AddUserToTaskTest : UnitTest
         var task = Valid.Tasks.New(user, group);
         findTaskQuery.FindRequiredForEditAsync(task).Returns(task);
 
-        await testObj.AddAsync(user, task);
+        var result = await testObj.AddAsync(user, task);
 
-        Assert.That(task.Assignees, Contains.Item(user.Id));
+        Assert.Multiple(() =>
+        {
+            Assert.That(result, Is.TypeOf<UserAddedToTask>());
+            Assert.That(task.Assignees, Contains.Item(user.Id));
+        });
     }
 
     [Test]
-    public void UserIsNotInTaskGroup()
+    public async ValueTask UserIsNotInTaskGroup()
     {
         isUserInGroupQuery.QueryAsync(default, default).ReturnsForAnyArgs(false);
 
@@ -44,6 +48,8 @@ public sealed class AddUserToTaskTest : UnitTest
         var task = Valid.Tasks.New(user, group);
         findTaskQuery.FindRequiredForEditAsync(task).Returns(task);
 
-        Assert.ThrowsAsync<UserNotInGroupException>(() => testObj.AddAsync(user, task).AsTask());
+        var result = await testObj.AddAsync(user, task);
+
+        Assert.That(result, Is.TypeOf<UserNotInTaskGroup>());
     }
 }

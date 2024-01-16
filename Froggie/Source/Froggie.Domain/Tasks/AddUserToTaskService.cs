@@ -3,26 +3,31 @@ using Froggie.Domain.Users;
 
 namespace Froggie.Domain.Tasks;
 
+public sealed record UserAddedToTask(Task Task) : OperationResult(true);
+
+public sealed record UserNotInTaskGroup() : OperationResult(false, "User needs to be in the same group as the task.");
+
+
 public interface IAddUserToTaskService
 {
-    ValueTask<Task> AddAsync(Id<User> userId, Id<Task> taskId);
+    ValueTask<OperationResult> AddAsync(Id<User> userId, Id<Task> taskId);
 }
 
 internal sealed class AddUserToTaskService(IFindByIdQuery<Task> findTaskQuery, IIsUserInGroupQuery isUserInGroupQuery)
     : IAddUserToTaskService
 {
-    public async ValueTask<Task> AddAsync(Id<User> userId, Id<Task> taskId)
+    public async ValueTask<OperationResult> AddAsync(Id<User> userId, Id<Task> taskId)
     {
         var task = await findTaskQuery.FindRequiredForEditAsync(taskId).NoAwait();
 
         var isUserInGroup = await isUserInGroupQuery.QueryAsync(userId, task.GroupId).NoAwait();
         if(!isUserInGroup)
         {
-            throw new UserNotInGroupException(userId, task.GroupId);
+            return new UserNotInTaskGroup();
         }
 
         task.AddAssignee(userId);
 
-        return task;
+        return new UserAddedToTask(task);
     }
 }

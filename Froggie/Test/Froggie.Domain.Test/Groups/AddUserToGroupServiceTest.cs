@@ -3,11 +3,6 @@ using Froggie.Domain.Users;
 
 namespace Froggie.Domain.Test.Groups;
 
-/*
- * user not in group
- * user already in group
- * limit?
- */
 public sealed class AddUserToGroupServiceTest : UnitTest
 {
     private AddUserToGroupService testObj = null!;
@@ -28,16 +23,20 @@ public sealed class AddUserToGroupServiceTest : UnitTest
         var user = Valid.Users.New();
         var group = Valid.Groups.New();
 
-        await testObj.AddAsync(user, group);
+        var result = await testObj.AddAsync(user, group);
+
+        Assert.That(result.Succeeded);
     }
 
     [Test]
-    public void When_UserInGroup_Then_Throw()
+    public async ValueTask When_UserInGroup_Then_Exit()
     {
         var user = Valid.Users.New();
         var group = Valid.Groups.New();
         existsQuery.QueryAsync(user.Id, group.Id).Returns(true);
 
-        Assert.ThrowsAsync<Exception>(() => testObj.AddAsync(user, group).AsTask());
+        var result = await testObj.AddAsync(user, group);
+
+        Assert.That(result, Is.TypeOf<UserAlreadyInGroup>());
     }
 }

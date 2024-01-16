@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Data;
+using LittleByte.Domain;
 using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Groups;

@@ -1,4 +1,5 @@
 using Froggie.Domain.Users;
+using LittleByte.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

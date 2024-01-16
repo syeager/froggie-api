@@ -1,4 +1,4 @@
-﻿using LittleByte.Data;
+﻿using LittleByte.Domain;
 
 namespace Froggie.Api.Tasks;
 

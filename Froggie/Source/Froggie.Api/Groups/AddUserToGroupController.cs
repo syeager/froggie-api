@@ -1,29 +1,18 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.Infra.Commands;
+using LittleByte.Data;
+using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Groups;
 
-public sealed class AddUserToGroupController : GroupController
+public sealed class AddUserToGroupController(
+    IMapper mapper,
+    IFindByIdQuery<User> findUserQuery,
+    IFindByIdQuery<Group> findGroupQuery,
+    IAddUserToGroupService addUserToGroupService,
+    ISaveContextCommand saveCommand)
+    : GroupController(mapper)
 {
-    private readonly IFindByIdQuery<User> findUserQuery;
-    private readonly IFindByIdQuery<Group> findGroupQuery;
-    private readonly IAddUserToGroupService addUserToGroupService;
-    private readonly ISaveContextCommand saveCommand;
-
-    public AddUserToGroupController(IMapper mapper,
-                                    IFindByIdQuery<User> findUserQuery,
-                                    IFindByIdQuery<Group> findGroupQuery,
-                                    IAddUserToGroupService addUserToGroupService,
-                                    ISaveContextCommand saveCommand)
-        : base(mapper)
-    {
-        this.findUserQuery = findUserQuery;
-        this.findGroupQuery = findGroupQuery;
-        this.addUserToGroupService = addUserToGroupService;
-        this.saveCommand = saveCommand;
-    }
-
     [HttpPost("add-member")]
     [ResponseType(HttpStatusCode.OK)]
     public async ValueTask<ApiResponse> AddUser(AddUserToGroupRequest request)

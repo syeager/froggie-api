@@ -1,7 +1,7 @@
 ﻿using Froggie.Api.Groups;
 using Froggie.Domain.Test;
 using Froggie.Domain.Users;
-using LittleByte.Test.AspNet;
+using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
 

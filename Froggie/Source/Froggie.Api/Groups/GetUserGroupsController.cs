@@ -1,6 +1,6 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
-using LittleByte.Common.AspNet.AutoMapper;
+using LittleByte.AutoMapper;
 
 namespace Froggie.Api.Groups;
 

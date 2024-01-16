@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Tasks;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -52,13 +52,13 @@ public sealed class Task : DomainModel<Task>
             .Push("Assignee.Email", assignee)
             .Info("Adding assignee to task");
 
-        if(!assignees.Contains(assignee))
+        if(assignees.Contains(assignee))
         {
-            assignees.Add(assignee);
+            log.Info("User is already assigned to this task");
         }
         else
         {
-            log.Info("User is already assigned to this task");
+            assignees.Add(assignee);
         }
     }
 

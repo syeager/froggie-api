@@ -3,6 +3,7 @@ using Froggie.Api.Tasks;
 using Froggie.Api.Users;
 using Froggie.Data;
 using LittleByte.AutoMapper;
+using LittleByte.AutoMapper.AspNet;
 using LittleByte.Serilog;
 using LittleByte.Serilog.AspNet;
 using Serilog;
@@ -23,6 +24,7 @@ try
         .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
         .AddEndpointsApiExplorer()
         .AddSingleton<StringValueObjectConverter>()
+        .AddSingleton<JwtSecurityTokenConverter>()
         .AddUsers(builder.Configuration)
         .AddTasks()
         .AddGroups()

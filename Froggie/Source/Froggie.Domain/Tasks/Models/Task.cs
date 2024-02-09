@@ -5,6 +5,7 @@ namespace Froggie.Domain.Tasks;
 
 public sealed class Task : DomainModel<Task>
 {
+    private readonly ILog log;
     private readonly List<DomainModel<User>> assignees;
     public IReadOnlyCollection<DomainModel<User>> Assignees => assignees;
 
@@ -20,6 +21,7 @@ public sealed class Task : DomainModel<Task>
                  Id<Group> groupId)
         : base(id)
     {
+        log = this.NewLogger();
         Title = title;
         CreatorId = creatorId;
         DueDate = dueDate;
@@ -44,8 +46,8 @@ public sealed class Task : DomainModel<Task>
 
     internal void AddAssignee(DomainModel<User> assignee)
     {
-        var log = this.NewLogger();
         log
+            .Push("Task.Id", Id)
             .Push("User.Id", assignee)
             .Info("Adding assignee to task");
 
@@ -57,5 +59,15 @@ public sealed class Task : DomainModel<Task>
         {
             log.Debug("User is already assigned to this task");
         }
+    }
+
+    public void RemoveAssignee(DomainModel<User> assignee)
+    {
+        log
+            .Push("Task.Id", Id)
+            .Push("User.Id", assignee)
+            .Info("Removing assignee from task");
+
+        assignees.Remove(assignee);
     }
 }

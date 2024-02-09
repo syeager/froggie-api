@@ -11,7 +11,7 @@ public class TaskTest
     }
 
     [Test]
-    public void Given_Assignee_Then_AddAssignee()
+    public void AddNewAssignee()
     {
         var user = Valid.Users.New();
 
@@ -21,7 +21,7 @@ public class TaskTest
     }
 
     [Test]
-    public void Given_ExistingAssignee_Then_DoNotAdd()
+    public void AddExistingAssignee()
     {
         var user = Valid.Users.New();
         testObj.AddAssignee(user);
@@ -29,5 +29,16 @@ public class TaskTest
         testObj.AddAssignee(user);
 
         Assert.That(testObj.Assignees.Count, Is.EqualTo(1));
+    }
+
+    [Test] 
+    public void RemoveAssignee()
+    {
+        var user = Valid.Users.New();
+        testObj.AddAssignee(user);
+ 
+        testObj.RemoveAssignee(user);
+ 
+        Assert.That(testObj.Assignees.Count, Is.EqualTo(0));
     }
 }

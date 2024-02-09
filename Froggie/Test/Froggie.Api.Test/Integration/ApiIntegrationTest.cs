@@ -1,4 +1,5 @@
-﻿using Froggie.Api.Groups;
+﻿using Froggie.Api.Accounts;
+using Froggie.Api.Groups;
 using Froggie.Api.Tasks;
 using Froggie.Api.Users;
 using Froggie.Data;
@@ -25,7 +26,8 @@ public abstract class ApiIntegrationTest<T> : IntegrationTest
     {
         serviceCollection
             .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-            .AddUsers(configuration)
+            .AddAccounts(configuration)
+            .AddUsers()
             .AddTasks()
             .AddGroups()
             .AddPersistence()

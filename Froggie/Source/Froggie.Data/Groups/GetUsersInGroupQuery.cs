@@ -16,7 +16,7 @@ internal sealed class GetUsersInGroupQuery(FroggieDb database, IMapper mapper) :
         const int pageSize = 10;
 
         var dao = await database
-            .UserGroupMaps.AsNoTracking()
+            .GroupUsers.AsNoTracking()
             .Where(um => um.GroupId == groupId)
             .Include(um => um.User).AsNoTracking()
             .Select(um => um.User)

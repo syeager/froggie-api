@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>Froggie.Api.Test</_Parameter1>
@@ -11,6 +11,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Source\LittleByte.AspNet\LittleByte.AspNet.csproj" />
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.AspNet\LittleByte.AutoMapper.AspNet.csproj" />
 		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.Data\LittleByte.AutoMapper.Data.csproj" />
 		<ProjectReference Include="..\..\Common\Source\LittleByte.Serilog.AspNet\LittleByte.Serilog.AspNet.csproj" />
 		<ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />

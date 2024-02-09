@@ -11,7 +11,7 @@ public sealed class GetGroupTasksTest : ApiIntegrationTest<GetTasksGroupControll
     [Test]
     public async ValueTask QueryAllTasks()
     {
-        var group = await CreateGroupAndUsersHelper.CreateAsync(services);
+        var group = CreateGroupAndUsersHelper.Create(services);
         await saveCommand.CommitChangesAsync();
 
         var users = await GetService<IGetUsersInGroupQuery>().QueryAsync(group);

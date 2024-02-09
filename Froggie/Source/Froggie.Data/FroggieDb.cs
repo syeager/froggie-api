@@ -1,25 +1,37 @@
-﻿using Froggie.Data.Groups;
+using Froggie.Data.Accounts;
+using Froggie.Data.Groups;
 using Froggie.Data.Tasks;
 using Froggie.Data.Users;
-using LittleByte.AutoMapper.EntityFramework;
-using Microsoft.AspNetCore.Identity;
+using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
+using LittleByte.EntityFramework.Identity;
 
 namespace Froggie.Data;
 
 [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
-internal sealed class FroggieDb : DomainContext<FroggieDb, UserDao, IdentityRole<Guid>>
+internal sealed class FroggieDb(DbContextOptions<FroggieDb> options)
+    : DomainContext<FroggieDb, Account>(options)
 {
-    public DbSet<TaskDao> Tasks { get; init; } = null!;
-    public DbSet<GroupDao> Groups { get; init; } = null!;
-    public DbSet<UserGroupMap> UserGroupMaps { get; init; } = null!;
-
-    public FroggieDb(IMapper mapper, DbContextOptions<FroggieDb> options)
-        : base(mapper, options) { }
+    public new DbSet<User> Users { get; init; } = null!;
+    public DbSet<Account> Accounts => base.Users;
+    public DbSet<Task> Tasks { get; init; } = null!;
+    public DbSet<Group> Groups { get; init; } = null!;
+    public DbSet<GroupUser> GroupUsers { get; init; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<UserGroupMap>().HasKey(ugm => new {ugm.UserId, ugm.GroupId});
+        builder.Entity<GroupUser>().Property(ugm => ugm.UserId).HasConversion<IdValueConverter<User>>();
+        builder.Entity<GroupUser>().Property(ugm => ugm.GroupId).HasConversion<IdValueConverter<Group>>();
+
+        builder.IdEntity<Task>();
+        builder.IdEntity<Group>();
+        builder.IdEntity<User>();
+        builder.Entity<Account>().HasOne(a => a.User);
+
+        builder.ApplyConfiguration(new TaskEntityConfiguration());
+        builder.ApplyConfiguration(new GroupEntityConfiguration());
+        builder.ApplyConfiguration(new UserEntityConfiguration());
     }
 }

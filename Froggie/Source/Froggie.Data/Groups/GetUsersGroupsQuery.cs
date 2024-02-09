@@ -4,12 +4,12 @@ using LittleByte.AutoMapper;
 
 namespace Froggie.Data.Groups;
 
-internal sealed class GetUsersGroupsQuery(FroggieDb database, IMapper mapper) : IGetUsersGroupsQuery
+internal sealed class GetUsersGroupsQuery(FroggieDb froggieDb, IMapper mapper) : IGetUserGroupsQuery
 {
     public async ValueTask<IReadOnlyCollection<Group>> QueryAsync(Id<User> userId)
     {
-        var daos = await database
-            .UserGroupMaps.AsNoTracking()
+        var daos = await froggieDb
+            .GroupUsers.AsNoTracking()
             .Include(ug => ug.Group).AsNoTracking()
             .Where(ug => ug.UserId == userId.Value)
             .Select(ug => ug.Group!)

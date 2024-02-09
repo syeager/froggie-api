@@ -9,7 +9,6 @@ public sealed class AddUserToGroupController(
     IMapper mapper,
     IFindByIdQuery<User> findUserQuery,
     IFindByIdQuery<Group> findGroupQuery,
-    IAddUserToGroupService addUserToGroupService,
     ISaveContextCommand saveCommand)
     : GroupController(mapper)
 {
@@ -17,10 +16,10 @@ public sealed class AddUserToGroupController(
     [ResponseType(HttpStatusCode.OK)]
     public async ValueTask<ApiResponse> AddUser(AddUserToGroupRequest request)
     {
-        var user = await findUserQuery.FindRequiredAsync(request.UserId);
-        var group = await findGroupQuery.FindRequiredAsync(request.GroupId);
+        var user = await findUserQuery.FindRequiredAsync(request.UserId.ToId<User>());
+        var group = await findGroupQuery.FindRequiredAsync(request.GroupId.ToId<Group>());
 
-        await addUserToGroupService.AddAsync(user, group);
+        group.AddUser(user);
 
         await saveCommand.CommitChangesAsync();
 

@@ -9,39 +9,28 @@ public sealed class CreateGroupServiceTest : UnitTest
     private static readonly User User = Valid.Users.New();
 
     private CreateGroupService testObj = null!;
-    private IGroupFactory groupFactory = null!;
     private IAddGroupCommand addGroupCommand = null!;
-    private IAddUserToGroupService addUserToGroupService = null!;
 
     [SetUp]
     public void SetUp()
     {
-        groupFactory = Substitute.For<IGroupFactory>();
-        groupFactory.Create(default, default!).ReturnsForAnyArgs(ExpectedGroup);
         addGroupCommand = Substitute.For<IAddGroupCommand>();
-        addUserToGroupService = Substitute.For<IAddUserToGroupService>();
-        testObj = new CreateGroupService(groupFactory, addGroupCommand, addUserToGroupService);
+        testObj = new CreateGroupService(addGroupCommand);
     }
 
     [Test]
-    public async ValueTask When_ValidData_Then_CreateGroup()
+    public void When_ValidData_Then_CreateGroup()
     {
-        var result = await testObj.CreateAsync(User, ExpectedGroup.Name);
+        var group = testObj.Create(User, ExpectedGroup.Name);
 
-        Assert.That(result, Is.SameAs(ExpectedGroup));
-        addGroupCommand.Received(1).Add(ExpectedGroup);
-        await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
+        addGroupCommand.Received(1).Add(group);
     }
 
     [Test]
-    public async ValueTask When_CreatingPersonalGroup_Then_CreateGroup()
+    public void When_CreatingPersonalGroup_Then_CreateGroup()
     {
-        var groupName = "";
-        groupFactory.WhenForAnyArgs(gf => gf.Create(default, null!)).Do(info => groupName = info.Arg<string>());
+        var group = testObj.CreatePersonal(User);
 
-        await testObj.CreatePersonalAsync(User);
-
-        Assert.That(groupName, Is.EqualTo(NameRules.PersonalName));
-        await addUserToGroupService.Received(1).AddAsync(User, ExpectedGroup);
+        Assert.That(group.Name, Is.EqualTo(GroupNameRules.PersonalName));
     }
 }

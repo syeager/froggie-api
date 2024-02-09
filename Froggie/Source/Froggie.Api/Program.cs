@@ -1,3 +1,4 @@
+using Froggie.Api.Accounts;
 using Froggie.Api.Groups;
 using Froggie.Api.Tasks;
 using Froggie.Api.Users;
@@ -23,11 +24,11 @@ try
         .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
         .AddEndpointsApiExplorer()
         .AddSingleton<StringValueObjectConverter>()
-        .AddUsers(builder.Configuration)
+        .AddAccounts(builder.Configuration)
+        .AddUsers()
         .AddTasks()
         .AddGroups()
-        .AddPersistence()
-        .AddJwtAuthentication(builder.Configuration);
+        .AddPersistence();
 
     var app = builder.Build();
 
@@ -44,13 +45,14 @@ try
 
     app
         .UseSerilogRequestLogging()
+        .UseHttpExceptions()
+        // TODO: This is not throwing an exception when I use "abc" for a guid.
+        .UseModelValidationExceptions()
         .SetForwardedHeaders()
         .UseHsts()
         .UseRouting()
-        .UseHttpExceptions()
         .UseAuthentication()
         .UseAuthorization()
-        .UseModelValidationExceptions()
         .UseEndpoints(endpoints => endpoints.MapControllers())
         .UseOpenApi();
 

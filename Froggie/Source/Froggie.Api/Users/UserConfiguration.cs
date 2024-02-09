@@ -5,16 +5,8 @@ namespace Froggie.Api.Users;
 
 public static class UserConfiguration
 {
-    public static IServiceCollection AddUsers(this IServiceCollection services, IConfiguration configuration) =>
+    public static IServiceCollection AddUsers(this IServiceCollection services) =>
         services
-            .AddUsersApi(configuration)
             .AddUsersDomain()
             .AddUsersData();
-
-    private static IServiceCollection AddUsersApi(this IServiceCollection services, IConfiguration configuration) =>
-        services
-            .BindOptions<JwtOptions>(configuration)
-            .AddTransient<ICredentialsGenerator, CredentialsGenerator>()
-            .AddTransient<ILogInService, LogInService>()
-            .AddTransient<ITokenGenerator, TokenGenerator>();
 }

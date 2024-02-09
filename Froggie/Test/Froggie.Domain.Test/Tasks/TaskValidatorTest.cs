@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Groups;
+﻿using FluentValidation;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
 using LittleByte.Common;
@@ -27,11 +28,9 @@ public sealed class TaskValidatorTest : UnitTest
     [Test]
     public void When_InvalidCreatorId_Then_Fail()
     {
-        var task = Valid.Tasks.New(Guid.Empty, new Id<Group>());
+        var exception = Assert.Throws<ValidationException>(() => Valid.Tasks.New(Guid.Empty, new Id<Group>()));
 
-        var result = testObj.Validate(task);
-
-        result.AssertFailure(nameof(Task.CreatorId));
+        exception!.AssertFailure(nameof(Task.CreatorId));
     }
 
     [TestCase("1/1/2000")]
@@ -40,7 +39,6 @@ public sealed class TaskValidatorTest : UnitTest
     {
         var dueDate = DateTime.Parse(dueDateString);
         var task = Task.Create(
-            Validator.WillPass<Task>(),
             new Id<Task>(),
             Valid.Tasks.Title,
             new Id<User>(),
@@ -55,16 +53,13 @@ public sealed class TaskValidatorTest : UnitTest
     [Test]
     public void With_MinDueDate_Then_Fail()
     {
-        var task = Task.Create(
-            Validator.WillPass<Task>(),
+        var exception = Assert.Throws<ValidationException>(() => Task.Create(
             new Id<Task>(),
             Valid.Tasks.Title,
             new Id<User>(),
             DateTime.MinValue,
-            new Id<Group>());
+            new Id<Group>()));
 
-        var result = testObj.Validate(task);
-
-        result.AssertFailure(nameof(Task.DueDate));
+        exception!.AssertFailure(nameof(Task.DueDate));
     }
 }

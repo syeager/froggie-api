@@ -10,7 +10,7 @@ public sealed class GetGroupController(IFindByIdQuery<Group> getGroup, IMapper m
     [ResponseType(HttpStatusCode.NotFound)]
     public async ValueTask<ApiResponse<GroupDto>> GetGroup(Guid id)
     {
-        var group = await getGroup.FindRequiredAsync(id);
+        var group = await getGroup.FindRequiredAsync(id.ToId<Group>());
         var dto = mapper.Map<GroupDto>(group);
         return new OkResponse<GroupDto>(dto);
     }

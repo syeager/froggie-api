@@ -2,11 +2,7 @@
 
 namespace Froggie.Data.Groups;
 
-internal sealed class AddGroupCommand(FroggieDb database, IMapper mapper) : IAddGroupCommand
+internal sealed class AddGroupCommand(FroggieDb database) : IAddGroupCommand
 {
-    public void Add(Group group)
-    {
-        var dao = mapper.Map<GroupDao>(group);
-        database.Groups.Add(dao);
-    }
+    public void Add(Group group) => database.Groups.Add(group);
 }

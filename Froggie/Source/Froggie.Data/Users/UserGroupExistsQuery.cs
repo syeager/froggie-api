@@ -15,7 +15,7 @@ internal sealed class UserGroupExistsQuery : IUserGroupExistsQuery
     public async ValueTask<bool> QueryAsync(Id<User> userId, Id<Group> groupId)
     {
         var userGroupExists =
-            await froggieDb.UserGroupMaps.AnyAsync(ugm => ugm.UserId == userId.Value && ugm.GroupId == groupId.Value);
+            await froggieDb.GroupUsers.AnyAsync(ugm => ugm.UserId == userId.Value && ugm.GroupId == groupId.Value);
 
         return userGroupExists;
     }

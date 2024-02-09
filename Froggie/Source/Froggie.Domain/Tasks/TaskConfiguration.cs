@@ -8,6 +8,5 @@ public static class TaskConfiguration
     public static IServiceCollection AddTasksDomain(this IServiceCollection services) => services
         .AddTransient<ICreateTaskService, CreateTaskService>()
         .AddTransient<IDeleteTaskService, DeleteTaskService>()
-        .AddTransient<ITaskFactory, TaskFactory>()
         .AddTransient<ModelValidator<Task>, TaskValidator>();
 }

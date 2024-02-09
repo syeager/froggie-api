@@ -16,11 +16,21 @@ public sealed class CreateTaskController(ICreateTaskService createTask, ISaveCon
         var userId = new Id<User>(request.CreatorId);
         var groupId = new Id<Group>(request.GroupId);
 
-        var task = await createTask.CreateAsync(request.Title, userId, request.DueDate, groupId);
+        var result = await createTask.CreateAsync(request.Title, userId, request.DueDate, groupId);
 
-        await context.CommitChangesAsync();
+        if(result.Succeeded)
+        {
+            await context.CommitChangesAsync();
 
-        var dto = mapper.Map<TaskDto>(task);
-        return new CreatedResponse<TaskDto>(dto);
+            var dto = mapper.Map<TaskDto>(result.Value);
+            return new CreatedResponse<TaskDto>(dto);
+        }
+
+        if(result is UserNeedsToBeInGroupToCreateTask)
+        {
+            throw new BadRequestException(result.ErrorMessage!);
+        }
+
+        throw new UnhandledInternalException();
     }
 }

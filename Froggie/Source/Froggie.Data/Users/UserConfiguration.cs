@@ -1,3 +1,4 @@
+using Froggie.Data.Accounts;
 using Froggie.Domain.Users;
 using LittleByte.Domain;
 using Microsoft.AspNetCore.Identity;
@@ -9,19 +10,21 @@ public static class UserConfiguration
 {
     public static IServiceCollection AddUsersData(this IServiceCollection services) => services
         .AddIdentity()
+        .AddScoped<IAddUserCommand, AddUserCommand>()
         .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
-        .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, UserDao, FroggieDb>>()
-        .AddTransient<IFindUserByEmailQuery, FindUserByEmailQuery>()
+        .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, FroggieDb>>()
+        .AddScoped<IAccountManager, AccountManager>()
+        .AddTransient<IFindAccountByEmailQuery, FindAccountByEmailQuery>()
         .AddTransient<IDoesUserWithNameExistQuery, DoesUserWithNameExistQuery>()
         .AddTransient<IUserPageQuery, UserPageQuery>()
-        .AddTransient<IAddUserCommand, AddUserCommand>()
-        .AddTransient<IFindUserByEmailAndPasswordQuery, FindUserByEmailAndPasswordQuery>()
-        .AddTransient<UserConverter>();
+        .AddTransient<ICreateAccountCommand, CreateAccountCommand>()
+        .AddTransient<IFindAccountByEmailAndPassword, FindAccountByEmailAndPassword>()
+    ;
 
     private static IServiceCollection AddIdentity(this IServiceCollection services)
     {
         services
-            .AddIdentityCore<UserDao>(options =>
+            .AddIdentityCore<Account>(options =>
             {
                 options.Password = new PasswordOptions
                 {

@@ -9,6 +9,5 @@ internal sealed class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<User, UserDto>();
-        CreateMap<LogInResult, LogInResponse>();
     }
 }

@@ -2,17 +2,10 @@
 
 namespace Froggie.Data.Tasks;
 
-internal sealed class AddTaskCommand : IAddTaskCommand
+internal sealed class AddTaskCommand(FroggieDb froggieDb) : IAddTaskCommand
 {
-    private readonly FroggieDb froggieDb;
-
-    public AddTaskCommand(FroggieDb froggieDb)
-    {
-        this.froggieDb = froggieDb;
-    }
-
     public void Add(Task task)
     {
-        froggieDb.Add<Task, TaskDao>(task);
+        froggieDb.Add(task);
     }
 }

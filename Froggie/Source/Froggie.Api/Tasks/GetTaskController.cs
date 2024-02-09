@@ -9,7 +9,7 @@ public sealed class GetTaskController(IFindByIdQuery<Task> task, IMapper mapper)
     [ResponseType(HttpStatusCode.NotFound)]
     public async ValueTask<ApiResponse<TaskDto>> GetTask(Guid id)
     {
-        var validTask = await task.FindRequiredAsync(id);
+        var validTask = await task.FindRequiredAsync(id.ToId<Task>());
         var taskDto = mapper.Map<TaskDto>(validTask);
         return new OkResponse<TaskDto>(taskDto);
     }

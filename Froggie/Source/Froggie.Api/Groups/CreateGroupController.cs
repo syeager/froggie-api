@@ -17,9 +17,10 @@ public sealed class CreateGroupController(
     [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<GroupDto>> Create(CreateGroupRequest request)
     {
-        var creator = await userQuery.FindRequiredAsync(request.CreatorId);
+        var creator = await userQuery.FindRequiredAsync(request.CreatorId.ToId<User>());
 
-        var group = await groupService.CreateAsync(creator, request.Name);
+        var name = new GroupName(request.Name);
+        var group = groupService.Create(creator, name);
         await contextCommand.CommitChangesAsync();
 
         var groupDto = mapper.Map<GroupDto>(group);

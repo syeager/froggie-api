@@ -3,7 +3,6 @@ using Froggie.Domain.Tasks;
 using Froggie.Domain.Test;
 using LittleByte.AspNet.Test;
 using LittleByte.Common;
-using LittleByte.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Tasks;

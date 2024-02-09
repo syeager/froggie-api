@@ -1,6 +1,4 @@
 ﻿using Froggie.Data.Tasks;
-using Froggie.Data.Users;
-using Froggie.Domain.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Test.Tasks.Queries;
@@ -30,15 +28,15 @@ public sealed class GetTasksByUserQueryTest : DataIntegrationTest
     [Test]
     public async ValueTask When_NotAllTasksAreUsers_Return_OnlyUsersTasks()
     {
-        var group = Valid.Groups.New();
-        var user = Valid.Users.New();
-        var userOther = Valid.Users.New();
-        var tasks = Valid.Tasks.New(2, user.Id, group.Id);
-        var tasksOther = Valid.Tasks.New(3, userOther.Id, group.Id);
-        froggieDb.Add<User, UserDao>(user);
-        froggieDb.Add<User, UserDao>(userOther);
-        froggieDb.AddRange<Task, TaskDao>(tasks);
-        froggieDb.AddRange<Task, TaskDao>(tasksOther);
+        var group = Domain.Test.Valid.Groups.New();
+        var user = Domain.Test.Valid.Users.New();
+        var userOther = Domain.Test.Valid.Users.New();
+        var tasks = Domain.Test.Valid.Tasks.New(2, user.Id, group.Id);
+        var tasksOther = Domain.Test.Valid.Tasks.New(3, userOther.Id, group.Id);
+        froggieDb.Add(user);
+        froggieDb.Add(userOther);
+        froggieDb.AddRange(tasks);
+        froggieDb.AddRange(tasksOther);
         await froggieDb.SaveChangesAsync();
 
         var result = await testObj.RunAsync(user.Id);

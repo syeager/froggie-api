@@ -6,6 +6,6 @@ namespace Froggie.Api.Groups;
 public sealed class GroupDto : Dto
 {
     [Required]
-    [StringRange(NameRules.LengthMin, NameRules.LengthMax)]
+    [StringRange(GroupNameRules.LengthMin, GroupNameRules.LengthMax)]
     public string Name { get; init; } = null!;
 }

@@ -6,9 +6,9 @@ namespace Froggie.Api.Groups;
 
 public sealed class GetUserGroupsController : GroupController
 {
-    private readonly IGetUsersGroupsQuery getGroupsQuery;
+    private readonly IGetUserGroupsQuery getGroupsQuery;
 
-    public GetUserGroupsController(IGetUsersGroupsQuery getGroupsQuery, IMapper mapper)
+    public GetUserGroupsController(IGetUserGroupsQuery getGroupsQuery, IMapper mapper)
         : base(mapper)
     {
         this.getGroupsQuery = getGroupsQuery;

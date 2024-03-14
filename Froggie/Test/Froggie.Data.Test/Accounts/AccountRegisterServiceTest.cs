@@ -22,7 +22,9 @@ public sealed class AccountRegisterServiceTest : UnitTest
         findUserByEmailQuery = Substitute.For<IFindAccountByEmailQuery>();
         createGroupService = Substitute.For<ICreateGroupService>();
         createAccountCommand = Substitute.For<ICreateAccountCommand>();
-        testObj = new AccountRegisterService(addUserCommand, findUserByEmailQuery, doesUserWithNameExistQuery, createGroupService, createAccountCommand);
+        var userFactory = Substitute.For<IUserFactory>();
+        userFactory.Create(default, default!).ReturnsForAnyArgs(Domain.Test.Valid.Users.New());
+        testObj = new AccountRegisterService(addUserCommand, findUserByEmailQuery, doesUserWithNameExistQuery, createGroupService, createAccountCommand, userFactory);
     }
 
     [Test]

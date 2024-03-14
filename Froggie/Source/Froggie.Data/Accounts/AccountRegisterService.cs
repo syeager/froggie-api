@@ -11,14 +11,16 @@ public interface IAccountRegisterService
 }
 
 public sealed class UsernameIsNotAvailable() : Result<User>(false, "Username is not available");
+
 public sealed class EmailAlreadyExists() : Result<User>(false, "An account with this email already exists");
 
-internal sealed class AccountRegisterService(
+public class AccountRegisterService(
     IAddUserCommand userCommand,
     IFindAccountByEmailQuery accountByEmailQuery,
     IDoesUserWithNameExistQuery userWithNameExistQuery,
     ICreateGroupService groupService,
-    ICreateAccountCommand createAccountCommand)
+    ICreateAccountCommand createAccountCommand,
+    IUserFactory userFactory)
     : IAccountRegisterService
 {
     public async ValueTask<Result<User>> RegisterAsync(string emailValue, string nameValue, string passwordValue)
@@ -43,7 +45,7 @@ internal sealed class AccountRegisterService(
 
         var id = new Id<User>();
         var name = new UserName(nameValue);
-        var user = User.Create(id, name);
+        var user = userFactory.Create(id, name);
         userCommand.Add(user);
 
         var password = new Password(passwordValue);

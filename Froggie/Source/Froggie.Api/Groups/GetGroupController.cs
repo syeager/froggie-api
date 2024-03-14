@@ -3,7 +3,7 @@ using LittleByte.Domain;
 
 namespace Froggie.Api.Groups;
 
-public sealed class GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper) : GroupController(mapper)
+public sealed class GetGroupController(IFindByIdQuery<Group> getGroup, IMapper mapper) : GroupController
 {
     [HttpGet(Routes.GetById)]
     [ResponseType(HttpStatusCode.OK, typeof(GroupDto))]

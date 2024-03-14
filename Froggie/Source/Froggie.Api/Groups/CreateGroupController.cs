@@ -10,7 +10,7 @@ public sealed class CreateGroupController(
     IMapper mapper,
     ISaveContextCommand contextCommand,
     IFindByIdQuery<User> userQuery)
-    : GroupController(mapper)
+    : GroupController
 {
     [HttpPost(Routes.Create)]
     [ResponseType(HttpStatusCode.Created, typeof(GroupDto))]

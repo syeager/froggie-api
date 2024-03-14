@@ -6,11 +6,10 @@ using LittleByte.EntityFramework;
 namespace Froggie.Api.Groups;
 
 public sealed class AddUserToGroupController(
-    IMapper mapper,
     IFindByIdQuery<User> findUserQuery,
     IFindByIdQuery<Group> findGroupQuery,
     ISaveContextCommand saveCommand)
-    : GroupController(mapper)
+    : GroupController
 {
     [HttpPost("add-member")]
     [ResponseType(HttpStatusCode.OK)]

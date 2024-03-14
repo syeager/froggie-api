@@ -1,4 +1,4 @@
-﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
 using LittleByte.AutoMapper;
 
@@ -6,9 +6,9 @@ namespace Froggie.Api.Groups;
 
 public sealed class GetUserGroupsController : GroupController
 {
-    private readonly IGetUserGroupsQuery getGroupsQuery;
-
-    public GetUserGroupsController(IGetUserGroupsQuery getGroupsQuery, IMapper mapper)
+public sealed class GetUserGroupsController(IGetUserGroupsQuery getGroupsQuery, IMapper mapper)
+    : GroupController
+{
         : base(mapper)
     {
         this.getGroupsQuery = getGroupsQuery;

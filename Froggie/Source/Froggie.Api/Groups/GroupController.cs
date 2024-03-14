@@ -2,12 +2,4 @@
 
 [OpenApiTag("Groups")]
 [Route("groups", Name = "Groups")]
-public abstract class GroupController : Controller
-{
-    protected readonly IMapper mapper;
-
-    protected GroupController(IMapper mapper)
-    {
-        this.mapper = mapper;
-    }
-}
+public abstract class GroupController : Controller;

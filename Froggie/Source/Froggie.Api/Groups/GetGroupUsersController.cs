@@ -7,8 +7,8 @@ using LittleByte.AutoMapper.Data;
 
 namespace Froggie.Api.Groups;
 
-public sealed class GetUsersGroupController(IGetUsersInGroupQuery inGroupQuery, IMapper mapper)
-    : GroupController(mapper)
+public sealed class GetGroupUsersController(IGetUsersInGroupQuery inGroupQuery, IMapper mapper)
+    : GroupController
 {
     [HttpGet("users")]
     [ResponseType(HttpStatusCode.OK, typeof(Page<UserDto>))]

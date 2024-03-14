@@ -7,7 +7,7 @@ using LittleByte.AutoMapper.Data;
 namespace Froggie.Api.Groups;
 
 public sealed class GetTasksGroupController(IMapper mapper, IGetTasksByGroupQuery tasksByGroupQuery)
-    : GroupController(mapper)
+    : GroupController
 {
     [HttpGet("tasks")]
     [ResponseType(HttpStatusCode.OK, typeof(Page<TaskDto>))]

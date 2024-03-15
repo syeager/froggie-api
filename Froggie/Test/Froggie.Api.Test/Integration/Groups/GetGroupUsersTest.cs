@@ -3,7 +3,7 @@ using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
 
-public sealed class GetGroupUsersTest : ApiIntegrationTest<GetUsersGroupController>
+public sealed class GetGroupUsersTest : ApiIntegrationTest<GetGroupUsersController>
 {
     [Test]
     public async ValueTask QueryAllUsers()

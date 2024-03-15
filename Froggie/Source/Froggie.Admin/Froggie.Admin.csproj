@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\Source\LittleByte.AspNet\LittleByte.AspNet.csproj" />
 		<ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>

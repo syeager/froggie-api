@@ -14,6 +14,7 @@
 		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.AspNet\LittleByte.AutoMapper.AspNet.csproj" />
 		<ProjectReference Include="..\..\Common\Source\LittleByte.AutoMapper.Data\LittleByte.AutoMapper.Data.csproj" />
 		<ProjectReference Include="..\..\Common\Source\LittleByte.Serilog.AspNet\LittleByte.Serilog.AspNet.csproj" />
+		<ProjectReference Include="..\Froggie.Admin\Froggie.Admin.csproj" />
 		<ProjectReference Include="..\Froggie.Data\Froggie.Data.csproj" />
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>

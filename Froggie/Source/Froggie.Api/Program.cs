@@ -1,3 +1,5 @@
+using Froggie.Admin.Accounts;
+using Froggie.Api;
 using Froggie.Api.Accounts;
 using Froggie.Api.Groups;
 using Froggie.Api.Tasks;
@@ -28,7 +30,9 @@ try
         .AddUsers()
         .AddTasks()
         .AddGroups()
-        .AddPersistence();
+        .AddPersistence()
+        .AddAdmin()
+        ;
 
     var app = builder.Build();
 
@@ -51,12 +55,11 @@ try
         .SetForwardedHeaders()
         .UseHsts()
         .UseRouting()
-        .UseAuthentication()
-        .UseAuthorization()
+        .UseAuthorizationAndAuthorization()
         .UseEndpoints(endpoints => endpoints.MapControllers())
         .UseOpenApi();
 
-    //await app.AddSeedDataAsync(app.Services.CreateScope().ServiceProvider);
+    await app.AddSeedDataAsync(app.Services.CreateScope().ServiceProvider);
     app.Run();
 }
 catch(Exception exception)

@@ -61,7 +61,7 @@ public sealed class Task : DomainModel<Task>
         }
     }
 
-    public void RemoveAssignee(DomainModel<User> assignee)
+    internal void RemoveAssignee(DomainModel<User> assignee)
     {
         log
             .Push("Task.Id", Id)

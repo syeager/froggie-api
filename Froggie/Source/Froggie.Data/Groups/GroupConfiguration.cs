@@ -8,9 +8,10 @@ public static class GroupConfiguration
 {
     public static IServiceCollection AddGroupsData(this IServiceCollection @this) => @this
         .AddScoped<IAddGroupCommand, AddGroupCommand>()
+        .AddScoped<IFindByIdQuery<Group>, FindByIdQuery<Group, FroggieDb>>()
         .AddScoped<IGetUserGroupsQuery, GetUsersGroupsQuery>()
         .AddScoped<IGetUsersInGroupQuery, GetUsersInGroupQuery>()
-        .AddScoped<IFindByIdQuery<Group>, FindByIdQuery<Group, FroggieDb>>()
+        .AddScoped<IIsUserInGroupQuery, IsUserInGroupQuery>() 
         .AddScoped<IGetTasksByGroupQuery, GetTasksByGroupQuery>()
         .AddScoped<IUserGroupCreateCommand, UserGroupCreateCommand>();
 }

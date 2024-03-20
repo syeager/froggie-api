@@ -13,6 +13,7 @@ public sealed class Task : DomainModel<Task>
     public DateTimeOffset DueDate { get; }
     public Id<Group> GroupId { get; }
     public Title Title { get; }
+    public bool IsCompleted { get; private set; }
 
     private Task(Id<Task> id,
                  Title title,
@@ -70,4 +71,6 @@ public sealed class Task : DomainModel<Task>
 
         assignees.Remove(assignee);
     }
+
+    internal void Complete() => IsCompleted = true;
 }

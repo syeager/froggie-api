@@ -41,4 +41,12 @@ public class TaskTest
  
         Assert.That(testObj.Assignees.Count, Is.EqualTo(0));
     }
+
+    [Test]
+    public void When_Completing_Then_SetToComplete()
+    {
+        testObj.Complete();
+
+        Assert.That(testObj.IsCompleted);
+    }
 }

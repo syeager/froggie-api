@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
+
+namespace Froggie.Data.Users;
 
 public interface IUserFactory
 {

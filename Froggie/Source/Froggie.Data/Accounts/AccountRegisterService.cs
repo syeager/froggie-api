@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Groups;
+﻿using Froggie.Data.Users;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
 using LittleByte.Common.Logging;
 using LittleByte.Domain;

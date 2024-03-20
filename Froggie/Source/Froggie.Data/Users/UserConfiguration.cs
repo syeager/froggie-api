@@ -10,6 +10,7 @@ public static class UserConfiguration
 {
     public static IServiceCollection AddUsersData(this IServiceCollection services) => services
         .AddIdentity()
+        .AddSingleton<IUserFactory, UserFactory>()
         .AddScoped<IAddUserCommand, AddUserCommand>()
         .AddScoped<IUserGroupExistsQuery, UserGroupExistsQuery>()
         .AddScoped<IFindByIdQuery<User>, FindByIdQuery<User, FroggieDb>>()

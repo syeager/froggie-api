@@ -1,12 +1,15 @@
 ﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Test.Tasks;
 using Froggie.Domain.Users;
+using Froggie.Test;
+using LittleByte.Validation;
 
 namespace Froggie.Domain.Test.Groups;
 
 public sealed class CreateGroupServiceTest : UnitTest
 {
-    private static readonly Group ExpectedGroup = Valid.Groups.New();
-    private static readonly User User = Valid.Users.New();
+    private static readonly Group ExpectedGroup = ValidGroup.New();
+    private static readonly User User = ValidUser.New();
 
     private CreateGroupService testObj = null!;
     private IAddGroupCommand addGroupCommand = null!;

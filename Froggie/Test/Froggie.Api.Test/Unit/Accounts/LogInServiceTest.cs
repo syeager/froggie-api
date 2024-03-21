@@ -1,8 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Froggie.Api.Accounts;
 using Froggie.Data.Accounts;
-using Froggie.Domain.Test;
 using Froggie.Domain.Users;
+using Froggie.Test;
 using LittleByte.AspNet;
 using LittleByte.Common;
 using LittleByte.Test.Categories;
@@ -24,12 +24,12 @@ public sealed class LogInServiceTest : UnitTest
         testObj = new LogInService(tokenGenerator, findAccountQuery);
     }
 
-    [Test] 
+    [Test]
     public async ValueTask When_ValidData_Then_LogIn()
     {
         var user = AddUser();
 
-        var result = await testObj.LogInAsync(Data.Test.Valid.Accounts.Email, Data.Test.Valid.Accounts.Password);
+        var result = await testObj.LogInAsync(ValidAccount.Email, ValidAccount.Password);
 
         AssertSuccess(result, user);
     }
@@ -39,7 +39,7 @@ public sealed class LogInServiceTest : UnitTest
     {
         findAccountQuery.TryFindAsync(null!, null!).ReturnsForAnyArgs((Account?)null);
 
-        var result = await testObj.LogInAsync(Data.Test.Valid.Accounts.Email, Data.Test.Valid.Accounts.Password);
+        var result = await testObj.LogInAsync(ValidAccount.Email, ValidAccount.Password);
 
         AssertFailure(result);
     }
@@ -50,7 +50,7 @@ public sealed class LogInServiceTest : UnitTest
         AddUser();
         findAccountQuery.TryFindAsync(null!, null!).ReturnsForAnyArgs((Account?)null);
 
-        var result = await testObj.LogInAsync(Data.Test.Valid.Accounts.Email, new Password(""));
+        var result = await testObj.LogInAsync(ValidAccount.Email, new Password(""));
 
         AssertFailure(result);
     }
@@ -61,12 +61,12 @@ public sealed class LogInServiceTest : UnitTest
     {
         var account = new Account
         {
-            User = User.Create(new Id<User>(), Valid.Users.Name),
-            Email = Data.Test.Valid.Accounts.Email,
-            UserName = Valid.Users.Name
+            User = User.Create(new Id<User>(), ValidUser.Name),
+            Email = ValidAccount.Email,
+            UserName = ValidUser.Name
         };
         findAccountQuery
-            .TryFindAsync(Data.Test.Valid.Accounts.Email, Data.Test.Valid.Accounts.Password)
+            .TryFindAsync(ValidAccount.Email, ValidAccount.Password)
             .Returns(account);
         tokenGenerator.GenerateJwt(default!).ReturnsForAnyArgs(new JwtSecurityToken());
         return account.User;

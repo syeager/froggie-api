@@ -2,6 +2,7 @@
 using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
+using Froggie.Test;
 using LittleByte.Common;
 using LittleByte.Validation.Test;
 
@@ -28,7 +29,7 @@ public sealed class TaskValidatorTest : UnitTest
     [Test]
     public void When_InvalidCreatorId_Then_Fail()
     {
-        var exception = Assert.Throws<ValidationException>(() => Valid.Tasks.New(Guid.Empty, new Id<Group>()));
+        var exception = Assert.Throws<ValidationException>(() => ValidTask.New(Guid.Empty, new Id<Group>()));
 
         exception!.AssertFailure(nameof(Task.CreatorId));
     }
@@ -40,7 +41,7 @@ public sealed class TaskValidatorTest : UnitTest
         var dueDate = DateTime.Parse(dueDateString);
         var task = Task.Create(
             new Id<Task>(),
-            Valid.Tasks.Title,
+            ValidTask.Title,
             new Id<User>(),
             dueDate,
             new Id<Group>());
@@ -55,7 +56,7 @@ public sealed class TaskValidatorTest : UnitTest
     {
         var exception = Assert.Throws<ValidationException>(() => Task.Create(
             new Id<Task>(),
-            Valid.Tasks.Title,
+            ValidTask.Title,
             new Id<User>(),
             DateTime.MinValue,
             new Id<Group>()));

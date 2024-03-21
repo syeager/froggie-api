@@ -1,4 +1,5 @@
 ﻿using Froggie.Data.Tasks;
+using Froggie.Test;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Data.Test.Tasks.Queries;
@@ -28,11 +29,11 @@ public sealed class GetTasksByUserQueryTest : DataIntegrationTest
     [Test]
     public async ValueTask When_NotAllTasksAreUsers_Return_OnlyUsersTasks()
     {
-        var group = Domain.Test.Valid.Groups.New();
-        var user = Domain.Test.Valid.Users.New();
-        var userOther = Domain.Test.Valid.Users.New();
-        var tasks = Domain.Test.Valid.Tasks.New(2, user.Id, group.Id);
-        var tasksOther = Domain.Test.Valid.Tasks.New(3, userOther.Id, group.Id);
+        var group = ValidGroup.New();
+        var user = ValidUser.New();
+        var userOther = ValidUser.New();
+        var tasks = ValidTask.New(2, user.Id, group.Id);
+        var tasksOther = ValidTask.New(3, userOther.Id, group.Id);
         froggieDb.Add(user);
         froggieDb.Add(userOther);
         froggieDb.AddRange(tasks);

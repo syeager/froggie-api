@@ -1,4 +1,6 @@
-﻿namespace Froggie.Domain.Test.Tasks;
+﻿using Froggie.Test;
+
+namespace Froggie.Domain.Test.Tasks;
 
 public class TaskTest
 {
@@ -7,13 +9,13 @@ public class TaskTest
     [SetUp]
     public void SetUp()
     {
-        testObj = Valid.Tasks.New(Guid.NewGuid(), Guid.NewGuid());
+        testObj = ValidTask.New(Guid.NewGuid(), Guid.NewGuid());
     }
 
     [Test]
     public void AddNewAssignee()
     {
-        var user = Valid.Users.New();
+        var user = ValidUser.New();
 
         testObj.AddAssignee(user);
 
@@ -23,7 +25,7 @@ public class TaskTest
     [Test]
     public void AddExistingAssignee()
     {
-        var user = Valid.Users.New();
+        var user = ValidUser.New();
         testObj.AddAssignee(user);
 
         testObj.AddAssignee(user);
@@ -31,14 +33,14 @@ public class TaskTest
         Assert.That(testObj.Assignees.Count, Is.EqualTo(1));
     }
 
-    [Test] 
+    [Test]
     public void RemoveAssignee()
     {
-        var user = Valid.Users.New();
+        var user = ValidUser.New();
         testObj.AddAssignee(user);
- 
+
         testObj.RemoveAssignee(user);
- 
+
         Assert.That(testObj.Assignees.Count, Is.EqualTo(0));
     }
 

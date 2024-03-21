@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Froggie.Api.Accounts;
 using Froggie.Domain.Groups;
-using Froggie.Domain.Test;
 using Froggie.Domain.Users;
+using Froggie.Test;
 using LittleByte.AspNet.Test;
 using LittleByte.Common;
 
@@ -15,9 +15,9 @@ public sealed class CreateAccountTest : ApiIntegrationTest<CreateAccountControll
     {
         var request = new CreateAccountRequest
         {
-            Email = Data.Test.Valid.Accounts.Email,
-            Name = Valid.Users.Name,
-            Password = Data.Test.Valid.Accounts.Password
+            Email = ValidAccount.Email,
+            Name = ValidUser.Name,
+            Password = ValidAccount.Password
         };
 
         var response = await controller.Create(request);

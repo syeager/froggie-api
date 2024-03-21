@@ -1,7 +1,7 @@
 ﻿using Froggie.Api.Groups;
 using Froggie.Data.Groups;
 using Froggie.Domain.Tasks;
-using Froggie.Domain.Test;
+using Froggie.Test;
 using LittleByte.AspNet.Test;
 
 namespace Froggie.Api.Test.Integration.Groups;
@@ -17,8 +17,8 @@ public sealed class GetGroupTasksTest : ApiIntegrationTest<GetTasksGroupControll
         var users = await GetService<IGetUsersInGroupQuery>().QueryAsync(group);
         var author = users.Results.First();
 
-        await GetService<ICreateTaskService>().CreateAsync(Valid.Tasks.Title, author, Valid.Tasks.DueDate, group);
-        await GetService<ICreateTaskService>().CreateAsync(Valid.Tasks.Title, author, Valid.Tasks.DueDate, group);
+        await GetService<ICreateTaskService>().CreateAsync(ValidTask.Title, author, ValidTask.DueDate, group);
+        await GetService<ICreateTaskService>().CreateAsync(ValidTask.Title, author, ValidTask.DueDate, group);
         await saveCommand.CommitChangesAsync();
 
         var tasks = await controller.GetTasks(group.Id);

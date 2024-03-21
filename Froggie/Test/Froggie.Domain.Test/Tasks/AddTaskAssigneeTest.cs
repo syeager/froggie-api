@@ -1,6 +1,7 @@
 ﻿using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
 using Froggie.Domain.Users;
+using Froggie.Test;
 using LittleByte.Domain;
 
 namespace Froggie.Domain.Test.Tasks;
@@ -26,9 +27,9 @@ public sealed class AddTaskAssigneeServiceTest : UnitTest
     [Test]
     public async ValueTask AddUserToTask()
     {
-        var user = Valid.Users.New();
-        var group = Valid.Groups.New();
-        var task = Valid.Tasks.New(user, group);
+        var user = ValidUser.New();
+        var group = ValidGroup.New();
+        var task = ValidTask.New(user, group);
         findTaskQuery.FindRequiredAsync(task).Returns(task);
         findUserQuery.FindRequiredAsync(user).Returns(user);
 
@@ -46,9 +47,9 @@ public sealed class AddTaskAssigneeServiceTest : UnitTest
     {
         isUserInGroupQuery.QueryAsync(default, default).ReturnsForAnyArgs(false);
 
-        var user = Valid.Users.New();
-        var group = Valid.Groups.New();
-        var task = Valid.Tasks.New(user, group);
+        var user = ValidUser.New();
+        var group = ValidGroup.New();
+        var task = ValidTask.New(user, group);
         findTaskQuery.FindRequiredAsync(task).Returns(task);
 
         var result = await testObj.AddAsync(user, task);

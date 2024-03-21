@@ -1,8 +1,8 @@
 ﻿using Froggie.Api.Tasks;
 using Froggie.Api.Test.Integration.Groups;
 using Froggie.Domain.Tasks;
-using Froggie.Domain.Test;
 using Froggie.Domain.Users;
+using Froggie.Test;
 using LittleByte.AspNet.Test;
 using LittleByte.Domain;
 
@@ -63,7 +63,7 @@ public sealed class AddAssigneeTest : ApiIntegrationTest<AddAssigneeController>
         await saveCommand.CommitChangesAsync();
 
         var taskResult = await GetService<ICreateTaskService>()
-            .CreateAsync("Test", group.Users.First(), Valid.Tasks.DueDate, group);
+            .CreateAsync("Test", group.Users.First(), ValidTask.DueDate, group);
         await saveCommand.CommitChangesAsync();
 
         return(group.Users.ToList(), taskResult.Value!);

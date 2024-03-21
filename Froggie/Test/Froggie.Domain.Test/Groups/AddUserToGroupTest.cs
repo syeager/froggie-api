@@ -1,4 +1,5 @@
 ﻿using Froggie.Domain.Groups;
+using Froggie.Test;
 
 namespace Froggie.Domain.Test.Groups;
 
@@ -7,8 +8,8 @@ public sealed class AddUserToGroupTest : UnitTest
     [Test]
     public void AddNewUserToGroup()
     {
-        var user = Valid.Users.New();
-        var group = Valid.Groups.New();
+        var user = ValidUser.New();
+        var group = ValidGroup.New();
         var userCount = group.Users.Count;
 
         var result = group.AddUser(user);
@@ -23,8 +24,8 @@ public sealed class AddUserToGroupTest : UnitTest
     [Test]
     public void UserAlreadyInGroup()
     {
-        var user = Valid.Users.New();
-        var group = Valid.Groups.New();
+        var user = ValidUser.New();
+        var group = ValidGroup.New();
         var userCount = group.Users.Count;
 
         group.AddUser(user);

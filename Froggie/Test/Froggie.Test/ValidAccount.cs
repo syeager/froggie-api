@@ -1,4 +1,4 @@
-﻿using Froggie.Data.Accounts;
+﻿using Froggie.Accounts;
 
 namespace Froggie.Test;
 

@@ -1,21 +1,20 @@
-﻿using Froggie.Data.Users;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 
-namespace Froggie.Data.Accounts;
+namespace Froggie.Accounts;
 
 public interface ICreateAccountCommand
 {
-    ValueTask<Account> CreateAsync(User user, Email email, Password password);
+    ValueTask<Account> CreateAsync(Guid id, UserName userName, Email email, Password password);
 }
 
 internal sealed class CreateAccountCommand(IAccountManager accountManager) : ICreateAccountCommand
 {
-    public async ValueTask<Account> CreateAsync(User user, Email email, Password password)
+    public async ValueTask<Account> CreateAsync(Guid id, UserName userName, Email email, Password password)
     {
         var account = new Account
         {
-            User = user,
-            UserName = user.Name,
+            Id = id,
+            UserName = userName,
             Email = email,
         };
 

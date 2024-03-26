@@ -1,16 +1,17 @@
-﻿using Froggie.Data.Accounts;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
+using LittleByte.Common;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace Froggie.Data.Users;
+namespace Froggie.Accounts;
 
-internal sealed class DoesUserWithNameExistQuery(FroggieDb database, UserManager<Account> accountManager)
+internal sealed class DoesAccountWithNameExistQuery(AccountsDb accountsDb, UserManager<Account> accountManager)
     : IDoesUserWithNameExistQuery
 {
     public async ValueTask<bool> SearchAsync(string nameValue)
     {
         var normalizedName = accountManager.NormalizeName(nameValue);
-        var exists = await database.Accounts
+        var exists = await accountsDb.Users
             .AnyAsync(user => user.NormalizedUserName == normalizedName).NoAwait();
 
         return exists;

@@ -1,10 +1,10 @@
-﻿using Froggie.Data.Accounts;
+﻿using Froggie.Accounts;
 using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Accounts;
 
 public sealed class LogInUserController(
-    ILogInService inService,
+    ILogInService logIn,
     IMapper mapper,
     ISaveContextCommand command)
     : AccountController
@@ -17,7 +17,7 @@ public sealed class LogInUserController(
         var email = new Email(request.Email);
         var password = new Password(request.Password);
 
-        var logInResult = await inService.LogInAsync(email, password);
+        var logInResult = await logIn.LogInAsync(email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
 
         await command.CommitChangesAsync();

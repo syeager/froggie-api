@@ -1,47 +1,37 @@
-﻿using Froggie.Data.Accounts;
-using Froggie.Data.Users;
-using Froggie.Domain.Groups;
-using Froggie.Domain.Users;
+﻿using Froggie.Domain.Users;
 using Froggie.Test;
-using LittleByte.Common;
 
-namespace Froggie.Data.Test.Accounts;
+namespace Froggie.Accounts.Test;
 
-public sealed class AccountRegisterServiceTest : UnitTest
+// TODO: Split into CreateAccount and RegisterUser
+public sealed class CreateAccountServiceTest : UnitTest
 {
-    private IAddUserCommand addUserCommand = null!;
     private ICreateAccountCommand createAccountCommand = null!;
-    private ICreateGroupService createGroupService = null!;
     private IDoesUserWithNameExistQuery doesUserWithNameExistQuery = null!;
     private IFindAccountByEmailQuery findUserByEmailQuery = null!;
-    private AccountRegisterService testObj = null!;
+    private CreateAccountService testObj = null!;
 
     [SetUp]
     public void SetUp()
     {
-        addUserCommand = Substitute.For<IAddUserCommand>();
         doesUserWithNameExistQuery = Substitute.For<IDoesUserWithNameExistQuery>();
         findUserByEmailQuery = Substitute.For<IFindAccountByEmailQuery>();
-        createGroupService = Substitute.For<ICreateGroupService>();
         createAccountCommand = Substitute.For<ICreateAccountCommand>();
-        var userFactory = Substitute.For<IUserFactory>();
-        userFactory.Create(default, default!).ReturnsForAnyArgs(ValidUser.New());
-        testObj = new AccountRegisterService(addUserCommand, findUserByEmailQuery, doesUserWithNameExistQuery,
-            createGroupService, createAccountCommand, userFactory);
+        testObj = new CreateAccountService(findUserByEmailQuery, doesUserWithNameExistQuery, createAccountCommand);
     }
 
     [Test]
     public async ValueTask With_ValidData_Then_CreateUser()
     {
-        var result = await testObj.RegisterAsync(
+        var expected = new Account();
+        createAccountCommand.CreateAsync(Arg.Any<Guid>(), ValidUser.Name, ValidAccount.Email, ValidAccount.Password).Returns(expected);
+        
+        var result = await testObj.CreateAsync(
             ValidAccount.Email,
             ValidUser.Name,
             ValidAccount.Password);
 
-        var user = result.Value!;
-        Assert.That(user.Id, Is.Not.EqualTo(Id<User>.Empty));
-        addUserCommand.ReceivedWithAnyArgs(1).Add(null!);
-        createGroupService.Received(1).CreatePersonal(user);
+        Assert.That(result.Value, Is.Not.Null);
     }
 
     [Test]
@@ -50,7 +40,7 @@ public sealed class AccountRegisterServiceTest : UnitTest
         var existingAccount = ValidAccount.New();
         findUserByEmailQuery.FindAsync(ValidAccount.Email).Returns(existingAccount);
 
-        var result = await testObj.RegisterAsync(
+        var result = await testObj.CreateAsync(
             ValidAccount.Email,
             ValidUser.Name2,
             ValidAccount.Password);
@@ -64,7 +54,7 @@ public sealed class AccountRegisterServiceTest : UnitTest
         var existingUser = ValidUser.New();
         doesUserWithNameExistQuery.SearchAsync(existingUser.Name).Returns(true);
 
-        var result = await testObj.RegisterAsync(
+        var result = await testObj.CreateAsync(
             ValidAccount.Email2,
             existingUser.Name,
             ValidAccount.Password);

@@ -1,4 +1,5 @@
-﻿using Froggie.Api.Accounts;
+﻿using Froggie.Accounts;
+using Froggie.Api.Accounts;
 using Froggie.Api.Groups;
 using Froggie.Api.Tasks;
 using Froggie.Api.Users;
@@ -39,14 +40,15 @@ public abstract class ApiIntegrationTest<T> : IntegrationTest
     {
         base.SetUp();
 
-        controller = services.GetRequiredService<T>();
-        saveCommand = services.GetRequiredService<ISaveContextCommand>();
+        controller = GetService<T>();
+        saveCommand = GetService<ISaveContextCommand>();
     }
 
     [TearDown]
     public override void TearDown()
     {
-        services.GetService<FroggieDb>()?.Database.EnsureDeleted();
+        GetService<FroggieDb>().Database.EnsureDeleted();
+        GetService<AccountsDb>().Database.EnsureDeleted();
 
         base.TearDown();
     }

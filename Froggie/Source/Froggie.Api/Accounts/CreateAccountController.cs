@@ -1,11 +1,12 @@
-﻿using Froggie.Data.Accounts;
+﻿using Froggie.Accounts;
+using Froggie.Api.Users;
 using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Accounts;
 
 public sealed class CreateAccountController(
     ILogInService logInService,
-    IAccountRegisterService registerService,
+    IRegisterUserService registerUser,
     IMapper mapper,
     ISaveContextCommand command)
     : AccountController
@@ -16,13 +17,21 @@ public sealed class CreateAccountController(
     [ResponseType(HttpStatusCode.BadRequest)]
     public async ValueTask<ApiResponse<LogInResponse>> Create(CreateAccountRequest request)
     {
-        var user = await registerService.RegisterAsync(request.Email, request.Name, request.Password);
+        var registerResult = await registerUser.RegisterAsync(request.Email, request.Name, request.Password);
 
-        // TODO: There has to be a better way to get the password. Maybe RegisterAsync should return a RegisterResult?
         var password = new Password(request.Password);
         var email = new Email(request.Email);
         var logInResult = await logInService.LogInAsync(email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
+
+        // TODO: Improve this so 2 LogInResponses don't have to be made.
+        response = new LogInResponse
+        {
+            AccessToken = response.AccessToken,
+            Errors = response.Errors,
+            Succeeded = response.Succeeded,
+            User = mapper.Map<UserDto>(registerResult.Value!.User),
+        };
 
         await command.CommitChangesAsync();
 

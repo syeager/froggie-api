@@ -19,7 +19,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Source\LittleByte.Data\LittleByte.Data.csproj" />
-		<ProjectReference Include="..\..\Common\Source\LittleByte.EntityFramework.Identity\LittleByte.EntityFramework.Identity.csproj" />
 		<ProjectReference Include="..\..\Common\Source\LittleByte.EntityFramework\LittleByte.EntityFramework.csproj" />
 		<ProjectReference Include="..\Froggie.Domain\Froggie.Domain.csproj" />
 	</ItemGroup>

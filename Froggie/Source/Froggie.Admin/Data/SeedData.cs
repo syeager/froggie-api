@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Froggie.Admin.Accounts;
+using Froggie.Accounts;
 using Froggie.Data.Users;
 using Froggie.Domain.Groups;
 using Froggie.Domain.Tasks;
@@ -22,9 +22,8 @@ public static class SeedData
         {
             var saveCommand = serviceProvider.Get<ISaveContextCommand>();
 
-            var user = await CreateTestUser(serviceProvider);
+            var (user, personalGroup) = await RegisterTestUser(serviceProvider);
             await saveCommand.CommitChangesAsync();
-            var personalGroup = await GetPersonalGroupAsync(user, serviceProvider);
             await CreateTaskAsync("Hello world 🌞", user, personalGroup, serviceProvider);
             var testGroup = CreateTestGroup(serviceProvider, user);
             await saveCommand.CommitChangesAsync();
@@ -33,24 +32,16 @@ public static class SeedData
         }
     }
 
-    private static async ValueTask<User> CreateTestUser(IServiceProvider serviceProvider)
+    private static async ValueTask<(User, Group)> RegisterTestUser(IServiceProvider serviceProvider)
     {
-        var accountService = serviceProvider.Get<RegisterTestAccountService>();
+        var accountService = serviceProvider.Get<IRegisterUserService>();
         var result = await accountService.RegisterAsync("user@froggie.com", "Test User", "abc");
         if(result.Succeeded is false)
         {
             throw new HttpException(HttpStatusCode.InternalServerError, "Failed to create SeedData: TestUser");
         }
 
-        var user = result.Value;
-        return user;
-    }
-
-    private static async ValueTask<Group> GetPersonalGroupAsync(User user, IServiceProvider serviceProvider)
-    {
-        var getUserGroupsQuery = serviceProvider.Get<IGetUserGroupsQuery>();
-        var groups = await getUserGroupsQuery.QueryAsync(user);
-        return groups.First();
+        return (result.Value.User, result.Value.PersonalGroup);
     }
 
     private static Group CreateTestGroup(IServiceProvider serviceProvider, User user)

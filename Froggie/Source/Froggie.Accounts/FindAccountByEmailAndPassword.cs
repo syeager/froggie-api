@@ -1,14 +1,14 @@
-﻿using Froggie.Domain.Users;
+﻿using LittleByte.Common;
 using LittleByte.Common.Logging;
 
-namespace Froggie.Data.Accounts;
+namespace Froggie.Accounts;
 
 public interface IFindAccountByEmailAndPassword
 {
     ValueTask<Account?> TryFindAsync(Email email, Password password);
 }
 
-internal class FindAccountByEmailAndPassword(IAccountManager accountManager, FroggieDb froggieDb) : IFindAccountByEmailAndPassword
+internal class FindAccountByEmailAndPassword(IAccountManager accountManager) : IFindAccountByEmailAndPassword
 {
     public async ValueTask<Account?> TryFindAsync(Email email, Password password)
     {
@@ -33,8 +33,6 @@ internal class FindAccountByEmailAndPassword(IAccountManager accountManager, Fro
             logger.Info("Password check failed");
             return null;
         }
-
-        account.User = await froggieDb.Users.FindAsync(account.UserId).NoAwait();
 
         return account;
     }

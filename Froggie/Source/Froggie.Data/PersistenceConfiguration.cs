@@ -12,6 +12,6 @@ public static class PersistenceConfiguration
             .AddSingleton<StringValueObjectConverter>()
             .AddSingleton(TimeProvider.System)
             .AddScoped<ISaveContextCommand, SaveContextCommand<FroggieDb>>()
-            .AddDbContext<FroggieDb>(options => options.UseInMemoryDatabase("froggie-in_memory"));
+            .AddDbContext<FroggieDb>(options => options.UseInMemoryDatabase("froggie-core"));
     }
 }

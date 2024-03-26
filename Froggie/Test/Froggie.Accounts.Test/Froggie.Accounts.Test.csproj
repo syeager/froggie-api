@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\Froggie.Accounts\Froggie.Accounts.csproj" />
+		<ProjectReference Include="..\Froggie.Test\Froggie.Test.csproj" />
+	</ItemGroup>
+</Project>

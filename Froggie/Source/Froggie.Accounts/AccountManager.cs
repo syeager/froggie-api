@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Froggie.Data.Accounts;
+namespace Froggie.Accounts;
 
 internal interface IAccountManager
 {

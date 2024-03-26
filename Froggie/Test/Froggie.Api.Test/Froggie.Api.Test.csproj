@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Test\LittleByte.AspNet.Test\LittleByte.AspNet.Test.csproj" />
+		<ProjectReference Include="..\..\Source\Froggie.Accounts\Froggie.Accounts.csproj" />
 		<ProjectReference Include="..\..\Source\Froggie.Api\Froggie.Api.csproj" />
 		<ProjectReference Include="..\Froggie.Data.Test\Froggie.Data.Test.csproj" />
 		<ProjectReference Include="..\Froggie.Domain.Test\Froggie.Domain.Test.csproj" />

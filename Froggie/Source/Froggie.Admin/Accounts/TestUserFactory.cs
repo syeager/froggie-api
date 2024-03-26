@@ -1,4 +1,5 @@
-﻿using Froggie.Domain.Users;
+﻿using Froggie.Data.Users;
+using Froggie.Domain.Users;
 using LittleByte.Common;
 
 namespace Froggie.Admin.Accounts;

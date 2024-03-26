@@ -1,14 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using Froggie.Api.Accounts;
-using Froggie.Data.Accounts;
-using Froggie.Domain.Users;
 using Froggie.Test;
 using LittleByte.AspNet;
-using LittleByte.Common;
-using LittleByte.Test.Categories;
-using NSubstitute;
 
-namespace Froggie.Api.Test.Unit.Accounts;
+namespace Froggie.Accounts.Test;
 
 public sealed class LogInServiceTest : UnitTest
 {
@@ -27,11 +21,11 @@ public sealed class LogInServiceTest : UnitTest
     [Test]
     public async ValueTask When_ValidData_Then_LogIn()
     {
-        var user = AddUser();
+        AddAccount();
 
         var result = await testObj.LogInAsync(ValidAccount.Email, ValidAccount.Password);
 
-        AssertSuccess(result, user);
+        AssertSuccess(result);
     }
 
     [Test]
@@ -47,7 +41,7 @@ public sealed class LogInServiceTest : UnitTest
     [Test]
     public async ValueTask When_BadPassword_Then_Fail()
     {
-        AddUser();
+        AddAccount();
         findAccountQuery.TryFindAsync(null!, null!).ReturnsForAnyArgs((Account?)null);
 
         var result = await testObj.LogInAsync(ValidAccount.Email, new Password(""));
@@ -57,11 +51,10 @@ public sealed class LogInServiceTest : UnitTest
 
     #region Helpers
 
-    private User AddUser()
+    private void AddAccount()
     {
         var account = new Account
         {
-            User = User.Create(new Id<User>(), ValidUser.Name),
             Email = ValidAccount.Email,
             UserName = ValidUser.Name
         };
@@ -69,17 +62,15 @@ public sealed class LogInServiceTest : UnitTest
             .TryFindAsync(ValidAccount.Email, ValidAccount.Password)
             .Returns(account);
         tokenGenerator.GenerateJwt(default!).ReturnsForAnyArgs(new JwtSecurityToken());
-        return account.User;
     }
 
-    private static void AssertSuccess(LogInResult result, User user)
+    private static void AssertSuccess(LogInResult result)
     {
         Assert.Multiple(() =>
         {
             Assert.That(result.AccessToken, Is.Not.Null);
             Assert.That(result.Errors, Is.Null);
             Assert.That(result.Succeeded, Is.True);
-            Assert.That(result.User, Is.SameAs(user));
         });
     }
 
@@ -90,7 +81,6 @@ public sealed class LogInServiceTest : UnitTest
             Assert.That(result.AccessToken, Is.Null);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Succeeded, Is.False);
-            Assert.That(result.User, Is.Null);
         });
     }
 

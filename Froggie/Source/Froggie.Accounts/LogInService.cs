@@ -1,12 +1,12 @@
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Froggie.Data.Accounts;
+using LittleByte.AspNet;
+using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace Froggie.Api.Accounts;
+namespace Froggie.Accounts;
 
 public interface ILogInService
 {
-    public Task<LogInResult> LogInAsync(Email email, Password password);
+    public ValueTask<LogInResult> LogInAsync(Email email, Password password);
 }
 
 internal sealed class LogInService(
@@ -16,7 +16,7 @@ internal sealed class LogInService(
 {
     private static readonly string[] FailedLogIn = ["Incorrect email or password."];
 
-    public async Task<LogInResult> LogInAsync(Email email, Password password)
+    public async ValueTask<LogInResult> LogInAsync(Email email, Password password)
     {
         LogInResult result;
 
@@ -25,7 +25,7 @@ internal sealed class LogInService(
         {
             var claims = GetUserClaims(account);
             var token = tokenGenerator.GenerateJwt(claims);
-            result = LogInResult.Success(token, account.User!);
+            result = LogInResult.Success(token);
         }
         else
         {

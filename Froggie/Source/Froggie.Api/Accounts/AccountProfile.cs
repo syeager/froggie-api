@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using Froggie.Accounts;
+using JetBrains.Annotations;
 
 namespace Froggie.Api.Accounts;
 

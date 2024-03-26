@@ -1,7 +1,7 @@
 ﻿using System.Net;
+using Froggie.Accounts;
 using Froggie.Api.Groups;
 using Froggie.Data;
-using Froggie.Data.Accounts;
 using Froggie.Test;
 using LittleByte.AspNet.Test;
 
@@ -12,7 +12,7 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
     [Test]
     public async ValueTask CreateGroup_Success()
     {
-        var result = await GetService<IAccountRegisterService>()
+        var result = await GetService<IRegisterUserService>()
             .RegisterAsync(ValidAccount.Email, ValidUser.Name, ValidAccount.Password);
 
         await saveCommand.CommitChangesAsync();
@@ -20,7 +20,7 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
         var request = new CreateGroupRequest
         {
             Name = "Group A",
-            CreatorId = result.Value!.Id,
+            CreatorId = result.Value!.User,
         };
 
         var response = await controller.Create(request);

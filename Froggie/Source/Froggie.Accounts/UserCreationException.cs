@@ -1,4 +1,4 @@
-﻿namespace Froggie.Data.Users;
+﻿namespace Froggie.Accounts;
 
 public sealed class UserCreationException(IEnumerable<UserCreationException.Error> errors) : Exception
 {

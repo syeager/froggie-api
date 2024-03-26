@@ -1,6 +1,5 @@
-﻿using Froggie.Data.Accounts;
-using Froggie.Domain.Groups;
-using Froggie.Test;
+﻿using Froggie.Domain.Groups;
+using Froggie.Domain.Users;
 using LittleByte.Common;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,13 +11,12 @@ public static class CreateGroupAndUsersHelper
                                string groupName = "test-group",
                                int userCount = 2)
     {
-        var registerUser = services.GetRequiredService<IAccountRegisterService>();
         var createGroup = services.GetRequiredService<ICreateGroupService>();
 
         var users = userCount.Execute(i =>
         {
-            var name = new GroupName($"{groupName}{i}");
-            return registerUser.RegisterAsync($"{name}@mail.com", name, ValidAccount.Password).Result.Value!;
+            var name = new UserName($"{groupName}{i}");
+            return User.Create(new Id<User>(), name);
         });
 
         var group = createGroup.Create(users.First(), new GroupName(groupName));

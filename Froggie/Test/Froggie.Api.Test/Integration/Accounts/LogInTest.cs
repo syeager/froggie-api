@@ -1,8 +1,7 @@
-﻿using Froggie.Api.Accounts;
-using Froggie.Data.Accounts;
+﻿using Froggie.Accounts;
+using Froggie.Api.Accounts;
 using Froggie.Test;
 using LittleByte.AspNet.Test;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Accounts;
 
@@ -11,8 +10,8 @@ public sealed class LogInTest : ApiIntegrationTest<LogInUserController>
     [Test]
     public async ValueTask LogInUser_Success()
     {
-        var registerService = services.GetRequiredService<IAccountRegisterService>();
-        await registerService.RegisterAsync(
+        var registerService = GetService<ICreateAccountService>();
+        await registerService.CreateAsync(
             ValidAccount.Email,
             ValidUser.Name,
             ValidAccount.Password);

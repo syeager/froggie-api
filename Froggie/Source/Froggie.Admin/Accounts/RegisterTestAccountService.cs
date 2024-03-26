@@ -1,14 +1,10 @@
-﻿using Froggie.Data.Accounts;
-using Froggie.Domain.Groups;
+﻿using Froggie.Accounts;
 using Froggie.Domain.Users;
 
 namespace Froggie.Admin.Accounts;
 
-public sealed class RegisterTestAccountService(
-    IAddUserCommand userCommand,
+public sealed class TestCreateAccountService(
     IFindAccountByEmailQuery accountByEmailQuery,
     IDoesUserWithNameExistQuery userWithNameExistQuery,
-    ICreateGroupService groupService,
-    ICreateAccountCommand createAccountCommand,
-    TestUserFactory userFactory) : AccountRegisterService(userCommand, accountByEmailQuery, userWithNameExistQuery,
-    groupService, createAccountCommand, userFactory);
+    ICreateAccountCommand createAccountCommand) : CreateAccountService(accountByEmailQuery, userWithNameExistQuery,
+    createAccountCommand);

@@ -5,6 +5,8 @@ namespace Froggie.Domain.Users;
 
 public static class UserConfiguration
 {
-    public static IServiceCollection AddUsersDomain(this IServiceCollection services) => services
-        .AddTransient<ModelValidator<User>, UserValidator>();
+    public static IServiceCollection AddUsersDomain(this IServiceCollection services)
+        => services
+            .AddTransient<ModelValidator<User>, UserValidator>()
+    ;
 }

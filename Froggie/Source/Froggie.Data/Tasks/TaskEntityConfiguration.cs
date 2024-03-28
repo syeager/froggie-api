@@ -12,6 +12,7 @@ internal sealed class TaskEntityConfiguration : IEntityTypeConfiguration<Task>
         configuration.Property(t => t.Title).HasConversion(t => t.Value, s => new Title(s));
         configuration.Property(t => t.CreatorId).HasConversion<IdValueConverter<User>>();
         configuration.Property(t => t.DueDate);
+        configuration.Property(t => t.IsCompleted);
         configuration.Property(t => t.GroupId).HasConversion<IdValueConverter<Group>>();
         configuration.HasMany(t => t.Assignees).WithMany()
             .UsingEntity<TaskAssignee>

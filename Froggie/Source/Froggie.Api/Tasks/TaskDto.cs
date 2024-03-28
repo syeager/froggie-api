@@ -15,4 +15,7 @@ public sealed class TaskDto : Dto
 
     [Required]
     public List<Guid> Assignees { get; init; } = null!;
+
+    [Required]
+    public bool IsCompleted { get; init; }
 }

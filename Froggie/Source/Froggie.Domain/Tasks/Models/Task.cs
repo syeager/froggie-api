@@ -72,5 +72,5 @@ public sealed class Task : DomainModel<Task>
         assignees.Remove(assignee);
     }
 
-    internal void Complete() => IsCompleted = true;
+    public void Complete() => IsCompleted = true;
 }

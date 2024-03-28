@@ -3,7 +3,6 @@ using Froggie.Api.Tasks;
 using Froggie.Domain.Groups;
 using Froggie.Test;
 using LittleByte.AspNet.Test;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Tasks;
 
@@ -15,7 +14,7 @@ public sealed class CreateTaskTest : ApiIntegrationTest<CreateTaskController>
         var group = ValidGroup.New();
         var user = ValidUser.New();
 
-        var userGroupCreateCommand = services.GetRequiredService<IUserGroupCreateCommand>();
+        var userGroupCreateCommand = GetService<IUserGroupCreateCommand>();
         userGroupCreateCommand.Create(user, group);
 
         await saveCommand.CommitChangesAsync();

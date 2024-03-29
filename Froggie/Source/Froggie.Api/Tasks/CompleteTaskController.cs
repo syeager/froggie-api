@@ -12,6 +12,7 @@ public sealed class CompleteTaskRequest
 
 public sealed class CompleteTaskController(IFindByIdQuery<Task> findTask, ISaveContextCommand saveCommand, IMapper mapper) : TaskController
 {
+    [HttpPut("complete")]
     public async ValueTask<ApiResponse<TaskDto>> Complete(CompleteTaskRequest request)
     {
         var taskId = request.TaskId.ToId<Task>();

@@ -3,7 +3,6 @@ using Froggie.Domain.Tasks;
 using Froggie.Test;
 using LittleByte.AspNet.Test;
 using LittleByte.Common;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Froggie.Api.Test.Integration.Tasks;
 
@@ -15,7 +14,7 @@ public sealed class GetUserTasksTest : ApiIntegrationTest<GetTasksByUserControll
         var group = ValidGroup.New();
         var user = ValidUser.New();
         var tasks = ValidTask.New(2, user.Id, group.Id);
-        var addTaskCommand = services.GetRequiredService<IAddTaskCommand>();
+        var addTaskCommand = GetService<IAddTaskCommand>();
         tasks.ForEach((task, _) => addTaskCommand.Add(task!));
         await saveCommand.CommitChangesAsync();
 

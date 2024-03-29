@@ -1,12 +1,14 @@
 ﻿using Froggie.Accounts;
-using LittleByte.EntityFramework;
+using Froggie.Api.Users;
+using Froggie.Domain.Users;
+using LittleByte.Domain;
 
 namespace Froggie.Api.Accounts;
 
 public sealed class LogInUserController(
     ILogInService logIn,
     IMapper mapper,
-    ISaveContextCommand command)
+    IFindByIdQuery<User> findUser)
     : AccountController
 {
     [HttpPost(Routes.LogIn)]
@@ -19,11 +21,20 @@ public sealed class LogInUserController(
 
         var logInResult = await logIn.LogInAsync(email, password);
         var response = mapper.Map<LogInResponse>(logInResult);
+        if(logInResult.Succeeded is false)
+        {
+            return new BadRequestResponse<LogInResponse>(response);
+        }
 
-        await command.CommitChangesAsync();
+        var user = await findUser.FindRequiredAsync(logInResult.Account!.Id.ToId<User>());
+        response = new LogInResponse
+        {
+            AccessToken = response.AccessToken,
+            Errors = response.Errors,
+            Succeeded = response.Succeeded,
+            User = mapper.Map<UserDto>(user),
+        };
 
-        return response.Succeeded
-            ? new OkResponse<LogInResponse>(response)
-            : new BadRequestResponse<LogInResponse>(response);
+        return new OkResponse<LogInResponse>(response);
     }
 }

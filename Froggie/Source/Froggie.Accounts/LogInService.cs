@@ -25,7 +25,7 @@ internal sealed class LogInService(
         {
             var claims = GetUserClaims(account);
             var token = tokenGenerator.GenerateJwt(claims);
-            result = LogInResult.Success(token);
+            result = LogInResult.Success(token, account);
         }
         else
         {

@@ -1,8 +1,8 @@
 ﻿using Froggie.Api.Tasks;
 using Froggie.Data.Groups;
 using Froggie.Domain.Groups;
-using LittleByte.Data;
 using LittleByte.AutoMapper.Data;
+using LittleByte.Data;
 
 namespace Froggie.Api.Groups;
 

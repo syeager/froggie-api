@@ -1,9 +1,14 @@
-﻿using Froggie.Domain.Groups;
+﻿using System.ComponentModel.DataAnnotations;
+using Froggie.Domain.Groups;
 using Froggie.Domain.Users;
 using LittleByte.Domain;
 using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Groups;
+
+public sealed record CreateGroupRequest(
+    [Required] Guid CreatorId,
+    [Required] string Name);
 
 public sealed class CreateGroupController(
     ICreateGroupService groupService,

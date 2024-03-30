@@ -12,6 +12,7 @@ public sealed class CompleteTaskController(
     IMapper mapper) : TaskController
 {
     [HttpPut("complete")]
+    [ResponseType(HttpStatusCode.OK, typeof(TaskDto))]
     public async ValueTask<ApiResponse<TaskDto>> Complete(CompleteTaskRequest request)
     {
         var taskId = request.TaskId.ToId<Task>();

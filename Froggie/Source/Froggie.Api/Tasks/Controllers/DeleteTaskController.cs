@@ -1,7 +1,10 @@
-﻿using Froggie.Domain.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using Froggie.Domain.Tasks;
 using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Tasks;
+
+public sealed record DeleteTaskRequest([Required] Guid Id);
 
 public sealed class DeleteTaskController(IDeleteTaskService task, ISaveContextCommand context)
     : TaskController

@@ -4,13 +4,12 @@ using LittleByte.EntityFramework;
 
 namespace Froggie.Api.Tasks;
 
-public sealed class CompleteTaskRequest
-{
-    [Required]
-    public Guid TaskId { get; init; }
-}
+public sealed record CompleteTaskRequest([Required] Guid TaskId);
 
-public sealed class CompleteTaskController(IFindByIdQuery<Task> findTask, ISaveContextCommand saveCommand, IMapper mapper) : TaskController
+public sealed class CompleteTaskController(
+    IFindByIdQuery<Task> findTask,
+    ISaveContextCommand saveCommand,
+    IMapper mapper) : TaskController
 {
     [HttpPut("complete")]
     public async ValueTask<ApiResponse<TaskDto>> Complete(CompleteTaskRequest request)

@@ -1,0 +1,28 @@
+﻿using System.ComponentModel.DataAnnotations;
+using Froggie.Data.Tasks;
+using Froggie.Domain.Users;
+using LittleByte.AutoMapper.Data;
+using LittleByte.Data;
+
+namespace Froggie.Api.Tasks;
+
+public sealed record GetTasksByUserRequest(
+    [Required] Guid UserId,
+    int PageIndex = 0,
+    int PageSize = PageRequest.DefaultPageSize)
+    : PageRequest(PageIndex, PageSize);
+
+public sealed class GetTasksByUserController(IGetUserTasksQuery tasksQuery, IMapper mapper) : TaskController
+{
+    [HttpGet("get-user-tasks")]
+    [ResponseType(HttpStatusCode.OK, typeof(Page<TaskDto>))]
+    [ResponseType(HttpStatusCode.NotFound)]
+    public async ValueTask<ApiResponse<Page<TaskDto>>> GetTasksByUser(GetTasksByUserRequest request)
+    {
+        var userId = new Id<User>(request.UserId);
+        var tasks = await tasksQuery.FindAsync(userId);
+
+        var response = tasks.CastResults<Task, TaskDto>(mapper);
+        return new OkResponse<Page<TaskDto>>(response);
+    }
+}

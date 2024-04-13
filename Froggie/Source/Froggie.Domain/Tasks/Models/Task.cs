@@ -19,7 +19,8 @@ public sealed class Task : DomainModel<Task>
                  Title title,
                  Id<User> creatorId,
                  DateTimeOffset dueDate,
-                 Id<Group> groupId)
+                 Id<Group> groupId,
+                 bool isCompleted)
         : base(id)
     {
         log = this.NewLogger();
@@ -28,6 +29,7 @@ public sealed class Task : DomainModel<Task>
         DueDate = dueDate;
         GroupId = groupId;
         assignees = [];
+        IsCompleted = isCompleted;
     }
 
     internal static Task Create(Id<Task> id,
@@ -35,9 +37,10 @@ public sealed class Task : DomainModel<Task>
                                 Id<User> creatorId,
                                 DateTimeOffset dueDate,
                                 Id<Group> groupId,
+                                bool isCompleted,
                                 IEnumerable<DomainModel<User>>? assignees = null)
     {
-        var task = new Task(id, title, creatorId, dueDate, groupId);
+        var task = new Task(id, title, creatorId, dueDate, groupId, isCompleted);
         task.assignees.AddRange(assignees ?? []);
         var validator = new TaskValidator();
         validator.SignOrThrow(task);

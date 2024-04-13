@@ -16,10 +16,7 @@ public sealed class CompleteTaskTestTest : ApiIntegrationTest<CompleteTaskContro
         GetService<IAddTaskCommand>().Add(task);
         await saveCommand.CommitChangesAsync();
 
-        var request = new CompleteTaskRequest
-        {
-            TaskId = task.Id
-        };
+        var request = new CompleteTaskRequest(task.Id);
 
         var response = await controller.Complete(request);
 

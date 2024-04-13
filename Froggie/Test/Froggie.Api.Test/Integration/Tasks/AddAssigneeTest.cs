@@ -15,11 +15,7 @@ public sealed class AddAssigneeTest : ApiIntegrationTest<AddAssigneeController>
     {
         var (users, task) = await CreateUsersAndTask();
 
-        var request = new AddAssigneeRequest
-        {
-            TaskId = task,
-            UserId = users[0]
-        };
+        var request = new AddAssigneeRequest(task,users[0]);
         var response = await controller.AddAssignee(request);
 
         ApiAssert.IsSuccess(response);
@@ -31,20 +27,12 @@ public sealed class AddAssigneeTest : ApiIntegrationTest<AddAssigneeController>
     {
         var (users, task) = await CreateUsersAndTask();
 
-        var request = new AddAssigneeRequest
-        {
-            TaskId = task,
-            UserId = users[0].Id
-        };
+        var request = new AddAssigneeRequest(task, users[0].Id);
 
         await controller.AddAssignee(request);
 
         var userId = users[1].Id;
-        request = new AddAssigneeRequest
-        {
-            TaskId = task,
-            UserId = userId
-        };
+        request = new AddAssigneeRequest(task, userId);
         var response = await controller.AddAssignee(request);
 
         Assert.Multiple(() =>

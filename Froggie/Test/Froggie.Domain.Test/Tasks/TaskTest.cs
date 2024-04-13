@@ -2,7 +2,7 @@
 
 namespace Froggie.Domain.Test.Tasks;
 
-public class TaskTest
+public class TaskTest : UnitTest
 {
     private Task testObj = null!;
 

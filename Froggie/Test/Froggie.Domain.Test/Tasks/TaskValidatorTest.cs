@@ -44,7 +44,8 @@ public sealed class TaskValidatorTest : UnitTest
             ValidTask.Title,
             new Id<User>(),
             dueDate,
-            new Id<Group>());
+            new Id<Group>(),
+            false);
 
         var result = testObj.Validate(task);
 
@@ -59,7 +60,8 @@ public sealed class TaskValidatorTest : UnitTest
             ValidTask.Title,
             new Id<User>(),
             DateTime.MinValue,
-            new Id<Group>()));
+            new Id<Group>(),
+            false));
 
         exception!.AssertFailure(nameof(Task.DueDate));
     }

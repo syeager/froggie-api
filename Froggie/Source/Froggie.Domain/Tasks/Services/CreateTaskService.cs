@@ -25,7 +25,7 @@ internal sealed class CreateTaskService(
 
         var id = new Id<Task>();
         var titleDomain = new Title(title);
-        var task = Task.Create(id, titleDomain, creatorId, dueDate, groupId);
+        var task = Task.Create(id, titleDomain, creatorId, dueDate, groupId, false);
         addTask.Add(task);
 
         return Result<Task>.Success(task);

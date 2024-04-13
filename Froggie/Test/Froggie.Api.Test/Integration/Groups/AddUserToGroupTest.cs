@@ -1,5 +1,4 @@
 ﻿using Froggie.Api.Groups;
-using Froggie.Api.Groups.Controllers;
 using Froggie.Domain.Users;
 using Froggie.Test;
 using LittleByte.AspNet.Test;

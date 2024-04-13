@@ -11,6 +11,12 @@ public static class TaskConfiguration
         .AddScoped<IDeleteTaskCommand, DeleteTaskCommand>()
         .AddScoped<IFindByIdQuery<Task>, FindByIdQuery<Task, FroggieDb>>()
         .AddScoped<IGetTasksByUserQuery, GetTasksByUserQuery>()
+        .AddScoped<ISearchTasks, SearchTasks>()
+        .AddScoped<TaskFilter<IAssigneeFilterParams>, AssigneeFilter>()
+        .AddScoped<TaskFilter<IAssigneeFilterParams>, AssigneeFilter>()
+        .AddScoped<TaskFilter<IAssigneeFilterParams>, AssigneeFilter>()
+        .AddScoped<TaskFilter<IAssigneeFilterParams>, AssigneeFilter>()
+        .AddScoped<TaskFilter<IAssigneeFilterParams>, AssigneeFilter>()
         .AddScoped<ITaskPageQuery, TaskPageQuery>()
         .AddTransient<IGetUserTasksQuery, GetUserTasksQuery>()
     ;

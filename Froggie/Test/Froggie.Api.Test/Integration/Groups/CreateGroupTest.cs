@@ -17,11 +17,7 @@ public sealed class CreateGroupTest : ApiIntegrationTest<CreateGroupController>
 
         await saveCommand.CommitChangesAsync();
 
-        var request = new CreateGroupRequest
-        {
-            Name = "Group A",
-            CreatorId = result.Value!.User,
-        };
+        var request = new CreateGroupRequest(result.Value!.User, "Group A");
 
         var response = await controller.Create(request);
 

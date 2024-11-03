@@ -18,4 +18,6 @@ public sealed class TaskDto : Dto
 
     [Required]
     public bool IsCompleted { get; init; }
+
+    public DateTimeOffset DueDate { get; init; }
 }
